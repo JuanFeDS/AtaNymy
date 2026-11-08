@@ -1,0 +1,58 @@
+/* Ficha de lectura v3: la misma estructura en todos los libros (radar, época, nota),
+   vestida con el color y la letra de cada uno. Variables por libro:
+   --f-banda, --f-banda-tinta, --f-trazo, --f-relleno, --f-sello */
+
+.fv3 {
+  --f-papel: #FBF6EC;
+  --f-tinta: #1F1A16;
+  --f-suave: rgba(31, 26, 22, 0.62);
+  --f-linea: rgba(31, 26, 22, 0.14);
+  position: relative; width: 100%; max-width: 25rem;
+  color: var(--f-tinta);
+  transform: rotate(var(--giro, 1.5deg));
+  filter: drop-shadow(0 28px 30px rgba(0, 0, 0, 0.38)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
+  transition: transform .5s cubic-bezier(.3,1.4,.5,1);
+}
+.fv3:hover { transform: rotate(0deg) translateY(-4px); }
+.fv3-hoja {
+  background: var(--an-grain-dark), var(--f-papel);
+  border-radius: 6px;
+  overflow: hidden;
+  /* Borde izquierdo troquelado, como una ficha arrancada de un talonario */
+  -webkit-mask: radial-gradient(circle at 0 50%, transparent 0.32rem, #000 0.36rem) 0 0 / 100% 1.1rem repeat-y;
+  mask: radial-gradient(circle at 0 50%, transparent 0.32rem, #000 0.36rem) 0 0 / 100% 1.1rem repeat-y;
+}
+.fv3-banda {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  background: var(--f-banda); color: var(--f-banda-tinta);
+  padding: 0.85rem 1.3rem 0.85rem 1.6rem;
+  font-family: var(--an-font-mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.fv3-banda b { font: 600 1.15rem/1 var(--an-font-title); letter-spacing: 0; text-transform: none; }
+.fv3-cuerpo { padding: 1.2rem 1.4rem 1.3rem 1.7rem; }
+.fv3-titulo { font: 500 1.75rem/1.02 var(--an-font-title); letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.fv3-autor { font-family: var(--an-font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--f-suave); margin-top: 0.45rem; }
+
+.fv3 .radar { display: block; width: 100%; max-width: 18rem; margin: 0.6rem auto 0; overflow: visible; color: var(--f-tinta); }
+.fv3 .radar .ring { stroke: var(--f-tinta); stroke-opacity: .12; stroke-width: 1.2; fill: none; }
+.fv3 .radar .axis { stroke: var(--f-tinta); stroke-opacity: .2; stroke-width: 1.2; stroke-dasharray: 2 5; fill: none; }
+.fv3 .radar .shape { fill: var(--f-relleno); fill-opacity: 1; stroke: var(--f-trazo); stroke-width: 4; stroke-linejoin: round; filter: url(#lapiz); }
+.fv3 .radar .dot { fill: var(--f-trazo); }
+.fv3 .radar .lbl { font: 500 21px var(--an-font-mono); letter-spacing: 0.06em; text-transform: uppercase; fill: var(--f-suave); fill-opacity: 1; }
+.fv3 .radar .val { font: 600 40px var(--an-font-title); fill: var(--f-tinta); }
+
+.fv3-epoca { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px dashed var(--f-linea); }
+.fv3-epoca-cab { display: flex; justify-content: space-between; font-family: var(--an-font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--f-suave); }
+.fv3-regla { position: relative; height: 1.4rem; margin-top: 0.5rem; background: repeating-linear-gradient(90deg, var(--f-tinta) 0 1.5px, transparent 1.5px calc(100% / 7)) 0 100% / 100% 45% no-repeat, linear-gradient(var(--f-tinta), var(--f-tinta)) 0 100% / 100% 1.5px no-repeat; }
+.fv3-regla::after { content: ""; position: absolute; bottom: 0.15rem; height: 0.55rem; left: calc((var(--desde) - 1) / 7 * 100%); width: calc((var(--hasta) - var(--desde) + 1) / 7 * 100%); background: var(--f-trazo); border-radius: 2px; }
+.fv3-epoca-pie { display: flex; justify-content: space-between; margin-top: 0.35rem; font-family: var(--an-font-mono); font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--f-suave); }
+.fv3-epoca-pie b { color: var(--f-tinta); font-weight: 500; }
+
+.fv3-pie { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 1.1rem; padding-top: 0.9rem; border-top: 2px solid var(--f-tinta); }
+.fv3-nota { font: 600 3.4rem/0.85 var(--an-font-title); letter-spacing: -0.03em; }
+.fv3-nota small { font: 400 0.75rem var(--an-font-mono); letter-spacing: 0.1em; color: var(--f-suave); margin-left: 0.3rem; }
+.fv3-meta { text-align: right; font-family: var(--an-font-mono); font-size: 0.6rem; line-height: 1.7; letter-spacing: 0.1em; text-transform: uppercase; color: var(--f-suave); }
+.fv3-meta b { color: var(--f-tinta); font-weight: 500; }
+
+.fv3 .sello { position: absolute; top: 3.6rem; right: -3rem; width: 6.4rem; height: 6.4rem; color: var(--f-sello); --sello-giro: 14deg; mix-blend-mode: normal; opacity: .92; z-index: 2; }
+@media (max-width: 700px) { .fv3 .sello { top: auto; bottom: 5.2rem; right: -0.8rem; width: 5.2rem; height: 5.2rem; } }

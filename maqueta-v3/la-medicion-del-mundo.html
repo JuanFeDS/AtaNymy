@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La medición del mundo · Ata Nymy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../maqueta-v2/taller.css?v=3">
+<link rel="stylesheet" href="ficha.css?v=2">
+<link rel="stylesheet" href="medicion.css?v=5">
+</head>
+<body>
+
+<header class="hud">
+  <a class="firma" href="../maqueta-v2/index.html"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+  <span class="mono hud-libro">Cuaderno · La medición del mundo</span>
+</header>
+
+<main>
+  <!-- 0 · Berlín, 1828: los dos juntos -->
+  <section class="berlin" aria-labelledby="titulo">
+    <div class="berlin-texto">
+      <span class="etiqueta">Cuaderno de lectura · Novela histórica · Ficha Nº 12</span>
+      <h1 id="titulo">La medición <em>del mundo</em></h1>
+      <div class="mono byline">Daniel Kehlmann · 2005</div>
+      <p class="berlin-intro">Berlín, 1828. Humboldt invita a Gauss a un congreso y Gauss, que odia salir de casa, acepta a regañadientes. Desde ese viaje, el libro mira atrás: <span class="sub">dos vidas dedicadas a medir el mundo</span>, una sin moverse y otra sin parar.</p>
+      <p class="mono berlin-pista">Desliza: la pantalla se parte en dos</p>
+    </div>
+    <div class="grieta" aria-hidden="true"><svg viewBox="0 0 20 400" preserveAspectRatio="none"><path d="M10 0 L8 60 L13 110 L7 170 L12 230 L9 300 L11 400" fill="none" stroke="currentColor" stroke-width="1.6" filter="url(#lapiz)"/></svg></div>
+  </section>
+
+  <!-- 1 · La pantalla partida -->
+  <section class="partido" aria-label="Las dos vidas, en paralelo">
+    <div class="escenario">
+
+      <div class="panel panel-gauss">
+        <div class="panel-cab">
+          <div><span class="mono">Gotinga</span><h2>Gauss</h2></div>
+          <div class="contador"><b>0</b><span class="mono">km recorridos</span></div>
+        </div>
+        <svg class="cuarto" viewBox="0 0 260 200" role="img" aria-label="Plano de un cuarto con un escritorio y un punto: Gauss no se mueve">
+          <g filter="url(#lapiz)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="40" y="20" width="180" height="150"/>
+            <path d="M40 120 v30" stroke-width="7" style="stroke: var(--g-fondo)"/>
+            <path d="M40 120 q 24 3 27 30" stroke-width="1.2" stroke-dasharray="2 4"/>
+            <rect x="140" y="34" width="62" height="34"/>
+            <path d="M188 50 h-6 M150 44 h20 M150 52 h28" stroke-width="1.2"/>
+          </g>
+          <circle class="gauss-punto" cx="170" cy="84" r="5"/>
+          <text x="186" y="104" class="anota">aquí, siempre</text>
+        </svg>
+        <ol class="suma" aria-label="Cuaderno de Gauss">
+          <li>1 + 2 + 3 + … + 100 = ?</li>
+          <li>1 + 100 = 101</li>
+          <li>2 + 99 = 101</li>
+          <li>3 + 98 = 101 · …</li>
+          <li>50 parejas × 101</li>
+          <li class="total">= 5050</li>
+        </ol>
+        <svg class="orbita" viewBox="0 0 320 240" role="img" aria-label="Órbita de Ceres calculada por Gauss">
+          <ellipse class="orbita-tierra" cx="160" cy="120" rx="70" ry="52"/>
+          <ellipse class="orbita-ceres" pathLength="1" cx="168" cy="116" rx="138" ry="98" transform="rotate(-12 168 116)"/>
+          <circle class="sol" cx="160" cy="120" r="9"/>
+          <g class="ceres"><circle r="5"/><text x="10" y="4">Ceres</text></g>
+          <text class="anota" x="16" y="228">1801 · la encuentra con papel y pluma</text>
+        </svg>
+        <div class="notas notas-g"></div>
+      </div>
+
+      <div class="regla" aria-hidden="true"><span class="cursor-regla"></span></div>
+
+      <div class="panel panel-humboldt">
+        <div class="panel-cab">
+          <div><span class="mono" data-estacion>La Coruña</span><h2>Humboldt</h2></div>
+          <div class="contador"><b data-anio-h>1799</b><span class="mono"><span data-parada>1</span> de 14 paradas</span></div>
+        </div>
+        <svg class="mapa" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa dibujado a mano del viaje de Humboldt y Bonpland, de 1799 a 1804">
+          <g class="camara">
+            <g class="costas" filter="url(#lapiz)">
+              <path d="M470 40 C 430 120 470 170 430 230 C 400 260 360 250 330 300 C 300 330 260 300 220 330 C 160 360 120 300 90 260"/>
+              <path d="M430 360 C 470 380 520 400 540 440 C 560 480 520 520 470 540 C 420 560 380 600 360 660 C 350 700 330 760 320 820"/>
+              <path d="M1150 60 C 1120 120 1080 150 1070 200 C 1060 260 1100 300 1060 360 C 1020 420 1000 520 1030 640"/>
+            </g>
+            <path class="ruta-sombra"/>
+            <path class="ruta-hecha"/>
+            <g class="estaciones"></g>
+            <g class="viajero"><circle r="9"/><circle r="18" class="halo"/></g>
+          </g>
+        </svg>
+        <div class="altimetro" aria-hidden="true">
+          <div class="alti-barra"><span class="alti-relleno"></span><span class="alti-cima">cima</span></div>
+          <div class="alti-cifra"><b data-altura>0</b><span class="mono">metros, según sus cálculos</span></div>
+        </div>
+        <span class="mono mapa-nota">Mapa a mano · sin escala · con Bonpland, siempre detrás</span>
+        <div class="notas notas-h"></div>
+      </div>
+
+    </div>
+
+    <!-- Notas de lectura: cada una cae en el lado de su capítulo -->
+    <template id="notas-datos">
+      <article class="nota-tarjeta" data-lado="h">
+        <time class="mono">3 sep · pág. de inicio</time>
+        <h3>Quiere medirlo todo</h3>
+        <p>La temperatura, la altura de las montañas, hasta el azul del cielo. Humboldt sale de La Coruña en 1799 con Bonpland y un baúl de instrumentos. Mira el mapa: ya va en camino.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="g">
+        <time class="mono">4 sep</time>
+        <h3>Mientras tanto, Gauss suma</h3>
+        <p>De niño encuentra un atajo para sumar del 1 al 100 y el maestro no sabe qué hacer con él. Mira su cuaderno: <span class="resalta">lo está resolviendo ahora mismo</span>, sin levantarse.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="h" data-comillas>
+        <time class="mono">5 sep</time>
+        <h3>Primera rareza: casi no hay comillas</h3>
+        <div class="frase-par">
+          <p class="frase-directa"><span class="comilla">«</span>Esto hay que medirlo<span class="comilla">»</span>, dijo Humboldt.</p>
+          <p class="frase-indirecta">Humboldt dijo que eso había que medirlo.</p>
+        </div>
+        <p class="pequeno">Los diálogos van en estilo indirecto, como si alguien te contara lo que dijeron. Al principio choca; luego entiendes el chiste: dos genios que nunca terminan de hablarse.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="g" data-modo="ceres">
+        <time class="mono">6 sep</time>
+        <h3>Encuentra un planeta sin mirar el cielo</h3>
+        <p>En 1801 se pierde Ceres, un cuerpo recién descubierto. Gauss calcula dónde tiene que estar con unas pocas observaciones, y ahí aparece. Mira la órbita: <span class="resalta">la dibuja desde su escritorio</span>.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="h" data-modo="chimborazo">
+        <time class="mono">7 sep</time>
+        <h3>Subir al Chimborazo</h3>
+        <p>En 1802 Humboldt sube el volcán que entonces se creía el más alto del mundo. No llega a la cima, pero sube más alto que nadie antes que él, con los pies destrozados y midiendo todo por el camino.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="g">
+        <time class="mono">8 sep</time>
+        <h3>Un capítulo cada uno</h3>
+        <p>La novela alterna como esta pantalla: uno calcula sin moverse, el otro se mete en ríos, cuevas y volcanes. Cuando te cansas de uno, llega el otro. Funciona como un péndulo.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="h">
+        <time class="mono">11 sep</time>
+        <h3>Bonpland se roba el libro</h3>
+        <p>Aguanta mosquitos, fiebres y a su jefe, y casi nunca se queja. Pedía más páginas. <span class="sub">Necesita su propia novela</span>.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="g">
+        <time class="mono">13 sep</time>
+        <h3>Los dos tienen razón</h3>
+        <p>Y los dos son insoportables, cada uno a su manera. Kehlmann no elige: se ríe con cariño de ambos, y de paso de nosotros, que también medimos cosas mientras la vida pasa por al lado.</p>
+      </article>
+    </template>
+  </section>
+
+  <!-- 2 · Berlín, otra vez: se cierra la pantalla -->
+  <section class="encuentro" aria-labelledby="t-encuentro">
+    <div class="telon" aria-hidden="true"><span class="telon-g"></span><span class="telon-h"></span></div>
+    <div class="encuentro-cab">
+      <span class="etiqueta">14 sep · Berlín, 1828</span>
+      <h2 id="t-encuentro">Por fin, en la misma habitación</h2>
+    </div>
+    <div class="encuentro-grid">
+      <div class="veredicto">
+        <p>Le damos un 3,2. Los personajes brillan; la narrativa se queda corta cuando el chiste ya se entendió. Es una novela histórica que no se toma en serio la solemnidad histórica: si buscas datos, ve a una biografía. Si buscas a dos señores obsesivos, aquí están.</p>
+        <div class="voto" role="group" aria-labelledby="t-voto">
+          <p id="t-voto" class="voto-pregunta">¿Tú eres más Gauss o más Humboldt?</p>
+          <div class="voto-botones">
+            <button type="button" data-voto="g">Más Gauss</button>
+            <button type="button" data-voto="h">Más Humboldt</button>
+          </div>
+          <p class="voto-respuesta" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="ficha-col">
+        <article class="fv3" aria-label="Ficha de lectura" style="--giro:-1.8deg;--f-banda:#14213D;--f-banda-tinta:#FFB627;--f-trazo:#FF6B4A;--f-relleno:rgba(15,122,90,.28);--f-sello:#0F7A5A">
+          <div class="fv3-hoja">
+            <div class="fv3-banda"><span>Ficha de lectura</span><b>Nº 12</b></div>
+            <div class="fv3-cuerpo">
+              <p class="fv3-titulo">La medición del mundo</p>
+              <div class="fv3-autor">Daniel Kehlmann · 2005 · Gotinga y medio mundo</div>
+              <svg class="radar" role="img" aria-label="Personajes 3,5; Historia 3,5; Universo 3,2; Narrativa 2,8; Otros 3,2" data-scores='[["Personajes",3.5],["Historia",3.5],["Universo",3.2],["Narrativa",2.8],["Otros",3.2]]'></svg>
+              <div class="fv3-epoca">
+                <div class="fv3-epoca-cab"><span>Época</span><span>Pasado reciente · 1790–1828</span></div>
+                <div class="fv3-regla" style="--desde:3;--hasta:3" aria-hidden="true"></div>
+                <div class="fv3-epoca-pie"><span>Pasado remoto</span><b>Presente</b><span>Futuro distante</span></div>
+              </div>
+              <div class="fv3-pie"><span class="fv3-nota">3,2<small>/ 5</small></span><span class="fv3-meta">Leído<br><b>Sep 2026</b></span></div>
+            </div>
+          </div>
+          <span class="sello" data-arriba="ATA NYMY" data-abajo="MEDIDO" data-centro="IX·26"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="hoja">
+    <a class="firma" href="../maqueta-v2/index.html"><span class="jaguar" style="color:var(--tinta-2)"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+    <span class="aviso">Maqueta · cuaderno de ejemplo · <a href="cien-anos-de-soledad.html">Cien años de soledad →</a></span>
+  </div>
+</footer>
+
+<script src="../maqueta-v2/marcas.js?v=3"></script>
+<script src="medicion.js?v=4"></script>
+</body>
+</html>
