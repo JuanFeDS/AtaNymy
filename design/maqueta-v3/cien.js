@@ -61,7 +61,7 @@ const espiral = (() => {
     [2, 0, 'José Arcadio', 'j', 'se va con los gitanos'],
     [2, 0.5, 'Aureliano, el coronel', 'a', '32 levantamientos, todos perdidos'],
     [2, 0.86, 'Amaranta', 'o', ''],
-    [3, 0.42, 'Arcadio', 'o', 'hijo de José Arcadio y Pilar Ternera'],
+    [3, 0.62, 'Arcadio', 'o', 'hijo de José Arcadio y Pilar Ternera'],
     [3, 0.5, 'Aureliano José', 'a', ''],
     [4, 0, 'José Arcadio Segundo', 'j', ''],
     [4, 0.5, 'Aureliano Segundo', 'a', ''],
@@ -185,7 +185,7 @@ const lluvia = (() => {
     const alto = lienzo.clientHeight;
     contexto.clearRect(0, 0, ancho, alto);
     const visibles = Math.floor(gotas.length * intensidad);
-    contexto.strokeStyle = 'rgba(47, 64, 102, 0.32)';
+    contexto.strokeStyle = 'rgba(190, 230, 255, 0.4)';
     contexto.lineWidth = 1.1;
     contexto.beginPath();
     for (let i = 0; i < visibles; i += 1) {
@@ -269,6 +269,52 @@ const observadorPasos = new IntersectionObserver((entradas) => {
 }, { rootMargin: '-38% 0px -38% 0px' });
 document.querySelectorAll('.paso').forEach((paso) => observadorPasos.observe(paso));
 
+/* ───────── El color de cada época de Macondo ───────── */
+const epocas = (() => {
+  // [selector de la escena que la ancla, fondo, luz, tinta, acento]
+  const paleta = [
+    ['.umbral', '#0E4D3A', '#1F8A5B', '#FFF4D6', '#FFD23F'],
+    ['.escena-hielo', '#0E4D3A', '#21946A', '#FFF4D6', '#FFD23F'],
+    ['.escena-insomnio', '#2B1F5C', '#6A3FA0', '#F4EEFF', '#FFD23F'],
+    ['.escena-nombres', '#A3164F', '#F0507F', '#FFF0F3', '#FFD23F'],
+    ['.escena-mariposas', '#0D5E57', '#19A38A', '#F2FFF8', '#FFD23F'],
+    ['.escena-lluvia', '#16233F', '#2E4D86', '#E6EEF7', '#9BE7F5'],
+    ['.cierre', '#7A2216', '#D2532F', '#FFEEDD', '#FFB347'],
+  ];
+  const aRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  const mezclar = (a, b, t) => `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')})`;
+  let anclas = [];
+
+  function medir() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    anclas = paleta.map(([selector, ...colores], indice) => {
+      const seccion = document.querySelector(selector);
+      const centro = seccion.offsetTop + seccion.offsetHeight / 2 - window.innerHeight / 2;
+      const posicion = indice === 0 ? 0 : indice === paleta.length - 1 ? 1 : limitar(centro / total);
+      return { posicion, colores: colores.map(aRgb) };
+    });
+  }
+
+  function pintar(edad) {
+    let siguiente = anclas.findIndex((ancla) => ancla.posicion >= edad);
+    if (siguiente <= 0) siguiente = Math.max(1, siguiente);
+    const desde = anclas[siguiente - 1];
+    const hasta = anclas[siguiente];
+    const tramo = hasta.posicion - desde.posicion;
+    const t = tramo > 0 ? limitar((edad - desde.posicion) / tramo) : 1;
+    // Cada época se sostiene y el cambio ocurre rápido entre escenas, para no pasar por colores turbios
+    const corte = limitar((t - 0.38) / 0.24);
+    const suave = corte * corte * (3 - 2 * corte);
+    ['--fondo', '--fondo-2', '--tinta', '--acento'].forEach((variable, i) => {
+      raiz.style.setProperty(variable, mezclar(desde.colores[i], hasta.colores[i], suave));
+    });
+  }
+
+  window.addEventListener('resize', medir);
+  medir();
+  return pintar;
+})();
+
 const reloj = document.querySelector('[data-anio]');
 const escenas = [...document.querySelectorAll('.escena[data-escena]')];
 const actualizadores = { nombres: espiral, insomnio, lluvia };
@@ -279,6 +325,7 @@ function actualizar() {
   const total = document.documentElement.scrollHeight - window.innerHeight;
   const edad = total > 0 ? limitar(window.scrollY / total) : 0;
   raiz.style.setProperty('--edad', edad.toFixed(3));
+  epocas(edad);
   reloj.textContent = String(Math.max(1, Math.round(edad * 100)));
   escenas.forEach((escena) => {
     const progreso = progresoDe(escena);
