@@ -91,12 +91,14 @@ function partirMarcasLargas() {
     const clase = ['sub', 'doble', 'tach'].find((nombre) => marca.classList.contains(nombre));
     marca.classList.remove(clase);
     marca.textContent = '';
-    texto.split(/(?<=\s)/).forEach((palabra, indice) => {
+    const palabras = texto.trim().split(/\s+/);
+    palabras.forEach((palabra, indice) => {
       const trozo = document.createElement('span');
-      trozo.className = clase;
+      trozo.className = `${clase} trozo`;
       trozo.style.transitionDelay = `${indice * 0.07}s`;
       trozo.textContent = palabra;
       marca.append(trozo);
+      if (indice < palabras.length - 1) marca.append(' ');
     });
   });
 }
