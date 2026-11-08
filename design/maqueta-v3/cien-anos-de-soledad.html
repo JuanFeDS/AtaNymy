@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cien años de soledad · Ata Nymy</title>
+<link rel="stylesheet" href="../maqueta-v2/taller.css?v=3">
+<link rel="stylesheet" href="cien.css?v=3">
+</head>
+<body>
+
+<!-- Capa fija: el papel envejece con el scroll -->
+<div class="vejez" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="firma" href="../maqueta-v2/index.html"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+  <div class="reloj" aria-live="off"><span class="mono">Año</span> <b data-anio>1</b> <span class="mono">de Macondo</span></div>
+  <div class="hilo" aria-hidden="true"><span></span></div>
+</header>
+
+<main>
+  <!-- 0 · Umbral -->
+  <section class="umbral" aria-labelledby="titulo">
+    <div class="umbral-texto">
+      <span class="etiqueta">Reseña · Relectura · Ficha Nº 13</span>
+      <h1 id="titulo">Cien años de soledad</h1>
+      <div class="mono byline">Gabriel García Márquez · Sudamericana, 1967</div>
+      <p class="umbral-hook">Esta reseña dura cien años.<br><span>Desliza para que pasen.</span></p>
+    </div>
+    <figure class="esfera" aria-hidden="true">
+      <svg viewBox="0 0 400 400"><g class="marcas-esfera" filter="url(#lapiz)"></g><g class="aguja"><path d="M200 200 L200 52" /><circle cx="200" cy="200" r="7"/></g></svg>
+      <figcaption class="mono">1 pueblo · 7 generaciones · 100 años</figcaption>
+    </figure>
+    <div class="flecha" aria-hidden="true"><svg viewBox="0 0 24 60"><path d="M12 2 C 11 20 13 38 12 56 M4 46 L12 57 L20 46" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" filter="url(#lapiz)"/></svg></div>
+  </section>
+
+  <!-- 1 · El hielo -->
+  <section class="escena escena-hielo" data-escena="hielo" aria-label="Escena uno: el hielo">
+    <div class="escenario">
+      <div class="calor" aria-hidden="true"></div>
+      <div class="carpa" aria-hidden="true"></div>
+      <div class="hielo-caja" aria-hidden="true">
+        <div class="hielo"><span class="brillo"></span></div>
+        <div class="charco"></div>
+        <i class="gota" style="--x:30%;--d:0s"></i><i class="gota" style="--x:62%;--d:.7s"></i><i class="gota" style="--x:46%;--d:1.3s"></i>
+      </div>
+      <div class="pie-escena mono">I · El gran invento de nuestro tiempo</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>La primera maravilla de Macondo no es un milagro: es un bloque de hielo dentro de una carpa de gitanos. Un padre paga para que sus hijos lo toquen. Uno de ellos lo recordará frente a un pelotón de fusilamiento, y con ese recuerdo empieza el libro.</p></div>
+      <div class="paso"><p>Ahí está el truco que sostiene todo el libro: <span class="sub">lo imposible se cuenta con la misma voz que lo cotidiano</span>, y lo cotidiano, el hielo, se cuenta como un prodigio.</p></div>
+      <div class="paso"><p>Más adelante, una muchacha sube al cielo mientras dobla sábanas y el narrador ni levanta la ceja. Al rato, tú tampoco. Mientras lees esto, el hielo se derrite. <span class="resalta">Así funciona el tiempo aquí.</span></p></div>
+    </div>
+  </section>
+
+  <!-- 3 · El insomnio -->
+  <section class="escena escena-insomnio" data-escena="insomnio" aria-label="Escena dos: la peste del insomnio">
+    <div class="escenario">
+      <div class="olvido">
+        <span class="etiqueta">II · La peste del insomnio</span>
+        <p class="parrafo-olvido" data-texto="Llega una peste que quita el sueño y, con el sueño, la memoria. Primero se olvidan los recuerdos de la infancia, después el nombre de las cosas y, al final, para qué sirven. La solución del pueblo es escribir etiquetas: el nombre en cada objeto y, por si acaso, su uso. Leer esta parte da un poco de miedo, porque se parece demasiado a cualquier martes."></p>
+        <p class="remate">Por eso subrayamos: <span class="sub">para no olvidar</span>.</p>
+      </div>
+      <div class="rotulos" aria-hidden="true">
+        <span class="rotulo" style="--x:8%;--y:16%;--g:-6deg;--t:.32">mesa</span>
+        <span class="rotulo" style="--x:80%;--y:12%;--g:5deg;--t:.42">reloj</span>
+        <span class="rotulo" style="--x:6%;--y:74%;--g:4deg;--t:.52">vaca · ordeñar cada mañana</span>
+        <span class="rotulo" style="--x:78%;--y:78%;--g:-4deg;--t:.6">cama</span>
+        <span class="rotulo grande" style="--x:58%;--y:4%;--g:-2deg;--t:.72">Dios existe</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Los nombres -->
+  <section class="escena escena-nombres" data-escena="nombres" aria-label="Escena tres: los nombres">
+    <div class="escenario">
+      <svg class="espiral" viewBox="0 0 600 600" role="img" aria-labelledby="espiral-desc">
+        <desc id="espiral-desc">Espiral de siete vueltas, una por generación de los Buendía. Los José Arcadio caen siempre arriba y los Aurelianos siempre abajo.</desc>
+        <path class="rayo rayo-j" d="M300 300 V 4"/>
+        <path class="rayo rayo-a" d="M300 300 V 596"/>
+        <path class="vuelta"/>
+        <g class="nombres-capa"></g>
+      </svg>
+      <div class="filtros" role="group" aria-label="Resaltar un nombre">
+        <button type="button" data-ver="j" aria-pressed="false"><i></i>José Arcadio</button>
+        <button type="button" data-ver="a" aria-pressed="false"><i></i>Aureliano</button>
+      </div>
+      <div class="pie-escena mono">III · Siete vueltas, dos nombres</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><h2>El truco de los nombres</h2><p>Los Buendía repiten nombres como quien repite errores. Cada vuelta de la espiral es una generación. Fíjate dónde caen.</p></div>
+      <div class="paso"><p>Los <span class="nombre-j">José Arcadio</span> salen impulsivos y enormes; los <span class="nombre-a">Aurelianos</span>, callados y lúcidos. No es un capricho: en Macondo el tiempo no avanza, gira, y cada generación tropieza en la misma piedra con otro nombre de pila.</p></div>
+      <div class="paso"><p>Cuando la espiral se cierre lo vas a ver solo: <span class="sub">todos caen en el mismo punto del giro</span>. Si te pierdes leyendo, vuelve aquí. Úrsula, que vive casi todo el libro, también se pierde.</p></div>
+    </div>
+  </section>
+
+  <!-- 5 · Las mariposas -->
+  <section class="escena escena-mariposas" data-escena="mariposas" aria-label="Escena cuatro: lo que subrayé">
+    <div class="subrayado-wrap">
+      <span class="etiqueta">IV · Lo que subrayé</span>
+      <p class="aviso-mariposas mono">Mueve el cursor: te siguen, como a Mauricio Babilonia</p>
+      <ol class="subrayados">
+        <li><span class="n">1</span><p>El coronel fabricando pescaditos de oro para fundirlos y volver a empezar. <span class="sub">Hacer para deshacer</span>, como forma de esperar.</p></li>
+        <li><span class="n">2</span><p>Pilar Ternera, que lee las cartas y sabe más que todos sin decirlo nunca del todo.</p></li>
+        <li><span class="n">3</span><p>Las mariposas amarillas. No es la imagen más importante del libro, pero sí la que se te queda pegada.</p></li>
+      </ol>
+    </div>
+    <div class="enjambre" aria-hidden="true"></div>
+  </section>
+
+  <!-- 4 · La lluvia -->
+  <section class="escena escena-lluvia" data-escena="lluvia" aria-label="Escena cinco: la lluvia">
+    <div class="escenario">
+      <div class="cielo" aria-hidden="true"></div>
+      <canvas class="cortina" aria-hidden="true"></canvas>
+      <figure class="conteo">
+        <svg viewBox="0 0 300 170" role="img" aria-label="Rayas de conteo: cuatro años, once meses y dos días de lluvia"><g class="rayas" filter="url(#lapiz)"></g></svg>
+        <figcaption><b data-dias>0</b> <span class="mono">días de lluvia, contados a mano</span></figcaption>
+      </figure>
+      <div class="pie-escena mono">V · Cuatro años, once meses y dos días</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>Ya cerca del final, después de la matanza de la compañía bananera, empieza a llover y no para en casi cinco años. Es una de las imágenes más famosas y también el mejor resumen de cómo se sienten algunos tramos del libro.</p></div>
+      <div class="paso"><p>Hay tramos donde la familia se vuelve un nudo y el humor baja. <span class="resalta">No es un defecto grave</span>, pero conviene saberlo antes de rendirse en la página doscientos.</p></div>
+      <div class="paso"><p>Cuenta las rayas mientras llueve. Escampa, te lo prometemos. Y lo que viene después de la lluvia vale cada día de agua.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 · Cierre -->
+  <section class="cierre" aria-labelledby="t-cierre">
+    <div class="cierre-texto">
+      <span class="etiqueta">Año 100</span>
+      <h2 id="t-cierre">Nuestra nota</h2>
+      <p>Le damos un 4,6. Gana en universo, porque Macondo ya es un lugar al que se vuelve; pierde un poco en «otros» porque la lluvia pide paciencia.</p>
+      <div class="para-quien">
+        <p><b class="mono">Léelo si</b> te gustan las sagas familiares, los narradores con humor y los libros que mejoran la segunda vez.</p>
+        <p><b class="mono">Quizá no si</b> necesitas una trama en línea recta o te angustian las listas de nombres parecidos.</p>
+      </div>
+      <button type="button" class="volver" data-volver><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12 a7 7 0 1 0 2.2-5.1 M5 3.5 V7.5 H9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Volver al año 1</button>
+      <p class="pregunta-final">¿Tú también necesitaste la espiral, o lo leíste a pelo?</p>
+    </div>
+    <div class="ficha-col">
+      <article class="ficha cinta" aria-label="Ficha de lectura" style="--giro: 2deg">
+        <div class="fp-cab"><span>Ata Nymy · Ficha Nº 13</span><span>Préstamo</span></div>
+        <div class="fp-titulo">Cien años de soledad</div>
+        <div class="fp-autor">García Márquez · 1967 · Macondo</div>
+        <div class="fp-fila"><span>Época</span><div class="epocas" aria-label="Pasado lejano y pasado reciente"><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="fp-fila"><span></span><div class="fp-epoca-txt">da vueltas</div></div>
+        <svg class="radar" role="img" aria-label="Personajes 4,7; Historia 4,4; Universo 5; Narrativa 4,8; Otros 4,1" data-scores='[["Personajes",4.7],["Historia",4.4],["Universo",5],["Narrativa",4.8],["Otros",4.1]]'></svg>
+        <div class="fp-pie"><span class="fp-nota">4,6<small>/ 5</small></span><span class="mono" style="font-size:.62rem;color:rgba(51,36,27,.6)">Releído · 2026</span></div>
+      </article>
+      <span class="sello" data-arriba="ATA NYMY" data-abajo="RELEÍDO" data-centro="X·26"></span>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="hoja">
+    <a class="firma" href="../maqueta-v2/index.html"><span class="jaguar" style="color:var(--tinta-2)"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+    <span class="aviso">Maqueta · reseña de ejemplo · Impreso en Buenos Aires el 30 de mayo de 1967, en librerías desde el 5 de junio</span>
+  </div>
+</footer>
+
+<script src="../maqueta-v2/marcas.js?v=3"></script>
+<script src="cien.js?v=3"></script>
+</body>
+</html>
