@@ -269,14 +269,39 @@ const observadorPasos = new IntersectionObserver((entradas) => {
 }, { rootMargin: '-38% 0px -38% 0px' });
 document.querySelectorAll('.paso').forEach((paso) => observadorPasos.observe(paso));
 
+/* ───────── V · Treinta y dos levantamientos, todos perdidos ───────── */
+const guerras = (() => {
+  const contenedor = document.querySelector('.banderas');
+  const contador = document.querySelector('[data-levantamientos]');
+  const TOTAL = 32;
+  const banderas = Array.from({ length: TOTAL }, () => {
+    const bandera = document.createElement('span');
+    bandera.className = 'bandera';
+    bandera.innerHTML = '<svg viewBox="0 0 30 40"><path class="asta" d="M6 38 V4"/><path class="pano" d="M7 5 L27 10 L7 17 Z"/><path class="tacha" d="M2 6 L28 36 M28 8 L3 34"/></svg>';
+    contenedor.append(bandera);
+    return bandera;
+  });
+  return (progreso) => {
+    const avance = limitar((progreso - 0.05) / 0.75) * TOTAL;
+    banderas.forEach((bandera, i) => {
+      bandera.classList.toggle('alzada', avance > i);
+      bandera.classList.toggle('perdida', avance > i + 0.6);
+    });
+    contador.textContent = String(Math.min(TOTAL, Math.floor(avance)));
+  };
+})();
+
 /* ───────── El color de cada época de Macondo ───────── */
 const epocas = (() => {
   // [selector de la escena que la ancla, fondo, luz, tinta, acento]
   const paleta = [
     ['.umbral', '#0E4D3A', '#1F8A5B', '#FFF4D6', '#FFD23F'],
-    ['.escena-hielo', '#0E4D3A', '#21946A', '#FFF4D6', '#FFD23F'],
+    ['.escena-imanes', '#0E4D3A', '#1F8A5B', '#FFF4D6', '#FFD23F'],
+    ['.escena-hielo', '#0B5A47', '#21946A', '#FFF4D6', '#FFD23F'],
     ['.escena-insomnio', '#2B1F5C', '#6A3FA0', '#F4EEFF', '#FFD23F'],
     ['.escena-nombres', '#A3164F', '#F0507F', '#FFF0F3', '#FFD23F'],
+    ['.escena-guerras', '#4A1414', '#8C2A1E', '#FFEDE3', '#FFB347'],
+    ['.escena-remedios', '#2D6CDF', '#7FB2FF', '#FFFFFF', '#FFD23F'],
     ['.escena-mariposas', '#0D5E57', '#19A38A', '#F2FFF8', '#FFD23F'],
     ['.escena-lluvia', '#16233F', '#2E4D86', '#E6EEF7', '#9BE7F5'],
     ['.cierre', '#7A2216', '#D2532F', '#FFEEDD', '#FFB347'],
@@ -317,7 +342,7 @@ const epocas = (() => {
 
 const reloj = document.querySelector('[data-anio]');
 const escenas = [...document.querySelectorAll('.escena[data-escena]')];
-const actualizadores = { nombres: espiral, insomnio, lluvia };
+const actualizadores = { nombres: espiral, insomnio, lluvia, guerras };
 let pendiente = false;
 
 function actualizar() {
