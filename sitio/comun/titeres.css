@@ -1,0 +1,43 @@
+/* Títeres de papel: figuras de una sola pieza en su palito.
+   Se mueven enteros, como en un teatrino: entran desde abajo, se mecen y salen.
+   Usan --s (0→1), el avance de la escena que ya escribe el script de cada página.
+
+   Variables por títere (en el atributo style):
+   --x       posición horizontal del palito dentro del escenario
+   --alto    altura de la figura (por defecto 66svh)
+   --hundir  cuánto palito queda por debajo del borde (por defecto 14svh)
+   --entra-en / --sale-en  tramo de la escena en que entra y sale
+
+   Modificadores:
+   .titere--espejo   mira hacia el otro lado
+   .titere--sombra   se proyecta como sombra, sin color
+   .titere--asciende sube y se pierde por arriba en vez de salir por abajo
+   .titere--detras   queda detrás del contenido de la escena */
+
+.titere {
+  --entra: clamp(0, calc(var(--s, 1) / var(--entra-en, 0.14)), 1);
+  --sale: clamp(0, calc((var(--s, 0) - var(--sale-en, 0.86)) / (1 - var(--sale-en, 0.86))), 1);
+  position: absolute; left: var(--x, 20%); bottom: calc(-1 * var(--hundir, 14svh));
+  height: var(--alto, 66svh); margin: 0; z-index: 2; pointer-events: none;
+  transform: translate(-50%, calc((1 - var(--entra) + var(--sale)) * 120%));
+  will-change: transform;
+}
+.titere img { display: block; height: 100%; width: auto; transform-origin: 50% 100%; filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.38)); transform: scaleX(var(--espejo, 1)); }
+.titere--espejo { --espejo: -1; }
+.titere--detras { z-index: 0; }
+.titere--sombra img { filter: brightness(0) blur(2.5px); opacity: var(--opacidad-sombra, 0.42); }
+.titere--asciende {
+  --sube: clamp(0, calc((var(--s, 0) - var(--sube-desde, 0.3)) / 0.62), 1);
+  transform: translate(-50%, calc((1 - var(--entra)) * 120% - var(--sube) * 150svh)) rotate(calc(var(--sube) * -8deg));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .titere img { animation: mecerse var(--ritmo, 3.4s) ease-in-out infinite alternate; }
+  @keyframes mecerse {
+    from { transform: scaleX(var(--espejo, 1)) rotate(-1.6deg) translateY(0); }
+    to { transform: scaleX(var(--espejo, 1)) rotate(1.6deg) translateY(-0.4rem); }
+  }
+}
+@media (max-width: 860px) {
+  .titere { height: var(--alto-movil, 42svh); bottom: calc(-1 * var(--hundir-movil, 6svh)); }
+  .titere--solo-escritorio { display: none; }
+}
