@@ -8,9 +8,11 @@ quedaron sueltos (mariposas, clavos). Escribe un `titeres.json` con el tamaño
 de cada recorte.
 
 Uso:
-    python herramientas/recortar_titeres.py ENTRADA CARPETA_SALIDA [--nombres a,b,c]
+    python herramientas/recortar_titeres.py ENTRADA CARPETA_SALIDA [--nombres a,b,c] [--limpiar x0,y0,x1,y1;...]
 
 Los nombres se asignan en orden de lectura: de arriba abajo y de izquierda a derecha.
+`--limpiar` pinta de fondo rectángulos de la hoja antes de recortar, para separar a mano
+un palito que toca la cabeza de otra figura.
 """
 
 import argparse
@@ -18,14 +20,16 @@ import json
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 from scipy import ndimage
 
 TOLERANCIA_FONDO = 11
 PROPORCION_ADORNO = 0.05
 DISTANCIA_ADORNO = 90
 PROPORCION_PALITO = 0.15
+HOLGURA_PALITO = 12
 MARGEN = 6
+EROSION_BORDE = 2
 
 
 def mascara_fondo(rgb):
@@ -64,19 +68,26 @@ def separar_unidas(region):
     tramo = anchos[inicio:fin]
     if not (tramo > 0).any() or tramo[tramo > 0].min() > anchos.max() * PROPORCION_PALITO:
         return [region]
+    # Se corta por la fila más angosta, que cae en medio del palito y nunca dentro de una cabeza.
     angosto = tramo[tramo > 0].min()
-    filas_palito = [inicio + i for i, ancho in enumerate(tramo) if 0 < ancho <= angosto * 1.5]
-    corte = max(filas_palito)
+    corte = inicio + int(np.flatnonzero(tramo == angosto)[0])
+    columnas_palito = np.flatnonzero(region[corte])
+    izquierda_palito = columnas_palito.min() - HOLGURA_PALITO
+    derecha_palito = columnas_palito.max() + HOLGURA_PALITO
     superior = region.copy()
     superior[corte + 1:] = False
     inferior = region.copy()
     inferior[:corte + 1] = False
-    anchos_inferior = inferior.sum(axis=1)
-    for fila in range(corte + 1, abajo + 1):
-        if anchos_inferior[fila] > angosto * 2.5:
-            break
-        inferior[fila] = False
-    return [parte for mitad in (superior, inferior) if mitad.any() for parte in separar_unidas(mitad)]
+    # A la figura de abajo solo se le quita el tramo de palito que queda por encima de ella:
+    # las filas donde todo lo que hay está dentro de la franja del palito.
+    fuera_palito = inferior.copy()
+    fuera_palito[:, izquierda_palito:derecha_palito + 1] = False
+    filas_con_figura = np.flatnonzero(fuera_palito.any(axis=1))
+    if filas_con_figura.size:
+        inferior[corte + 1:filas_con_figura[0], izquierda_palito:derecha_palito + 1] = False
+    # Los restos del palito que quedan sueltos tras el corte se descartan: cada mitad conserva su pieza principal.
+    mitades = [componentes(mitad)[0] for mitad in (superior, inferior) if mitad.any()]
+    return [parte for mitad in mitades for parte in separar_unidas(mitad)]
 
 
 def armar_figuras(fondo):
@@ -95,22 +106,39 @@ def armar_figuras(fondo):
 
 
 def guardar(imagen, region, nombre, carpeta):
-    """Recorta la figura con su transparencia y la guarda como PNG."""
+    """Recorta la figura con su transparencia y la guarda como PNG.
+
+    Erosiona el borde un par de píxeles para que no quede la franja gris del fondo.
+    """
+    region = ndimage.binary_erosion(region, iterations=EROSION_BORDE)
     arriba, abajo, izquierda, derecha = caja(region)
     arriba, izquierda = max(arriba - MARGEN, 0), max(izquierda - MARGEN, 0)
     abajo, derecha = min(abajo + MARGEN + 1, region.shape[0]), min(derecha + MARGEN + 1, region.shape[1])
-    alfa = Image.fromarray((region * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.7))
+    alfa = Image.fromarray((region * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.5))
     figura = imagen.convert("RGBA")
     figura.putalpha(alfa)
     figura.crop((izquierda, arriba, derecha, abajo)).save(carpeta / f"{nombre}.png", optimize=True)
     return {"archivo": f"{nombre}.png", "ancho": int(derecha - izquierda), "alto": int(abajo - arriba)}
 
 
-def recortar(entrada, salida, nombres=None):
+def limpiar_zonas(imagen, zonas):
+    """Pinta con el color del fondo los rectángulos indicados (x0, y0, x1, y1)."""
+    rgb = np.asarray(imagen).astype(np.int16)
+    borde = np.concatenate([rgb[0], rgb[-1], rgb[:, 0], rgb[:, -1]])
+    color_fondo = tuple(int(valor) for valor in np.median(borde, axis=0))
+    pincel = ImageDraw.Draw(imagen)
+    for zona in zonas:
+        pincel.rectangle(zona, fill=color_fondo)
+    return imagen
+
+
+def recortar(entrada, salida, nombres=None, zonas=None):
     """Recorta todas las figuras de la hoja y escribe titeres.json en la carpeta de salida."""
     carpeta = Path(salida)
     carpeta.mkdir(parents=True, exist_ok=True)
     imagen = Image.open(entrada).convert("RGB")
+    if zonas:
+        imagen = limpiar_zonas(imagen, zonas)
     figuras = armar_figuras(mascara_fondo(np.asarray(imagen).astype(np.int16)))
     alto_fila = max(caja(figura)[1] - caja(figura)[0] for figura in figuras) * 0.6
     figuras.sort(key=lambda figura: (round(caja(figura)[0] / alto_fila), caja(figura)[2]))
@@ -131,9 +159,11 @@ def main():
     parser.add_argument("entrada", help="Hoja de títeres sobre fondo gris liso")
     parser.add_argument("salida", help="Carpeta donde guardar los PNG y titeres.json")
     parser.add_argument("--nombres", help="Nombres separados por comas, en orden de lectura")
+    parser.add_argument("--limpiar", help="Rectángulos x0,y0,x1,y1 a pintar de fondo, separados por punto y coma")
     argumentos = parser.parse_args()
     nombres = argumentos.nombres.split(",") if argumentos.nombres else None
-    for nombre, datos in recortar(argumentos.entrada, argumentos.salida, nombres).items():
+    zonas = [tuple(int(valor) for valor in zona.split(",")) for zona in argumentos.limpiar.split(";")] if argumentos.limpiar else None
+    for nombre, datos in recortar(argumentos.entrada, argumentos.salida, nombres, zonas).items():
         print(f"{nombre}: {datos['ancho']} x {datos['alto']}")
 
 
