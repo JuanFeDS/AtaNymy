@@ -112,15 +112,16 @@
   --ig-story-safe-bottom: 280px;
 
   /* ───────── 3 · WEB (PROPUESTA, sin aprobar: huecos del sistema original) ───────── */
-  --web-size-hero: clamp(3.25rem, 9vw, 8.5rem);
-  --web-size-h2: clamp(2rem, 4.2vw, 3.5rem);
-  --web-size-lead: clamp(1.25rem, 2vw, 1.6rem);
-  --web-size-body: 1.1875rem;
+  /* v2: tope de 3,6 rem en títulos; la energía viene del material, no de la escala */
+  --web-size-hero: clamp(2.4rem, 4.6vw, 3.6rem);
+  --web-size-h2: clamp(1.45rem, 2.3vw, 1.9rem);
+  --web-size-lead: clamp(1.15rem, 1.6vw, 1.35rem);
+  --web-size-body: 1.125rem;
   --web-size-note: 0.95rem;
-  --web-size-label: 0.78rem;
-  --web-leading-title: 0.98;
-  --web-leading-body: 1.65;
-  --web-measure: 66ch;
+  --web-size-label: 0.74rem;
+  --web-leading-title: 1.04;
+  --web-leading-body: 1.7;
+  --web-measure: 62ch;
   --web-gutter: clamp(1.25rem, 5vw, 4rem);
   --web-max: 1320px;
   --web-space-related: 0.5rem;
