@@ -1,0 +1,401 @@
+/* Cien años de soledad · una reseña que dura cien años.
+   cien.js escribe --edad (0→1) y el color de cada época de Macondo:
+   --fondo, --fondo-2 (la luz), --tinta y --acento. --s es el avance de cada escena. */
+
+:root {
+  --edad: 0;
+  --fondo: #0E4D3A;
+  --fondo-2: #1F8A5B;
+  --tinta: #FFF4D6;
+  --acento: #FFD23F;
+  --tinta-suave: color-mix(in srgb, var(--tinta) 74%, transparent);
+  --tinta-2: var(--acento);
+  --linea: color-mix(in srgb, var(--tinta) 22%, transparent);
+  --jose: #FFD23F;
+  --aure: #9BE7F5;
+  --amarillo: #FFD23F;
+  --resaltador: color-mix(in srgb, var(--acento) 45%, transparent);
+  --sello-tinta: #2F4066;
+  --an-font-title: 'Fraunces', Georgia, serif;
+  --an-font-body: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+}
+body { background: var(--fondo); color: var(--tinta); transition: background-color .2s linear; }
+main { position: relative; z-index: 1; }
+h1, h2, h3, .fraunces { font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+h1 { font-weight: 600; letter-spacing: -0.02em; }
+h2 { font-weight: 500; }
+a { color: inherit; }
+
+/* Atmósfera: dos luces que respiran con el color de la época */
+.atmosfera { position: fixed; inset: -10vmax; z-index: 0; pointer-events: none; }
+.atmosfera::before, .atmosfera::after { content: ""; position: absolute; border-radius: 50%; filter: blur(40px); opacity: .7; }
+.atmosfera::before { width: 70vmax; height: 70vmax; right: -5vmax; top: -10vmax; background: radial-gradient(circle, var(--fondo-2) 0%, transparent 62%); }
+.atmosfera::after { width: 60vmax; height: 60vmax; left: -8vmax; bottom: -12vmax; background: radial-gradient(circle, color-mix(in srgb, var(--acento) 38%, transparent) 0%, transparent 60%); }
+@media (prefers-reduced-motion: no-preference) {
+  .atmosfera::before { animation: respira 14s ease-in-out infinite alternate; }
+  .atmosfera::after { animation: respira 18s ease-in-out infinite alternate-reverse; }
+  @keyframes respira { to { transform: translate(-6vmax, 5vmax) scale(1.12); } }
+}
+.grano { position: fixed; inset: 0; z-index: 31; pointer-events: none; background: var(--an-grain-light); opacity: .55; mix-blend-mode: overlay; }
+.vejez { position: fixed; inset: 0; z-index: 30; pointer-events: none; background: radial-gradient(ellipse 80% 75% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.32) 100%); }
+
+/* HUD fijo */
+.hud { position: fixed; inset: 0 0 auto 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.9rem var(--web-gutter); pointer-events: none; }
+.hud > * { pointer-events: auto; }
+.hud .firma { color: var(--tinta); }
+.hud .firma .jaguar { color: var(--acento); }
+.reloj { display: flex; align-items: baseline; gap: 0.45rem; color: var(--tinta-suave); }
+.reloj b { font: 600 1.9rem/1 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--acento); min-width: 2.2ch; text-align: right; font-variant-numeric: tabular-nums; }
+.hilo { position: fixed; right: 0.9rem; top: 4.2rem; bottom: 1.2rem; width: 2px; background: var(--linea); z-index: 40; }
+.hilo span { position: absolute; inset: 0 0 auto 0; height: calc(var(--edad) * 100%); background: var(--acento); border-radius: 2px; }
+.etiqueta { color: var(--tinta-suave); }
+.etiqueta::before { background: var(--acento); }
+.mono { letter-spacing: 0.1em; }
+
+/* 0 · Umbral */
+.umbral { min-height: 100svh; display: grid; grid-template-columns: 1fr; align-items: center; gap: 2rem; padding: 6rem var(--web-gutter) 5rem; position: relative; }
+@media (min-width: 900px) { .umbral { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); } }
+.umbral-texto { max-width: 40rem; margin-left: clamp(0rem, 6vw, 7rem); }
+.umbral h1 { margin-top: 1.1rem; font-size: clamp(2.6rem, 5vw, 3.8rem); }
+.umbral h1 em { font-style: italic; font-weight: 400; color: var(--acento); }
+.umbral .byline { color: var(--tinta-suave); }
+.umbral-hook { margin: 3rem 0 0; font: italic 300 clamp(1.4rem, 2.6vw, 2rem)/1.3 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--tinta); }
+.esfera { margin: 0; justify-self: center; width: min(30rem, 86vw); text-align: center; color: var(--tinta); }
+.esfera svg { width: 100%; height: auto; overflow: visible; }
+.marcas-esfera path { stroke: currentColor; stroke-linecap: round; opacity: .8; }
+.marcas-esfera text { font: 500 24px var(--an-font-title); fill: var(--acento); }
+.aguja { transform-origin: 200px 200px; transform: rotate(calc(var(--edad) * 360deg)); }
+.aguja path { stroke: var(--acento); stroke-width: 3.5; stroke-linecap: round; }
+.aguja circle { fill: var(--acento); }
+.esfera figcaption { margin-top: 1rem; color: var(--tinta-suave); }
+.flecha { position: absolute; left: 50%; bottom: 2rem; width: 1.5rem; color: var(--acento); transform: translateX(-50%); }
+@media (prefers-reduced-motion: no-preference) {
+  .aguja { transition: transform .4s cubic-bezier(.3,1.5,.5,1); }
+  .flecha { animation: baja 2.4s ease-in-out infinite; }
+  @keyframes baja { 50% { transform: translate(-50%, 0.6rem); } }
+}
+
+/* Escenas con escenario fijo y relato que pasa por delante */
+.escena { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+.escenario { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; overflow: hidden; }
+.relato { padding: 20svh var(--web-gutter) 30svh 0; }
+.paso { min-height: 80svh; display: flex; flex-direction: column; justify-content: center; opacity: 0.25; transition: opacity 0.6s; }
+.paso.activo { opacity: 1; }
+.paso p { font-size: clamp(1.15rem, 1.55vw, 1.35rem); line-height: 1.6; max-width: 32ch; margin: 0; text-wrap: pretty; }
+.paso h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.pie-escena { position: absolute; left: var(--web-gutter); bottom: 1.6rem; color: var(--tinta-suave); }
+.sub { --marca: var(--acento); }
+
+/* 1 · El hielo */
+.escena-hielo { --s: 0; }
+.escena-hielo .escenario { overflow: visible; }
+.escena-hielo .relato { position: relative; z-index: 2; }
+.carpa {
+  position: absolute; top: 0; left: 0; width: 100vw; height: 18svh;
+  background: repeating-linear-gradient(90deg, #E8336E 0 2.6rem, #FFD23F 2.6rem 5.2rem);
+  -webkit-mask: radial-gradient(2.7rem 1.6rem at 2.6rem 100%, transparent 98%, #000) 0 0 / 5.2rem 100%;
+  mask: radial-gradient(2.7rem 1.6rem at 2.6rem 100%, transparent 98%, #000) 0 0 / 5.2rem 100%;
+  filter: drop-shadow(0 14px 16px rgba(0,0,0,.3));
+}
+.carpa::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,.35), transparent 75%); }
+.calor { position: absolute; inset: 0; background: radial-gradient(38% 42% at 50% 56%, rgba(255, 210, 63, 0.4), transparent 70%); }
+.hielo-caja { position: relative; width: min(25rem, 74%); aspect-ratio: 1 / 1; }
+.hielo {
+  position: absolute; left: 12%; right: 12%; bottom: 16%;
+  height: calc((1 - var(--s) * 0.68) * 70%);
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.8) 0 12%, transparent 12% 40%, rgba(255,255,255,.4) 40% 44%, transparent 44%),
+    linear-gradient(180deg, #F4FDFF 0%, #A9E6F7 45%, #4FB6DE 100%);
+  clip-path: polygon(3% 6%, 30% 0, 71% 3%, 98% 0, 100% 52%, 96% 100%, 4% 100%, 0 48%);
+  filter: drop-shadow(0 0 2.6rem rgba(155, 231, 245, 0.95));
+}
+.hielo .brillo { position: absolute; inset: 8% auto auto 10%; width: 18%; height: 60%; background: linear-gradient(rgba(255,255,255,.85), transparent); transform: skewX(-12deg); }
+.charco { position: absolute; left: 50%; bottom: 10%; height: 9%; width: calc(40% + var(--s) * 55%); transform: translateX(-50%); border-radius: 50%; background: radial-gradient(rgba(155, 231, 245, .6), rgba(155, 231, 245, 0) 70%); }
+.gota { position: absolute; left: var(--x); bottom: calc(16% + 2px); width: 6px; height: 9px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #A9E6F7; opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .gota { animation: cae calc(2.4s - var(--s) * 1.5s) var(--d) infinite ease-in; }
+  @keyframes cae { 0% { opacity: 0; transform: translateY(-4px); } 15% { opacity: .9; } 100% { opacity: 0; transform: translateY(2.6rem); } }
+}
+
+/* 2 · El insomnio */
+.escena-insomnio { display: block; height: 290svh; }
+.escena-insomnio .escenario { padding: 5rem var(--web-gutter) 3rem; }
+.olvido { max-width: 44rem; position: relative; z-index: 2; }
+.parrafo-olvido { font: 400 clamp(1.4rem, 2.6vw, 2rem)/1.5 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; margin: 1.2rem 0 0; }
+.palabra { transition: color 0.8s, background-size 0.8s; background: linear-gradient(var(--linea), var(--linea)) 0 92% / 0% 2px no-repeat; }
+.palabra.olvidada { color: transparent; background-size: 100% 2px; }
+.palabra.guardada { color: var(--acento); font-style: italic; }
+.remate { margin: 2rem 0 0; font: italic 400 1.4rem var(--an-font-title); opacity: 0; transform: translateY(0.6rem); transition: opacity .8s, transform .8s; }
+.remate.visible { opacity: 1; transform: none; }
+.rotulos { position: absolute; inset: 4rem 0 2rem; }
+.rotulo {
+  position: absolute; left: var(--x); top: var(--y); z-index: 1;
+  font-family: var(--an-font-mono); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--an-grain-dark), #FFF6E0; color: #2A1E14;
+  padding: 0.55rem 0.95rem 0.55rem 1.65rem; border-radius: 2px 6px 6px 2px;
+  box-shadow: 0 14px 22px -12px rgba(0,0,0,.55);
+  transform: rotate(var(--g)) scale(0.6); opacity: 0;
+  transition: transform .5s cubic-bezier(.3,1.4,.5,1), opacity .4s;
+}
+.rotulo::before { content: ""; position: absolute; left: 0.55rem; top: 50%; width: 0.45rem; height: 0.45rem; border-radius: 50%; transform: translateY(-50%); background: var(--fondo); }
+.rotulo.grande { font: 600 1.3rem var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; letter-spacing: 0; text-transform: none; background: var(--an-grain-dark), var(--acento); color: #2A1E14; padding: 0.6rem 1.2rem 0.6rem 1.8rem; }
+.rotulo.pegado { opacity: 1; transform: rotate(var(--g)) scale(1); }
+
+/* 3 · Los nombres */
+.espiral { width: min(92vmin, 38rem); height: auto; overflow: visible; }
+.vuelta { fill: none; stroke: var(--tinta); stroke-opacity: .45; stroke-width: 1.5; stroke-linecap: round; filter: url(#lapiz); }
+.rayo { fill: none; stroke-width: 2.4; stroke-dasharray: 3 7; opacity: 0; transition: opacity 0.8s; }
+.rayo-j { stroke: var(--jose); }
+.rayo-a { stroke: var(--aure); }
+.espiral.cerrada .rayo, .espiral.ver-j .rayo-j, .espiral.ver-a .rayo-a { opacity: 0.9; }
+.nombre { opacity: 0; transition: opacity 0.5s; }
+.nombre.visible { opacity: 1; }
+.nombre text { font: 400 16px var(--an-font-title); fill: var(--tinta); }
+.nombre circle { fill: var(--tinta); opacity: .6; }
+.nombre.tipo-j text, .nombre.tipo-j circle { fill: var(--jose); opacity: 1; }
+.nombre.tipo-a text, .nombre.tipo-a circle { fill: var(--aure); opacity: 1; }
+.nombre.tipo-j text, .nombre.tipo-a text { font-style: italic; font-weight: 600; }
+.espiral.ver-j .nombre:not(.tipo-j), .espiral.ver-a .nombre:not(.tipo-a) { opacity: 0.12; }
+.filtros { position: absolute; right: var(--web-gutter); bottom: 1.4rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filtros button { font-family: var(--an-font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinta); background: transparent; border: 1.5px solid var(--linea); border-radius: 999px; padding: 0.55rem 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; transition: background .25s, color .25s, border-color .25s; min-height: 44px; }
+.filtros button:hover { border-color: var(--tinta); }
+.filtros button i { width: 0.7rem; height: 0.7rem; border-radius: 50%; }
+.filtros [data-ver="j"] i { background: var(--jose); }
+.filtros [data-ver="a"] i { background: var(--aure); }
+.filtros button[aria-pressed="true"][data-ver="j"] { background: var(--jose); color: #2A1E14; border-color: var(--jose); }
+.filtros button[aria-pressed="true"][data-ver="a"] { background: var(--aure); color: #13233F; border-color: var(--aure); }
+.filtros button[aria-pressed="true"] i { background: currentColor; }
+.nombre-j { color: var(--jose); font-style: italic; font-family: var(--an-font-title); font-weight: 600; font-size: 1.1em; }
+.nombre-a { color: var(--aure); font-style: italic; font-family: var(--an-font-title); font-weight: 600; font-size: 1.1em; }
+
+/* 4 · Lo que subrayé, con mariposas */
+.escena-mariposas { display: block; padding: 18svh var(--web-gutter) 14svh; }
+.subrayado-wrap { max-width: 46rem; margin-inline: auto; }
+.subrayados { list-style: none; padding: 0; margin: 3rem 0 0; }
+.subrayados li { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; padding-block: 2rem; border-top: 1px solid var(--linea); }
+.subrayados .n { font: italic 600 2.6rem/1 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--acento); }
+.subrayados p { margin: 0; font: 400 clamp(1.25rem, 2.1vw, 1.6rem)/1.45 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.enjambre { position: fixed; inset: 0; pointer-events: none; z-index: 35; }
+.mariposa { position: absolute; left: 0; top: 0; width: 38px; height: 32px; filter: drop-shadow(0 4px 4px rgba(0,0,0,.3)); opacity: 0; transition: opacity .6s; will-change: transform; }
+.enjambre.activo .mariposa { opacity: 1; }
+.mariposa svg { width: 100%; height: 100%; overflow: visible; }
+.mariposa .ala { fill: var(--amarillo); transform-origin: 13px 11px; }
+.mariposa .cuerpo { fill: #2A1E14; }
+@media (prefers-reduced-motion: no-preference) {
+  .mariposa .ala-i { animation: aleteo 0.32s ease-in-out infinite alternate; }
+  .mariposa .ala-d { animation: aleteo 0.32s ease-in-out infinite alternate-reverse; }
+  @keyframes aleteo { from { transform: scaleX(1); } to { transform: scaleX(0.45); } }
+}
+
+/* 5 · La lluvia */
+.escena-lluvia { --i: 0; }
+.escena-lluvia .escenario { overflow: visible; }
+.cielo { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: rgba(5, 12, 30, calc(var(--i) * 0.25)); }
+.cortina { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+.conteo { margin: 0; position: relative; text-align: center; color: var(--acento); width: min(24rem, 82%); }
+.conteo svg { width: 100%; height: auto; }
+.conteo figcaption { margin-top: 1rem; color: var(--tinta-suave); }
+.conteo figcaption b { display: block; font: 600 clamp(1.9rem, 3.4vw, 2.7rem)/1.1 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--tinta); }
+.rayas path, .rayas circle { opacity: 0; transition: opacity .25s; }
+.rayas .hecha { opacity: 1; }
+
+/* 6 · Cierre */
+.cierre { display: grid; grid-template-columns: 1fr; gap: 4rem; padding: 12svh var(--web-gutter) 4rem; max-width: var(--web-max); margin-inline: auto; align-items: center; }
+@media (min-width: 900px) { .cierre { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } }
+.cierre h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); }
+.cierre-texto p { max-width: 46ch; }
+.para-quien { margin-top: 2rem; border-top: 3px solid var(--tinta); padding-top: 0.6rem; }
+.para-quien p { margin: 0.9rem 0 0; }
+.para-quien b { color: var(--acento); margin-right: 0.4rem; }
+.volver { margin-top: 2.4rem; display: inline-flex; align-items: center; gap: 0.6rem; font: 700 1rem var(--an-font-body); color: #2A1E14; background: var(--acento); border: 0; border-radius: 999px; padding: 0.95rem 1.5rem; cursor: pointer; transition: transform .25s, box-shadow .25s; min-height: 44px; }
+.volver svg { width: 1.2rem; height: 1.2rem; transition: transform .6s; }
+.volver:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(0,0,0,.5); }
+.volver:hover svg { transform: rotate(-300deg); }
+.pregunta-final { font: italic 400 1.25rem/1.4 var(--an-font-title); color: var(--tinta-suave); margin-top: 2rem; }
+.cierre .ficha-col { position: relative; justify-self: center; width: 100%; max-width: 23rem; }
+.pie { margin-top: 2rem; border-top-color: var(--linea); position: relative; z-index: 1; }
+.pie .aviso { max-width: 60ch; text-align: right; color: var(--tinta-suave); }
+.pie .firma .jaguar { color: var(--acento) !important; }
+
+/* Móvil */
+@media (max-width: 860px) {
+  .escena { display: block; }
+  .escenario { height: 62svh; }
+  .relato { padding: 0 var(--web-gutter) 20svh; position: relative; z-index: 2; pointer-events: none; }
+  .paso { min-height: 75svh; justify-content: flex-end; opacity: 1; }
+  .paso > * { pointer-events: auto; background: color-mix(in srgb, var(--fondo) 78%, black); padding: 1.1rem 1.25rem; border-radius: var(--web-radius-soft); box-shadow: 0 14px 30px -16px rgba(0,0,0,.6); }
+  .pie-escena { bottom: 0.8rem; }
+  .filtros { left: var(--web-gutter); right: auto; bottom: 2.6rem; }
+}
+@media (max-width: 700px) {
+  .hud .firma b, .reloj .mono:last-child { display: none; }
+  .hud { padding-right: 1.4rem; }
+  .hilo { right: 0.35rem; }
+  .flecha { display: none; }
+  .espiral .nombre text { font-size: 25px; }
+  .espiral .nombre.tipo-o text { display: none; }
+  .escena-nombres .escenario { height: 70svh; }
+  .espiral { width: 100vw; }
+
+  .rotulo { font-size: 0.62rem; }
+  .rotulo.grande { font-size: 1rem; }
+}
+
+/* I · Los imanes */
+.campo { position: relative; width: 100%; height: 100%; }
+.iman { position: absolute; left: 50%; top: 52%; width: min(15rem, 38%); transform: translate(-50%, -50%) rotate(calc(var(--s) * -6deg)); overflow: visible; filter: drop-shadow(0 18px 20px rgba(0,0,0,.35)); }
+.iman-cuerpo { fill: none; stroke: #E8336E; stroke-width: 34; stroke-linecap: butt; }
+.iman-punta { stroke: #E9EEF2; stroke-width: 34; }
+.onda { position: absolute; left: 50%; top: 30%; width: calc(var(--r) * 9rem); height: calc(var(--r) * 5rem); border: 2px dashed var(--acento); border-bottom: 0; border-radius: 50% 50% 0 0; transform: translate(-50%, -50%); opacity: calc(var(--s) * 0.9 / var(--r)); }
+.cosa { --p: clamp(0, calc((var(--s) - var(--d)) / 0.42), 1); position: absolute; left: calc(var(--x) + (var(--mx, 50%) + var(--tx) - var(--x)) * var(--p)); top: calc(var(--y) + (50% + var(--ty) - var(--y)) * var(--p)); font-size: clamp(2rem, 3.4vw, 3rem); color: var(--tinta); transform: translate(-50%, -50%) rotate(calc(var(--g) * (1 - var(--p)))); filter: drop-shadow(0 6px 6px rgba(0,0,0,.35)); }
+@media (prefers-reduced-motion: no-preference) {
+  .onda { animation: pulso 2.2s ease-out infinite; }
+  @keyframes pulso { 50% { transform: translate(-50%, -50%) scale(1.06); } }
+}
+
+/* V · Las guerras del coronel */
+.tablero { display: flex; flex-direction: column; align-items: center; gap: 2rem; width: min(34rem, 86%); }
+.banderas { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0.6rem 0.8rem; width: 100%; }
+.bandera { position: relative; aspect-ratio: 3 / 4; opacity: 0; transform: translateY(0.8rem) scale(.8); transition: opacity .3s, transform .4s cubic-bezier(.3,1.5,.5,1); color: var(--acento); }
+.bandera.alzada { opacity: 1; transform: none; }
+.bandera svg { width: 100%; height: 100%; overflow: visible; }
+.bandera .asta { stroke: var(--tinta); stroke-width: 3; stroke-linecap: round; }
+.bandera .pano { fill: currentColor; }
+.bandera .tacha { stroke: var(--tinta); stroke-width: 3.2; opacity: .85; stroke-linecap: round; fill: none; stroke-dasharray: 60; stroke-dashoffset: 60; transition: stroke-dashoffset .35s ease-out; filter: url(#lapiz); }
+.bandera.perdida .tacha { stroke-dashoffset: 0; }
+.bandera.perdida .pano { opacity: .45; }
+.marcador { display: grid; grid-template-columns: auto auto auto auto; align-items: baseline; gap: 0.4rem 0.9rem; }
+.marcador b { font: 600 clamp(2.4rem, 4vw, 3.4rem)/1 var(--an-font-title); font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--acento); font-variant-numeric: tabular-nums; }
+.marcador .cero { color: var(--tinta); }
+.marcador .mono { color: var(--tinta-suave); font-size: 0.68rem; }
+
+/* VI · Remedios, la bella */
+.tendedero { position: absolute; inset: 0; }
+.tendedero::before { content: ""; position: absolute; left: 6%; right: 6%; top: 74%; height: 2px; background: var(--tinta-suave); transform: rotate(-1.5deg); opacity: calc(1 - var(--s) * 1.2); }
+.sabana {
+  position: absolute; left: var(--x); top: 70%; width: clamp(6rem, 13vw, 10rem); aspect-ratio: 4 / 5;
+  background: linear-gradient(100deg, #FFFFFF 0%, #EEF3FF 38%, #FFFFFF 52%, #DCE6FA 100%);
+  border-radius: 3px 3px 12px 18px;
+  box-shadow: 0 30px 40px -20px rgba(0,0,0,.35);
+  transform: translateY(calc(var(--s) * var(--v) * -125svh)) rotate(calc(var(--g) + var(--s) * 24deg));
+}
+.sabana.pequena { width: clamp(4rem, 8vw, 6.5rem); }
+@media (prefers-reduced-motion: no-preference) {
+  .sabana { animation: ondea 3.2s ease-in-out infinite alternate; }
+  @keyframes ondea { to { border-radius: 14px 4px 18px 6px; } }
+}
+@media (max-width: 860px) {
+  .iman { width: 46%; top: 46%; }
+  .banderas { gap: 0.4rem 0.5rem; }
+}
+
+/* Teatrino de «Lo que subrayé»: Pilar y Mauricio entran cuando llega la sección */
+.escena-mariposas { position: relative; }
+.teatrino { position: sticky; top: 0; height: 100svh; margin-bottom: -100svh; pointer-events: none; overflow: hidden; z-index: 0; }
+.teatrino .titere { transition: transform .9s cubic-bezier(.2, .8, .2, 1); }
+.subrayado-wrap { position: relative; z-index: 1; }
+
+/* La etiqueta de cada escena va a la derecha del escenario para no quedar bajo los títeres */
+.escena .pie-escena { left: auto; right: var(--web-gutter); z-index: 3; text-align: right; }
+@media (max-width: 860px) { .escena .pie-escena { right: var(--web-gutter); } }
+
+/* IV · La etiqueta de la espiral vuelve a la izquierda: a la derecha están los filtros */
+.escena-nombres .pie-escena { left: var(--web-gutter); right: auto; text-align: left; }
+
+/* V · El tablero se corre a la derecha para dejar sitio al coronel */
+@media (min-width: 861px) { .escena-guerras .tablero { margin-left: 30%; width: min(24rem, 54%); } }
+
+/* IX · Teatro de sombras: los ocho personajes desfilan en silueta sobre una luz cálida */
+.escena-sombras { display: block; height: 280svh; }
+.pantalla { position: absolute; inset: 0; background: radial-gradient(58% 52% at 50% 48%, rgba(255, 210, 140, 0.62), rgba(255, 179, 71, 0.18) 55%, transparent 75%); }
+
+/* Cursivas: Cormorant Garamond, caligráfica y de libro antiguo, en vez de la cursiva de Fraunces.
+   font-size-adjust iguala su altura de x con la del resto del texto. */
+:root { --fuente-cursiva: 'Cormorant Garamond', 'Garamond', serif; }
+.umbral h1 em, .umbral-hook, .palabra.guardada, .remate, .nombre-j, .nombre-a,
+.subrayados .n, .pregunta-final, .nombre.tipo-j text, .nombre.tipo-a text {
+  font-family: var(--fuente-cursiva); font-variation-settings: normal; font-size-adjust: 0.5;
+}
+.umbral h1 em { font-weight: 600; }
+.umbral-hook, .remate, .pregunta-final { font-weight: 500; }
+
+/* IX · La etiqueta va a la izquierda: a la derecha está el indicador del recorrido */
+.escena-sombras .pie-escena { left: var(--web-gutter); right: auto; text-align: left; }
+
+/* IX · Teatro de sombras en tres actos (cien.js mueve las figuras):
+   1 · desfilan bajo la luz y cada una dice quién es al pasar por el centro;
+   2 · se detienen, la luz grande se apaga y cada una queda bajo su propio foco;
+   3 · una sola frase de lectura. La luz sigue al cursor y las sombras se inclinan con ella. */
+.escena-sombras { height: 380svh; }
+.pantalla { background: radial-gradient(58% 52% at var(--luz-x, 50%) 48%, rgba(255, 210, 140, calc(0.62 * var(--luz, 1))), rgba(255, 179, 71, calc(0.18 * var(--luz, 1))) 55%, transparent 75%); }
+.desfile { position: absolute; inset: 0; }
+.sombra { position: absolute; left: 0; bottom: calc(-5svh + var(--foco, 0) * 12svh); height: var(--h, 58svh); margin: 0; transform: translate(calc(var(--cx, -100vw) - 50%), calc(-1 * var(--alza, 0px))) skewX(var(--sesgo, 0deg)); transform-origin: 50% 100%; will-change: transform; }
+.sombra::before { content: ""; position: absolute; left: 50%; bottom: 0; width: 175%; height: 125%; transform: translateX(-50%); background: radial-gradient(50% 46% at 50% 60%, rgba(255, 220, 160, 0.85), rgba(255, 179, 71, 0.28) 55%, transparent 78%); opacity: var(--foco, 0); z-index: -1; pointer-events: none; }
+.sombra img { display: block; height: 100%; width: auto; filter: brightness(0) blur(1.2px); opacity: 0.88; transform-origin: 50% 100%; }
+.sombra figcaption { position: absolute; left: 50%; bottom: calc(100% + 0.8rem); width: max-content; max-width: 15rem; text-align: center; opacity: var(--nombre, 0); transform: translate(-50%, calc((1 - var(--nombre, 0)) * 0.7rem)) skewX(calc(-1 * var(--sesgo, 0deg))); }
+.sombra figcaption b { display: block; font: italic 600 clamp(1.2rem, 1.9vw, 1.6rem)/1.1 var(--fuente-cursiva); font-size-adjust: 0.5; color: var(--tinta); }
+.sombra figcaption span { display: block; margin-top: 0.3rem; font: 400 0.66rem/1.3 var(--an-font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--acento); }
+.sombras-lectura { position: absolute; top: 15svh; left: 50%; width: min(30ch, 86vw); margin: 0; text-align: center; z-index: 3; opacity: var(--lectura, 0); transform: translate(-50%, calc((1 - var(--lectura, 0)) * 1rem)); font: italic 500 clamp(1.7rem, 3.2vw, 2.6rem)/1.25 var(--fuente-cursiva); font-size-adjust: 0.5; }
+.sombras-lectura span { display: block; color: var(--acento); }
+@media (prefers-reduced-motion: no-preference) {
+  .sombra img { animation: vaiven 1.15s ease-in-out infinite alternate; }
+  .sombra:nth-child(2n) img { animation-delay: -0.5s; }
+  .sombra:nth-child(3n) img { animation-duration: 1.4s; }
+  @keyframes vaiven { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-0.8rem) rotate(2deg); } }
+}
+@media (max-width: 860px) {
+  .escena-sombras .escenario { height: 100svh; }
+  .sombra figcaption b { font-size: 1rem; }
+  .sombra figcaption span { display: none; }
+}
+
+/* Objetos de papel recortado generados con IA en lugar de dibujos en CSS (sitio/assets/objetos/cien-anos/) */
+img.iman { height: auto; transform: translate(-50%, -50%) rotate(calc(180deg - var(--s) * 6deg)); filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.35)); }
+img.cosa { width: clamp(3.4rem, 5.4vw, 5rem); height: auto; font-size: 0; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.3)); }
+img.cosa-olla { width: clamp(4.6rem, 7vw, 6.6rem); }
+img.cosa-clavo { width: clamp(2.6rem, 4vw, 3.6rem); }
+.hielo-img { position: absolute; left: 8%; bottom: 13%; width: 84%; height: auto; transform-origin: 50% 100%; transform: scale(calc(1 + var(--s) * 0.08), calc(1 - var(--s) * 0.55)); filter: drop-shadow(0 0 2.4rem rgba(155, 231, 245, 0.85)); }
+.bandera { aspect-ratio: 1 / 1; color: var(--tinta); }
+.bandera img { width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity .3s, filter .3s; }
+.bandera svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bandera.perdida img { opacity: 0.5; filter: saturate(0.4); }
+img.sabana { background: none; box-shadow: none; border-radius: 0; aspect-ratio: auto; height: auto; filter: drop-shadow(0 22px 22px rgba(0, 0, 0, 0.3)); }
+@media (prefers-reduced-motion: no-preference) {
+  img.sabana { animation: flamea 2.6s ease-in-out infinite alternate; }
+  img.sabana:nth-child(2n) { animation-delay: -1.1s; }
+  @keyframes flamea { from { scale: 1 1; } to { scale: 1.05 0.94; } }
+}
+
+/* I · El imán se corre a la derecha para que Melquíades no lo tape; los objetos vuelan hacia él */
+.escena-imanes .campo { --mx: 64%; }
+.escena-imanes img.iman, .escena-imanes .onda { left: var(--mx); }
+/* V · Banderas más grandes y tachas más finas */
+@media (min-width: 861px) { .escena-guerras .tablero { width: min(31rem, 58%); margin-left: 32%; } }
+.banderas { gap: 0.3rem 0.5rem; }
+.bandera .tacha { stroke-width: 2.2; opacity: 0.75; }
+
+/* Patrones de fondo: iconos de línea repetidos, del color de la tinta de cada época y muy tenues.
+   Complementan el degradado sin competir con el contenido; se desplazan un poco con el scroll.
+   Las baldosas salen de herramientas/armar_patrones.py (sitio/assets/patrones/cien-anos/). */
+.umbral, .cierre { position: relative; }
+.escena::before, .umbral::before, .cierre::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--tinta); opacity: var(--opacidad-patron, 0.075);
+  -webkit-mask: var(--patron) repeat 0 calc(var(--s, 0) * -14rem) / 20rem 20rem;
+  mask: var(--patron) repeat 0 calc(var(--s, 0) * -14rem) / 20rem 20rem;
+}
+.umbral, .cierre { --patron: url("../assets/patrones/cien-anos/umbral.png"); }
+.escena-imanes { --patron: url("../assets/patrones/cien-anos/imanes.png"); }
+.escena-hielo { --patron: url("../assets/patrones/cien-anos/hielo.png"); }
+.escena-insomnio { --patron: url("../assets/patrones/cien-anos/insomnio.png"); }
+.escena-nombres { --patron: url("../assets/patrones/cien-anos/nombres.png"); }
+.escena-guerras { --patron: url("../assets/patrones/cien-anos/guerras.png"); }
+.escena-remedios { --patron: url("../assets/patrones/cien-anos/remedios.png"); }
+.escena-mariposas { --patron: url("../assets/patrones/cien-anos/mariposas.png"); }
+.escena-lluvia { --patron: url("../assets/patrones/cien-anos/lluvia.png"); }
+.escena-sombras { --patron: url("../assets/patrones/cien-anos/sombras.png"); --opacidad-patron: 0.05; }
+@media (max-width: 860px) {
+  .escena::before, .umbral::before, .cierre::before { -webkit-mask-size: 14rem 14rem; mask-size: 14rem 14rem; }
+}
+
+.escena, .umbral, .cierre { isolation: isolate; }

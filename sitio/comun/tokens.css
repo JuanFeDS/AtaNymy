@@ -1,0 +1,150 @@
+/*
+  Ata Nymy · tokens unificados
+  Origen: tokens.css v1.1 "Mosaico con azul" del proyecto Claude Design (v1.0 fusionada).
+  Capas: 1 Marca · 2 IG-1080 (carruseles) · 3 Web (PROPUESTA) · 4 Tema de libro.
+*/
+
+:root {
+  /* ───────── 1 · MARCA ───────── */
+  --an-night: #1F2B45;
+  --an-night-light: #2F4066;
+  --an-slate: #3E5B78;
+  --an-slate-light: #52739A;
+  --an-ochre: #FFCC7E;
+  --an-ochre-light: #FFDDA6;
+  --an-olive: #4E5630;
+  --an-olive-light: #636D3C;
+  --an-cafe: #7A5236;
+  --an-cafe-light: #916443;
+  --an-parchment: #F0E4CC;
+  --an-parchment-light: #F4EAD6;
+  --an-parchment-dark: #EADBBE;
+  --an-parchment-hi: #F6EEDD;
+  --an-cream: #FAF4E8;
+  --an-moss: #A9B64E;
+  --an-moss-light: #BDC96A;
+  --an-moss-ink: #5F6B22;
+  --an-espresso: #33241B;
+  --an-espresso-deep: #231812;
+  --an-espresso-light: #4A3527;
+  --an-plum: #5C3447;
+
+  /* Color de logo: solo para el jaguar */
+  --an-logo-fur: #FFCC7E;
+  --an-logo-spots: #604E66;
+  --an-logo-branch: #CC6684;
+  --an-logo-branch-shadow: #844860;
+  --an-logo-collar: #AE6660;
+  --an-logo-pillow: #F6E4FC;
+
+  /* Gráficos, en orden */
+  --an-chart-1: #A9B64E;
+  --an-chart-2: #FFCC7E;
+  --an-chart-3: #CC6684;
+  --an-chart-4: #C8653F;
+  --an-chart-5: #B7A4CF;
+  --an-chart-6: #7FA08A;
+
+  /* Texto: opacidades sobre oscuro (sobre claro, invertir con espresso) */
+  --an-text-100: #F0E4CC;
+  --an-text-80: rgba(240, 228, 204, 0.80);
+  --an-text-72: rgba(240, 228, 204, 0.72);
+  --an-text-60: rgba(240, 228, 204, 0.60);
+  --an-line-16: rgba(240, 228, 204, 0.16);
+  --an-box-6: rgba(240, 228, 204, 0.06);
+  --an-ink-100: #33241B;
+  --an-ink-85: rgba(51, 36, 27, 0.85);
+  --an-ink-72: rgba(51, 36, 27, 0.72);
+  --an-ink-14: rgba(51, 36, 27, 0.14);
+
+  /* Textura */
+  --an-grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.94 0 0 0 0 0.89 0 0 0 0 0.8 0.16 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --an-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.14 0 0 0 0 0.1 0.2 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --an-watermark-opacity: 0.07;
+
+  /* Fondos con grano (patrón: grano + radial 120% 90%) */
+  --an-bg-night: var(--an-grain-light), radial-gradient(120% 90% at 100% 0%, var(--an-night-light) 0%, var(--an-night) 62%);
+  --an-bg-slate: var(--an-grain-light), radial-gradient(120% 90% at 0% 0%, var(--an-slate-light) 0%, var(--an-slate) 62%);
+  --an-bg-ochre: var(--an-grain-dark), radial-gradient(120% 90% at 100% 0%, var(--an-ochre-light) 0%, var(--an-ochre) 62%);
+  --an-bg-moss: var(--an-grain-dark), radial-gradient(120% 90% at 0% 0%, var(--an-moss-light) 0%, var(--an-moss) 62%);
+  --an-bg-olive: var(--an-grain-light), radial-gradient(120% 90% at 100% 100%, var(--an-olive-light) 0%, var(--an-olive) 62%);
+  --an-bg-cafe: var(--an-grain-light), radial-gradient(120% 90% at 0% 100%, var(--an-cafe-light) 0%, var(--an-cafe) 62%);
+  --an-bg-parchment: var(--an-grain-dark), radial-gradient(120% 90% at 50% 0%, var(--an-parchment-hi) 0%, var(--an-parchment-dark) 62%);
+
+  /* Tipografía (familias) */
+  --an-font-title: 'DM Serif Display', Georgia, serif;
+  --an-font-body: 'Karla', 'Helvetica Neue', sans-serif;
+  --an-font-sign: 'Fredoka', 'Nunito', sans-serif;
+  --an-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --an-tracking-label: 0.14em;
+
+  /* Regla de contraste: color de acento según el fondo (se conserva en la web) */
+  --an-accent-on-night: var(--an-moss);
+  --an-accent-on-slate: var(--an-ochre);
+  --an-accent-on-olive: var(--an-ochre);
+  --an-accent-on-cafe: var(--an-ochre);
+  --an-accent-on-ochre: var(--an-espresso);
+  --an-accent-on-moss: var(--an-espresso);
+  --an-accent-on-parchment: var(--an-moss-ink);
+
+  /* ───────── 2 · IG-1080 (carruseles; tamaños a 1080 px) ───────── */
+  --ig-size-cover: 124px;
+  --ig-size-title: 88px;
+  --ig-size-h2: 48px;
+  --ig-size-body: 36px;
+  --ig-size-body-sm: 32px;
+  --ig-size-sign: 30px;
+  --ig-size-label: 24px;
+  --ig-size-figure: 420px;
+  --ig-leading-title: 1.02;
+  --ig-leading-body: 1.4;
+  --ig-space-1: 8px;
+  --ig-space-2: 16px;
+  --ig-space-3: 24px;
+  --ig-space-4: 32px;
+  --ig-space-5: 48px;
+  --ig-space-6: 64px;
+  --ig-space-7: 88px;
+  --ig-radius-box: 28px;
+  --ig-bar-title: 12px;
+  --ig-bar-series: 40px 6px;
+  --ig-story-safe-top: 250px;
+  --ig-story-safe-bottom: 280px;
+
+  /* ───────── 3 · WEB (PROPUESTA, sin aprobar: huecos del sistema original) ───────── */
+  /* v2: tope de 3,6 rem en títulos; la energía viene del material, no de la escala */
+  --web-size-hero: clamp(2.4rem, 4.6vw, 3.6rem);
+  --web-size-h2: clamp(1.45rem, 2.3vw, 1.9rem);
+  --web-size-lead: clamp(1.15rem, 1.6vw, 1.35rem);
+  --web-size-body: 1.125rem;
+  --web-size-note: 0.95rem;
+  --web-size-label: 0.74rem;
+  --web-leading-title: 1.04;
+  --web-leading-body: 1.7;
+  --web-measure: 62ch;
+  --web-gutter: clamp(1.25rem, 5vw, 4rem);
+  --web-max: 1320px;
+  --web-space-related: 0.5rem;
+  --web-space-group: 1.5rem;
+  --web-space-block: 4rem;
+  --web-space-section: clamp(4.5rem, 10vw, 9rem);
+  --web-radius-soft: 1.25rem;
+  --web-radius-pill: 999px;
+}
+
+/* ───────── 4 · TEMA DE LIBRO (variables con alcance) ─────────
+   Cada libro declara una base y un acento; el resto se deriva.
+   --book-alt-*: segunda banda (ficha, cita). --book-ink: acento sobre pergamino. */
+[data-libro] {
+  --book-base: var(--an-night);
+  --book-hi: var(--an-night-light);
+  --book-fg: var(--an-parchment);
+  --book-accent: var(--an-moss);
+  --book-alt: var(--an-night);
+  --book-alt-hi: var(--an-night-light);
+  --book-alt-fg: var(--an-parchment);
+  --book-alt-accent: var(--an-moss);
+  --book-ink: var(--an-moss-ink);
+  --book-grain: var(--an-grain-light);
+  --book-alt-grain: var(--an-grain-light);
+}

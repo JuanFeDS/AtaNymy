@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fraseario del Quijote · Ata Nymy</title>
+<link rel="stylesheet" href="../comun/taller.css">
+<style>
+/* Material de esta entrada: pliego de imprenta, tinta negra y rúbrica roja. */
+:root {
+  --papel: #F1EBDC; --papel-hi: #F8F4EA;
+  --tinta: #221A15;
+  --tinta-suave: rgba(34, 26, 21, 0.7);
+  --tinta-2: #A63A24;
+  --resaltador: rgba(166, 58, 36, 0.16);
+  --sello-tinta: #A63A24;
+}
+
+.portada { text-align: center; padding-block: clamp(3rem, 7vw, 5.5rem) 2.5rem; max-width: 46rem; margin-inline: auto; }
+.portada .etiqueta { justify-content: center; }
+.portada h1 { font-size: clamp(2.1rem, 4vw, 3.1rem); margin: 1.2rem auto 0.8rem; max-width: 18ch; }
+.portada h1 em { color: var(--tinta-2); }
+.florón { font-family: var(--an-font-title); font-size: 1.9rem; color: var(--tinta-2); line-height: 1; margin: 1.4rem 0; }
+.pie-imprenta { font-family: var(--an-font-title); font-style: italic; color: var(--tinta-suave); font-size: 1.05rem; line-height: 1.5; }
+.pie-imprenta b { font-style: normal; font-family: var(--an-font-mono); font-weight: 400; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-top: 0.4rem; color: var(--tinta); }
+.filete { height: 5px; border-top: 2px solid var(--tinta); border-bottom: 1px solid var(--tinta); max-width: 46rem; margin: 0 auto; }
+
+.intro { max-width: 40rem; margin: 2.8rem auto 0; }
+.intro p::first-letter { font: 400 3.6em/0.82 var(--an-font-title); float: left; padding: 0.06em 0.12em 0 0; color: var(--tinta-2); }
+
+.frases { list-style: none; margin: clamp(3rem, 6vw, 4.5rem) auto 0; padding: 0; max-width: 60rem; }
+.frase { display: grid; grid-template-columns: 1fr; gap: 0.6rem 3rem; padding-block: 2.2rem; border-top: 1px solid rgba(34,26,21,.18); }
+@media (min-width: 900px) { .frase { grid-template-columns: 3.5rem minmax(0, 1fr) 15rem; } }
+.frase .num { font: italic 400 1.5rem/1 var(--an-font-title); color: var(--tinta-2); padding-top: 0.45rem; }
+.frase blockquote { margin: 0; font: italic 400 clamp(1.35rem, 2.3vw, 1.75rem)/1.32 var(--an-font-title); text-wrap: pretty; }
+.frase .cita { display: block; margin-top: 0.8rem; color: var(--tinta-suave); }
+.frase .glosa { font-size: 0.95rem; line-height: 1.55; color: var(--tinta-suave); padding-top: 0.5rem; }
+@media (min-width: 900px) { .frase .glosa { border-left: 1px solid rgba(166,58,36,.4); padding-left: 1.2rem; } }
+.frase .glosa b { color: var(--tinta-2); font-weight: 700; }
+.ins { position: relative; color: var(--tinta-2); font-style: normal; font-family: var(--an-font-mono); font-size: 0.55em; vertical-align: 0.9em; margin-inline: -0.2em 0.1em; }
+.ins::before { content: "‸"; position: absolute; left: 50%; top: 0.95em; transform: translateX(-50%); font-size: 1.8em; line-height: 1; }
+.apocrifa blockquote { color: var(--tinta-suave); }
+.apocrifa .tach { --marca: var(--tinta-2); }
+.apocrifa .tach::after { top: 40%; }
+.apocrifa .num { font-family: var(--an-font-mono); font-style: normal; font-size: 0.72rem; letter-spacing: 0.12em; }
+
+.bolsillo-zona { display: grid; place-items: center; margin-top: clamp(4rem, 8vw, 6rem); }
+.bolsillo { position: relative; width: min(100%, 25rem); padding-top: 7.5rem; }
+.bolsillo .ficha { position: absolute; top: 0; left: 1rem; right: 1rem; width: auto; --giro: -2.5deg; z-index: 1; height: 15rem; overflow: hidden; }
+.bolsillo .ficha .radar, .bolsillo .ficha .fp-pie, .bolsillo .ficha .fp-fila:nth-of-type(2) { display: none; }
+.sobre {
+  position: relative; z-index: 2; height: 10rem;
+  background: var(--an-grain-dark), #D9C49A;
+  clip-path: polygon(0 18%, 50% 0, 100% 18%, 100% 100%, 0 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem;
+  box-shadow: 0 20px 30px -22px rgba(34,26,21,.6);
+  padding-top: 1.4rem; text-align: center;
+}
+.sobre .mono { color: rgba(34,26,21,.7); }
+.sobre strong { font: 400 2.4rem/1 var(--an-font-title); }
+.sobre strong small { font-family: var(--an-font-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(34,26,21,.6); }
+.bolsillo .sello { position: absolute; right: -1.6rem; bottom: -1.4rem; z-index: 3; --sello-giro: 16deg; }
+.colofon { text-align: center; max-width: 30rem; margin: 3.5rem auto 0; font: italic 400 1rem/1.6 var(--an-font-title); color: var(--tinta-suave); }
+</style>
+</head>
+<body>
+
+<header class="franja">
+  <div class="hoja">
+    <a class="firma" href="../"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+    <nav aria-label="Principal"><a href="../">Estantería</a><a href="../cien-anos-de-soledad/">Reseñas</a><a href="#" aria-current="page">Fraseario</a><a href="../la-medicion-del-mundo/">Cuadernos</a></nav>
+  </div>
+</header>
+
+<main class="hoja">
+  <section class="portada">
+    <span class="etiqueta">Fraseario · Nº 4</span>
+    <h1>El ingenioso hidalgo don Quijote <em>de la Mancha</em></h1>
+    <div class="pie-imprenta">Miguel de Cervantes<b>Primera parte, 1605 · Segunda parte, 1615</b></div>
+    <div class="florón" aria-hidden="true">❦</div>
+    <div class="pie-imprenta">Con privilegio, en Madrid, por Juan de la Cuesta.<br>Véndese en casa de Francisco de Robles.</div>
+  </section>
+  <div class="filete" aria-hidden="true"></div>
+
+  <div class="intro prosa">
+    <p>Ocho frases que subrayamos, todas comprobadas contra el texto. Al buscarlas descubrimos dos cosas: una de las más famosas se cita mal casi siempre, y otra que todo el mundo atribuye al Quijote no está en el libro. Las dejamos las dos, con su corrección.</p>
+  </div>
+
+  <ol class="frases">
+    <li class="frase">
+      <span class="num">i</span>
+      <div><blockquote>En un lugar de la Mancha, de cuyo nombre no quiero acordarme</blockquote><span class="mono cita">I, 1 · el narrador</span></div>
+      <div class="glosa">La frase más citada del español empieza <b>negándose a dar un dato</b>. Buen presagio para un libro que se burla de los libros.</div>
+    </li>
+    <li class="frase">
+      <span class="num">ii</span>
+      <div><blockquote>del poco dormir y del <span class="resalta">mucho leer</span>, se le secó el celebro</blockquote><span class="mono cita">I, 1 · el narrador</span></div>
+      <div class="glosa">«Celebro», así, con ele. Advertencia para lectores compulsivos: <b>nos incluye</b>.</div>
+    </li>
+    <li class="frase">
+      <span class="num">iii</span>
+      <div><blockquote>cada uno es hijo de sus obras</blockquote><span class="mono cita">I, 4 · don Quijote</span></div>
+      <div class="glosa">Lo dice para defender a un mozo de su amo. La defensa sale fatal, pero la frase quedó.</div>
+    </li>
+    <li class="frase">
+      <span class="num">iv</span>
+      <div><blockquote>desnudo nací, desnudo me hallo: ni pierdo ni gano</blockquote><span class="mono cita">I, 25 · Sancho</span></div>
+      <div class="glosa">Sancho la repite en la segunda parte, capítulo 8. <b>Le gustaba</b>, y se nota.</div>
+    </li>
+    <li class="frase">
+      <span class="num">v</span>
+      <div><blockquote>cada uno es como Dios le hizo, y aun peor muchas veces</blockquote><span class="mono cita">II, 4 · Sancho</span></div>
+      <div class="glosa">La versión de Sancho de la frase iii: menos épica, más cierta.</div>
+    </li>
+    <li class="frase">
+      <span class="num">vi</span>
+      <div><blockquote>Con la iglesia hemos <span class="tach" style="--marca: var(--tinta-2)">topado</span><span class="ins">dado</span>, Sancho.</blockquote><span class="mono cita">II, 9 · don Quijote</span></div>
+      <div class="glosa">Casi todos la citamos con «topado». El texto dice <b>«dado»</b>. Y no es una crítica al clero: buscan el palacio de Dulcinea de noche y se dan con la torre del pueblo.</div>
+    </li>
+    <li class="frase">
+      <span class="num">vii</span>
+      <div><blockquote>Dime con quién andas, decirte he quién eres</blockquote><span class="mono cita">II, 10 · Sancho, citando un refrán</span></div>
+      <div class="glosa">Sancho lo usa contra sí mismo: si sigue a un loco, algo de loco tendrá.</div>
+    </li>
+    <li class="frase">
+      <span class="num">viii</span>
+      <div><blockquote>La libertad, Sancho, es uno de los más <span class="sub">preciosos dones</span> que a los hombres dieron los cielos</blockquote><span class="mono cita">II, 58 · don Quijote</span></div>
+      <div class="glosa">Si solo te llevas una, que sea esta.</div>
+    </li>
+    <li class="frase apocrifa">
+      <span class="num">apócrifa</span>
+      <div><blockquote><span class="tach">Ladran, Sancho, señal que cabalgamos</span></blockquote><span class="mono cita">No aparece en ninguna de las dos partes</span></div>
+      <div class="glosa">La buscamos en el texto completo. <b>No está</b>. Se le atribuye al Quijote desde hace mucho, pero el origen es otro.</div>
+    </li>
+  </ol>
+
+  <div class="bolsillo-zona">
+    <div class="bolsillo">
+      <article class="ficha" aria-label="Ficha de lectura">
+        <div class="fp-cab"><span>Ata Nymy · Ficha Nº 4</span><span>Préstamo</span></div>
+        <div class="fp-titulo">Don Quijote de la Mancha</div>
+        <div class="fp-autor">Cervantes · 1605 / 1615</div>
+        <div class="fp-fila"><span>Época</span><div class="epocas" aria-label="Pasado lejano"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="fp-fila"><span></span><div class="fp-epoca-txt">la Mancha, hacia 1600</div></div>
+        <svg class="radar" data-scores='[["Personajes",5],["Historia",4.2],["Universo",4.6],["Narrativa",4.8],["Otros",4.5]]'></svg>
+      </article>
+      <div class="sobre"><span class="mono">Nota global</span><strong>4,6<small> / 5</small></strong><span class="mono">Devolver antes de olvidarlo</span></div>
+      <span class="sello" data-arriba="ATA NYMY" data-abajo="SUBRAYADO" data-centro="XI·26"></span>
+    </div>
+  </div>
+
+  <p class="colofon">Acabóse de componer este fraseario en noviembre de 2026, con el texto de dominio público a la vista y un lápiz rojo.</p>
+</main>
+
+<footer class="pie">
+  <div class="hoja">
+    <a class="firma" href="../"><span class="jaguar" style="color:var(--tinta-2)"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+    <p class="pregunta">¿Cuál de estas citabas mal sin saberlo?</p>
+    <span class="aviso">Maqueta · fraseario de ejemplo</span>
+  </div>
+</footer>
+
+<script src="../comun/marcas.js"></script>
+</body>
+</html>
