@@ -1,0 +1,10 @@
+{
+  "torso": { "z_mundo": 3, "hijas": { "cabeza": [150, 22], "pierna-izq": [88, 336], "pierna-der": [222, 336], "brazo-izq": [34, 44], "brazo-der": [276, 44] } },
+  "cabeza": { "z_mundo": 2 },
+  "pierna-izq": { "z_mundo": 1 },
+  "pierna-der": { "z_mundo": 1 },
+  "brazo-izq": { "z_mundo": 5, "hijas": { "antebrazo-izq": [80, 214] } },
+  "antebrazo-izq": { "z_mundo": 4 },
+  "brazo-der": { "z_mundo": 5, "hijas": { "antebrazo-der": [90, 210] } },
+  "antebrazo-der": { "z_mundo": 4 }
+}
