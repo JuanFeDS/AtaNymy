@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cien años de soledad · Ata Nymy</title>
+<link rel="stylesheet" href="sello.css">
+<style>
+/* Tema del libro: ocre + café. Todo lo de abajo es de ESTA entrada. */
+[data-libro="cien"] {
+  --book-base: var(--an-ochre); --book-hi: var(--an-ochre-light); --book-fg: var(--an-espresso); --book-accent: var(--an-espresso);
+  --book-alt: var(--an-cafe); --book-alt-hi: var(--an-cafe-light); --book-alt-fg: var(--an-parchment); --book-alt-accent: var(--an-ochre);
+  --book-grain: var(--an-grain-dark); --book-alt-grain: var(--an-grain-light);
+  --book-ink: var(--an-cafe);
+}
+
+.hero { padding-block: clamp(2.5rem, 5vw, 4rem) 0; }
+.hero .motif { right: auto; left: -8vw; bottom: -18vw; }
+.hero .eyebrow { color: var(--an-espresso); }
+.hero .titulo-corte { font: 400 clamp(5rem, 21vw, 21rem)/0.82 var(--an-font-title); letter-spacing: -0.04em; white-space: nowrap; margin: clamp(1.5rem, 4vw, 3rem) auto 0; }
+.titulo-corte span { display: block; }
+.titulo-corte .de { font-style: italic; font-size: 0.5em; line-height: 1; margin: -0.02em 0 0 38%; letter-spacing: -0.02em; }
+.hero-pie { display: grid; grid-template-columns: 1fr; gap: 1.5rem; border-top: 3px solid var(--an-espresso); margin-top: clamp(2rem, 5vw, 4rem); padding-block: 1.75rem 2.5rem; }
+@media (min-width: 900px) { .hero-pie { grid-template-columns: 5fr 4fr 3fr; gap: 3rem; align-items: start; } }
+.hero-pie .lead { max-width: 30ch; }
+.hero-pie .cover-slot { aspect-ratio: 3 / 2; max-width: 16rem; }
+
+.ficha .timeline span.on { color: var(--an-cafe); }
+
+.layout-b { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+@media (min-width: 1000px) { .layout-b { grid-template-columns: 7fr 5fr; gap: 5rem; } }
+.lead-b { font: italic 400 clamp(1.6rem, 3vw, 2.4rem)/1.2 var(--an-font-title); color: var(--an-ink-100); margin: 0 0 1.5rem; text-wrap: balance; }
+.rueda-col { position: sticky; top: 1.5rem; align-self: start; }
+.rueda { width: 100%; max-width: 30rem; margin-inline: auto; display: block; color: var(--an-cafe); }
+.rueda .anillo { transform-origin: 250px 250px; }
+.rueda text { font: 500 17px var(--an-font-mono); text-transform: uppercase; fill: currentColor; }
+.rueda .centro { font: 400 54px var(--an-font-title); fill: var(--an-espresso); text-transform: none; }
+.rueda .centro-i { font: italic 400 30px var(--an-font-title); fill: var(--an-cafe); text-transform: none; }
+.rueda-cap { font-family: var(--an-font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--an-ink-72); text-align: center; margin-top: 0.75rem; }
+@media (prefers-reduced-motion: no-preference) { .rueda .anillo { animation: gira 90s linear infinite; } @keyframes gira { to { transform: rotate(360deg); } } }
+
+.banda-gran { background: var(--an-bg-cafe); color: var(--an-parchment); padding-block: clamp(3rem, 7vw, 6rem) 0; overflow: hidden; --accent: var(--an-ochre); }
+.banda-gran .gigante { font: italic 400 clamp(4rem, 17vw, 16rem)/0.9 var(--an-font-title); letter-spacing: -0.03em; color: var(--an-ochre); margin: 1.5rem 0 0 -0.03em; padding-bottom: 0.1em; text-wrap: balance; }
+.banda-gran small { display: block; padding-block: 1.5rem 2.5rem; font-family: var(--an-font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; }
+</style>
+</head>
+<body data-libro="cien">
+
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="mark"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+    <nav aria-label="Principal"><a href="#" aria-current="page">Libros</a><a href="#">Bitácora</a><a href="#">Fraseario</a><a href="#">Seguimiento</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <i class="ti ti-leaf motif" aria-hidden="true"></i>
+    <div class="wrap">
+      <div class="eyebrow reveal">Reseña · Realismo mágico · Ficha Nº 13</div>
+    </div>
+    <h1 class="titulo-corte wrap reveal" style="margin-inline:auto"><span>Cien años</span><span class="de">de soledad</span></h1>
+    <div class="wrap">
+      <div class="hero-pie reveal">
+        <p class="lead" style="margin:0">Una familia, un pueblo y un nombre que se repite hasta que ya no sabes quién es quién. A propósito.</p>
+        <div class="meta-line" style="align-self:end">Gabriel García Márquez · 1967 · Releído en octubre</div>
+        <div class="cover-slot" role="img" aria-label="Espacio para la portada del libro">portada<br>del libro<br>(arrastrar aquí)</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ficha" aria-labelledby="t-ficha">
+    <div class="wrap ficha-grid">
+      <div>
+        <div class="eyebrow">Ficha de lectura · valores de ejemplo</div>
+        <h2 id="t-ficha">Un libro que se mide mal, y por eso se lee otra vez</h2>
+        <div class="nota"><b>4,6</b><span>/ 5 · NOTA GLOBAL</span></div>
+        <div class="timeline" aria-label="Época de la historia"><span>Pasado remoto</span><span class="on">Pasado lejano</span><span class="on">Pasado reciente</span><span>Presente</span><span>Futuro cercano</span><span>Futuro lejano</span><span>Futuro distante</span></div>
+        <div class="timeline-cap">▲ el tiempo no avanza en línea recta</div>
+      </div>
+      <svg class="radar" role="img" aria-label="Radar: Personajes 4,8; Historia 4,5; Universo 4,9; Narrativa 4,7; Otros 4,2" data-scores='[["Personajes",4.8],["Historia",4.5],["Universo",4.9],["Narrativa",4.7],["Otros",4.2]]'></svg>
+    </div>
+  </section>
+
+  <article class="read">
+    <div class="wrap layout-b">
+      <div class="prose">
+        <p class="lead-b">Este texto es de relleno. Aquí la entrada abre con una frase en cursiva grande, distinta a la capitular de la otra reseña.</p>
+        <p>La estructura cambia con el libro: en esta, el texto va en una columna ancha y a su lado una rueda de nombres que gira. El cuerpo sigue en pergamino, con Karla a 19 px, para que la lectura larga no cambie entre entradas.</p>
+        <h2>Un subtítulo para el segundo tramo</h2>
+        <p>Más texto de ejemplo. <span class="spoiler">Contiene spoilers a partir de aquí</span>. Los enlaces van en café, el acento sobre pergamino de este libro (<a href="#">así</a>).</p>
+        <p>Cada libro elige su propia pieza firma. La de este es la repetición: <i>Aureliano</i> y <i>José Arcadio</i> dando vueltas.</p>
+      </div>
+
+      <div class="rueda-col" aria-hidden="true">
+        <svg class="rueda" viewBox="0 0 500 500">
+          <defs><path id="circulo" d="M250 250 m-190 0 a190 190 0 1 1 380 0 a190 190 0 1 1 -380 0"/></defs>
+          <circle cx="250" cy="250" r="232" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.5"/>
+          <circle cx="250" cy="250" r="148" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.5"/>
+          <g class="anillo"><text><textPath href="#circulo" textLength="1180" lengthAdjust="spacing">José Arcadio · Aureliano · José Arcadio · Aureliano · José Arcadio · Aureliano · José Arcadio · Aureliano · </textPath></text></g>
+          <text class="centro" x="250" y="246" text-anchor="middle">Otra vez</text>
+          <text class="centro-i" x="250" y="288" text-anchor="middle">el mismo nombre</text>
+        </svg>
+        <div class="rueda-cap">Siete generaciones, dos nombres</div>
+      </div>
+    </div>
+  </article>
+
+  <section class="banda-gran" aria-label="Cita destacada">
+    <div class="wrap">
+      <div class="eyebrow">Línea para quedarse</div>
+      <div class="gigante">Muchos años después</div>
+      <small>Primera línea del libro · texto de ejemplo</small>
+    </div>
+  </section>
+</main>
+
+<footer class="close">
+  <div class="wrap">
+    <span class="sign">@ata_nymy</span>
+    <p>¿Ya lo leíste? Cuéntanos tu nota del 1 al 5.</p>
+    <a class="btn" href="#"><i class="ti ti-bookmark"></i>Guardar la ficha</a>
+  </div>
+</footer>
+
+<script src="radar.js"></script>
+</body>
+</html>

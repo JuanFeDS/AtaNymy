@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La medición del mundo · Ata Nymy</title>
+<link rel="stylesheet" href="sello.css">
+<style>
+/* Tema del libro: noche + musgo. Todo lo de abajo es de ESTA entrada. */
+[data-libro="medicion"] {
+  --book-base: var(--an-night); --book-hi: var(--an-night-light); --book-fg: var(--an-parchment); --book-accent: var(--an-moss);
+  --book-alt: var(--an-night); --book-alt-hi: var(--an-night); --book-alt-fg: var(--an-parchment); --book-alt-accent: var(--an-moss);
+  --book-ink: var(--an-moss-ink);
+}
+
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: end; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 8fr 3fr; gap: 4rem; } }
+.hero .meta-line { margin-top: 2rem; }
+.hero .cover-slot { aspect-ratio: 2 / 3; max-width: 15rem; }
+.hero .lead { margin-top: 1.75rem; }
+.hero .motif { right: auto; left: 38%; bottom: -22vw; }
+
+/* Firma de esta entrada: dos trayectorias en paralelo, sin cajas */
+.paralelo { display: grid; grid-template-columns: 1fr; margin-block: 3rem 4rem; }
+@media (min-width: 760px) { .paralelo { grid-template-columns: 1fr 1fr; } .paralelo > * + * { border-left: 1px solid var(--an-ink-14); padding-left: 2.5rem; } .paralelo > :first-child { padding-right: 2.5rem; } }
+.paralelo > * { padding-block: 1.5rem; }
+.paralelo .quien { font-family: var(--an-font-mono); font-size: var(--web-size-label); letter-spacing: var(--an-tracking-label); text-transform: uppercase; color: var(--book-ink); }
+.paralelo h3 { font: 400 clamp(1.6rem, 2.6vw, 2.2rem)/1.02 var(--an-font-title); margin: 0.6rem 0 0.4rem; }
+.paralelo .fechas { font: italic 400 1.5rem var(--an-font-title); color: var(--an-ink-72); }
+.paralelo .cifra { font: 400 clamp(4rem, 9vw, 7rem)/0.9 var(--an-font-title); color: var(--book-ink); letter-spacing: -0.03em; margin-top: 1.5rem; }
+.paralelo .cifra-l { font-family: var(--an-font-mono); font-size: var(--web-size-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--an-ink-72); }
+.paralelo p { margin: 1rem 0 0; font-size: 1.05rem; }
+
+.layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1000px) { .layout { grid-template-columns: 3fr 6fr 3fr; gap: 3rem; } }
+.layout aside.meta { position: sticky; top: 2rem; align-self: start; display: none; gap: 1.5rem; }
+@media (min-width: 1000px) { .layout aside.meta { display: flex; } }
+.meta dl { margin: 0; }
+.meta dt { font-family: var(--an-font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--an-ink-72); }
+.meta dd { margin: 0.2rem 0 1.1rem; font-weight: 700; }
+.lead-p::first-letter { font: 400 5.4em/0.8 var(--an-font-title); float: left; padding: 0.06em 0.1em 0 0; color: var(--book-ink); }
+.nota-margen { font-size: var(--web-size-note); color: var(--an-ink-72); padding-top: 0.5rem; border-top: 3px solid var(--an-ink-100); align-self: start; }
+.nota-margen b { font-family: var(--an-font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; color: var(--book-ink); }
+
+.banda-cita { background: var(--an-bg-moss); color: var(--an-espresso); padding-block: clamp(3.5rem, 8vw, 7rem); --accent: var(--an-espresso); }
+.banda-cita blockquote { margin: 1.5rem 0 0; font: italic 400 clamp(2rem, 5.2vw, 4.75rem)/1.04 var(--an-font-title); max-width: 20ch; text-wrap: balance; letter-spacing: -0.01em; }
+.banda-cita small { display: block; margin-top: 1.5rem; font-family: var(--an-font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; }
+</style>
+</head>
+<body data-libro="medicion">
+
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="mark"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+    <nav aria-label="Principal"><a href="#" aria-current="page">Libros</a><a href="#">Bitácora</a><a href="#">Fraseario</a><a href="#">Seguimiento</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <i class="ti ti-compass motif" aria-hidden="true"></i>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow reveal">Reseña · Novela histórica · Ficha Nº 12</div>
+        <h1 class="reveal" style="margin-top:1.75rem">La medición <em>del mundo</em></h1>
+        <p class="lead reveal">Dos genios, una misma obsesión: medirlo todo. Uno sin salir de su cuarto, el otro recorriendo el planeta.</p>
+        <div class="meta-line reveal">Daniel Kehlmann · 2005 · Leído en septiembre</div>
+      </div>
+      <div class="cover-slot reveal" role="img" aria-label="Espacio para la portada del libro">portada<br>del libro<br>(arrastrar aquí)</div>
+    </div>
+  </section>
+
+  <section class="ficha" aria-labelledby="t-ficha">
+    <div class="wrap ficha-grid">
+      <div>
+        <div class="eyebrow">Ficha de lectura</div>
+        <h2 id="t-ficha">Cinco dimensiones, sin miedo a los decimales</h2>
+        <div class="nota"><b>3,2</b><span>/ 5 · NOTA GLOBAL</span></div>
+        <div class="timeline" aria-label="Época de la historia"><span>Pasado remoto</span><span>Pasado lejano</span><span class="on">Pasado reciente</span><span>Presente</span><span>Futuro cercano</span><span>Futuro lejano</span><span>Futuro distante</span></div>
+        <div class="timeline-cap">▲ 1790 – 1828</div>
+      </div>
+      <svg class="radar" role="img" aria-label="Radar: Personajes 3,5; Historia 3,5; Universo 3,2; Narrativa 2,8; Otros 3,2" data-scores='[["Personajes",3.5],["Historia",3.5],["Universo",3.2],["Narrativa",2.8],["Otros",3.2]]'></svg>
+    </div>
+  </section>
+
+  <article class="read">
+    <div class="wrap layout">
+      <aside class="meta" aria-label="Datos del libro">
+        <span class="tag-v">Reseña · ejemplo de maqueta</span>
+        <dl>
+          <dt>Autor</dt><dd>Daniel Kehlmann</dd>
+          <dt>Año</dt><dd>2005</dd>
+          <dt>Géneros</dt><dd>Novela histórica</dd>
+          <dt>Spoilers</dt><dd>Desde la mitad</dd>
+        </dl>
+      </aside>
+
+      <div class="prose">
+        <p class="lead-p">Este texto es de relleno para ver el ritmo de lectura: medida de unos 66 caracteres, cuerpo en Karla a 19 px y capitular en el color del libro. La voz es la del sistema, una amiga que leyó de más, así que aquí iría una pregunta antes que una tesis.</p>
+        <p>Los párrafos largos van sobre pergamino y con tinta espresso, porque leer mucho texto sobre fondo oscuro cansa. El color del libro manda en la cabecera, la ficha y las bandas; el cuerpo descansa.</p>
+
+        <div class="paralelo" role="group" aria-label="Los dos protagonistas">
+          <div>
+            <div class="quien">El que no sale</div>
+            <h3>Carl Friedrich Gauss</h3>
+            <div class="fechas">1777 – 1855</div>
+            <div class="cifra">0</div>
+            <div class="cifra-l">viajes que le apetecen</div>
+            <p>Ejemplo de texto breve. Este bloque es solo de esta entrada: la comparación se cuenta con columnas, no con tarjetas.</p>
+          </div>
+          <div>
+            <div class="quien">El que recorre</div>
+            <h3>Alexander von Humboldt</h3>
+            <div class="fechas">1769 – 1859</div>
+            <div class="cifra">∞</div>
+            <div class="cifra-l">cosas por medir</div>
+            <p>Otro texto de ejemplo. La regla fina entre las columnas hace de estructura; el color solo entra en las cifras.</p>
+          </div>
+        </div>
+
+        <h2>Un subtítulo para el segundo tramo</h2>
+        <p>Más texto de ejemplo. Aviso de spoilers siempre antes del tramo que los lleve, como pide la guía de la casa: <span class="spoiler">Contiene spoilers a partir de aquí</span>.</p>
+        <p>Los enlaces van en musgo tinta (<a href="#">así</a>), que sobre pergamino llega a 5,1:1 de contraste.</p>
+      </div>
+
+      <aside class="nota-margen" aria-label="Nota al margen">
+        <b>Nota al margen</b>
+        Espacio para una acotación corta, un dato o un enlace a otra entrada. Va con una regla gruesa arriba, como en una revista.
+      </aside>
+    </div>
+  </article>
+
+  <section class="banda-cita" aria-label="Cita destacada">
+    <div class="wrap">
+      <div class="eyebrow">Línea para quedarse</div>
+      <blockquote>Aquí va una cita corta, en grande y a sangre.</blockquote>
+      <small>Texto de ejemplo · pegar la cita real al publicar</small>
+    </div>
+  </section>
+</main>
+
+<footer class="close">
+  <div class="wrap">
+    <span class="sign">@ata_nymy</span>
+    <p>¿Ya lo leíste? Cuéntanos tu nota del 1 al 5.</p>
+    <a class="btn" href="#"><i class="ti ti-bookmark"></i>Guardar la ficha</a>
+  </div>
+</footer>
+
+<script src="radar.js"></script>
+</body>
+</html>
