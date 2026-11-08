@@ -22,7 +22,7 @@
   transform: translate(-50%, calc((1 - var(--entra) + var(--sale)) * 120%));
   will-change: transform;
 }
-.titere img { display: block; height: 100%; width: auto; transform-origin: 50% 100%; filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.38)); transform: scaleX(var(--espejo, 1)); }
+.titere img { display: block; height: 100%; width: auto; transform-origin: 50% 100%; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.3)); transform: scaleX(var(--espejo, 1)); }
 .titere--espejo { --espejo: -1; }
 .titere--detras { z-index: 0; }
 .titere--sombra img { filter: brightness(0) blur(2.5px); opacity: var(--opacidad-sombra, 0.42); }

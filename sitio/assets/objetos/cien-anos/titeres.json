@@ -1,0 +1,87 @@
+{
+  "hielo": {
+    "archivo": "hielo.png",
+    "ancho": 366,
+    "alto": 332
+  },
+  "iman": {
+    "archivo": "iman.png",
+    "ancho": 299,
+    "alto": 311
+  },
+  "clavo": {
+    "archivo": "clavo.png",
+    "ancho": 176,
+    "alto": 234
+  },
+  "llave": {
+    "archivo": "llave.png",
+    "ancho": 219,
+    "alto": 311
+  },
+  "candado": {
+    "archivo": "candado.png",
+    "ancho": 195,
+    "alto": 262
+  },
+  "tijeras": {
+    "archivo": "tijeras.png",
+    "ancho": 367,
+    "alto": 257
+  },
+  "olla": {
+    "archivo": "olla.png",
+    "ancho": 270,
+    "alto": 194
+  },
+  "sabana-1": {
+    "archivo": "sabana-1.png",
+    "ancho": 353,
+    "alto": 276
+  },
+  "sabana-2": {
+    "archivo": "sabana-2.png",
+    "ancho": 418,
+    "alto": 287
+  },
+  "sabana-3": {
+    "archivo": "sabana-3.png",
+    "ancho": 383,
+    "alto": 335
+  },
+  "bandera": {
+    "archivo": "bandera.png",
+    "ancho": 408,
+    "alto": 395
+  },
+  "mariposa-1": {
+    "archivo": "mariposa-1.png",
+    "ancho": 229,
+    "alto": 217
+  },
+  "mariposa-2": {
+    "archivo": "mariposa-2.png",
+    "ancho": 176,
+    "alto": 208
+  },
+  "mariposa-3": {
+    "archivo": "mariposa-3.png",
+    "ancho": 211,
+    "alto": 186
+  },
+  "mariposa-4": {
+    "archivo": "mariposa-4.png",
+    "ancho": 215,
+    "alto": 205
+  },
+  "mariposa-5": {
+    "archivo": "mariposa-5.png",
+    "ancho": 169,
+    "alto": 187
+  },
+  "mariposa-6": {
+    "archivo": "mariposa-6.png",
+    "ancho": 183,
+    "alto": 229
+  }
+}
