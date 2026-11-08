@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La medición del mundo · Ata Nymy</title>
+<link rel="stylesheet" href="taller.css">
+<style>
+/* Material de esta entrada: libreta cuadriculada, grafito y tinta musgo. */
+:root {
+  --papel: #E9E4D2; --papel-hi: #F3EFE2;
+  --tinta: #2B2E33;
+  --tinta-suave: rgba(43, 46, 51, 0.74);
+  --tinta-2: #5F6B22;
+  --grafito: #4A4F57;
+  --resaltador: rgba(169, 182, 78, 0.45);
+  --sello-tinta: #1F2B45;
+}
+body {
+  background:
+    linear-gradient(rgba(78, 86, 48, 0.09) 1px, transparent 1px) 0 0 / 1.5rem 1.5rem,
+    linear-gradient(90deg, rgba(78, 86, 48, 0.09) 1px, transparent 1px) 0 0 / 1.5rem 1.5rem,
+    var(--an-grain-dark), var(--papel);
+}
+
+.cabecera { padding-block: clamp(2.5rem, 6vw, 4.5rem) 1.5rem; display: grid; grid-template-columns: 1fr; gap: 1rem 3rem; align-items: end; }
+@media (min-width: 900px) { .cabecera { grid-template-columns: 1fr auto; } }
+.cabecera .byline { color: var(--tinta-suave); }
+.cabecera .medida { text-align: right; color: var(--tinta-suave); line-height: 1.8; }
+.cabecera .medida b { color: var(--tinta-2); }
+
+/* Lámina: dos hombres, dos radios de acción */
+.lamina { display: grid; grid-template-columns: 1fr; border-top: 2px solid var(--tinta); border-bottom: 2px solid var(--tinta); margin-top: 1rem; }
+@media (min-width: 900px) { .lamina { grid-template-columns: 1fr 2.2fr; } .lamina > * + * { border-left: 1px solid rgba(43,46,51,.25); } }
+.lamina figure { margin: 0; padding: 1.6rem 1.4rem 1.2rem; }
+.lamina figcaption { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem; color: var(--tinta-suave); }
+.lamina h2 { font-size: 1.35rem; margin: 0 0 0.2rem; }
+.lamina svg { width: 100%; height: auto; display: block; color: var(--grafito); }
+.lamina text { font-family: var(--an-font-mono); font-size: 11px; letter-spacing: 0.06em; fill: var(--tinta); text-transform: uppercase; }
+.lamina .anota { font-family: var(--an-font-title); font-style: italic; font-size: 15px; letter-spacing: 0; text-transform: none; fill: var(--tinta-2); }
+
+/* Bitácora: la reseña como registro fechado */
+.cuerpo { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: clamp(3rem, 6vw, 4.5rem); }
+@media (min-width: 1000px) { .cuerpo { grid-template-columns: minmax(0, 1fr) 22rem; gap: 5rem; } }
+.bitacora { list-style: none; margin: 0; padding: 0; position: relative; }
+.bitacora::before { content: ""; position: absolute; left: 6.3rem; top: 0.6rem; bottom: 0.6rem; width: 1px; background: rgba(43,46,51,.3); }
+.bitacora li { display: grid; grid-template-columns: 5.4rem 1fr; gap: 0 1.8rem; padding-bottom: 2.2rem; }
+.bitacora time { font-family: var(--an-font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tinta-suave); padding-top: 0.35rem; text-align: right; position: relative; }
+.bitacora time::after { content: ""; position: absolute; right: -1.25rem; top: 0.62rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; border: 2px solid var(--tinta-2); background: var(--papel); }
+.bitacora li:last-child time::after { background: var(--tinta-2); }
+.bitacora h3 { font-size: 1.3rem; margin: 0 0 0.4rem; }
+.bitacora p { margin: 0 0 0.8em; max-width: 60ch; text-wrap: pretty; }
+.regla { display: flex; align-items: center; gap: 0.8rem; margin: 0.6rem 0 0.4rem; color: var(--tinta-2); }
+.regla span { height: 0.75rem; flex: none; background: repeating-linear-gradient(90deg, currentColor 0 1.5px, transparent 1.5px 0.6rem) 0 100% / 100% 100% no-repeat, linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; }
+.regla em { font-family: var(--an-font-title); font-size: 1rem; }
+
+.anexo { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+@media (min-width: 1000px) { .anexo { position: sticky; top: 2rem; align-self: start; } }
+.anexo .sello { margin-top: -4.6rem; margin-left: 9rem; --sello-giro: 9deg; }
+.veredicto { border-top: 3px solid var(--tinta); padding-top: 1rem; width: 100%; max-width: 23rem; }
+.veredicto p { margin: 0.4rem 0 0; font: italic 400 1.15rem/1.45 var(--an-font-title); }
+</style>
+</head>
+<body>
+
+<header class="franja">
+  <div class="hoja">
+    <a class="firma" href="index.html"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+    <nav aria-label="Principal"><a href="index.html">Estantería</a><a href="cien-anos-de-soledad.html">Reseñas</a><a href="quijote-fraseario.html">Fraseario</a><a href="#" aria-current="page">Cuadernos</a></nav>
+  </div>
+</header>
+
+<main class="hoja">
+  <section class="cabecera">
+    <div>
+      <span class="etiqueta">Cuaderno de lectura · Novela histórica</span>
+      <h1>La medición del mundo</h1>
+      <div class="mono byline">Daniel Kehlmann · 2005 · Leído del 3 al 14 de septiembre</div>
+    </div>
+    <div class="mono medida">Escala: 1 lector<br>Instrumento: <b>lápiz HB</b><br>Error estimado: ± mucho</div>
+  </section>
+
+  <section class="lamina" aria-label="Lámina: los dos protagonistas">
+    <figure>
+      <h2>Gauss</h2>
+      <svg viewBox="0 0 260 200" role="img" aria-label="Plano de un cuarto pequeño con un punto en el centro">
+        <g filter="url(#lapiz)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <rect x="60" y="30" width="140" height="120"/>
+          <path d="M60 95 v30" stroke-width="6" style="stroke: var(--papel)"/>
+          <path d="M60 95 q 22 4 24 28" stroke-width="1.2" stroke-dasharray="2 4"/>
+          <path d="M120 150 v-16 M200 70 h-12"/>
+          <circle cx="130" cy="90" r="4" fill="currentColor"/>
+          <circle cx="130" cy="90" r="22" stroke-dasharray="3 5"/>
+        </g>
+        <text x="130" y="178" text-anchor="middle">Gotinga</text>
+        <text class="anota" x="152" y="70">aquí</text>
+      </svg>
+      <figcaption class="mono"><span>Radio de acción</span><span>≈ un escritorio</span></figcaption>
+    </figure>
+    <figure>
+      <h2>Humboldt</h2>
+      <svg viewBox="0 0 560 220" role="img" aria-label="Ruta dibujada a mano: La Coruña, Cumaná, Orinoco, La Habana, Quito y Chimborazo, México, Filadelfia, Burdeos">
+        <g filter="url(#lapiz)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M515 72 C 430 80 300 96 236 118 C 200 132 186 150 170 168 C 150 182 132 186 120 178 C 110 168 118 150 150 142 C 120 120 70 120 40 132 C 60 104 70 86 98 60 C 130 46 200 30 300 26 C 380 24 450 24 505 30" stroke-width="2" stroke-dasharray="6 6"/>
+          <path d="M140 40 c-10 30 -40 80 -40 120 c0 20 30 50 40 30" stroke-width="1.2" stroke-opacity=".35"/>
+          <path d="M470 80 c 20 30 10 80 40 110" stroke-width="1.2" stroke-opacity=".35"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="515" cy="72" r="4"/><circle cx="236" cy="118" r="4"/><circle cx="170" cy="168" r="4"/><circle cx="150" cy="142" r="4"/><circle cx="40" cy="132" r="4"/><circle cx="98" cy="60" r="4"/><circle cx="300" cy="26" r="4"/><circle cx="505" cy="30" r="4"/>
+        </g>
+        <text x="540" y="92" text-anchor="end">La Coruña · 1799</text>
+        <text x="246" y="112">Cumaná</text>
+        <text x="180" y="192">Orinoco · 1800</text>
+        <text x="160" y="134">La Habana</text>
+        <text x="30" y="152" text-anchor="start">Quito · 1802</text>
+        <text class="anota" x="30" y="168">y el Chimborazo</text>
+        <text x="104" y="54">México · 1803</text>
+        <text x="300" y="46" text-anchor="middle">Filadelfia · 1804</text>
+        <text x="540" y="20" text-anchor="end">Burdeos · 1804</text>
+        <text class="anota" x="320" y="176">con Bonpland, siempre detrás</text>
+      </svg>
+      <figcaption class="mono"><span>Radio de acción</span><span>≈ medio planeta, en cinco años</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="cuerpo">
+    <ol class="bitacora" aria-label="Registro de lectura">
+      <li><time datetime="2026-09-03">3 sep</time><div>
+        <h3>Empieza con un viaje que nadie quería hacer</h3>
+        <p>Berlín, 1828. Humboldt invita a Gauss a un congreso y Gauss, que odia salir de casa, acepta a regañadientes. Desde la primera página sabes de quién te vas a reír, y es de los dos.</p>
+      </div></li>
+      <li><time datetime="2026-09-05">5 sep</time><div>
+        <h3>Primera rareza: casi no hay comillas</h3>
+        <p>Los diálogos van en <span class="sub">estilo indirecto</span>, como si alguien te contara lo que dijeron. Al principio choca. Luego entiendes que es el chiste: dos genios que miden el mundo y <span class="resalta">nunca terminan de hablarse</span>.</p>
+        <div class="regla"><span style="width:7.2rem"></span><em>distancia entre Gauss y cualquier conversación</em></div>
+      </div></li>
+      <li><time datetime="2026-09-08">8 sep</time><div>
+        <h3>Un capítulo cada uno</h3>
+        <p>Gauss calcula sin moverse; Humboldt se mete en ríos, cuevas y volcanes para medir lo que encuentra. Los dos tienen razón y los dos son insoportables, cada uno a su manera. La alternancia funciona como un péndulo: cuando te cansas de uno, llega el otro.</p>
+      </div></li>
+      <li><time datetime="2026-09-11">11 sep</time><div>
+        <h3>Bonpland se roba el libro</h3>
+        <p>El compañero de Humboldt aguanta mosquitos, fiebres y a su jefe, y casi nunca se queja. Pedía más páginas. Si alguna vez hacemos una ruta de secundarios que merecían su propia novela, empieza aquí.</p>
+      </div></li>
+      <li><time datetime="2026-09-14">14 sep</time><div>
+        <h3>Al cerrar el cuaderno</h3>
+        <p>Es una novela histórica que no se toma en serio la solemnidad histórica. Si buscas datos, ve a una biografía. Si buscas a dos señores obsesivos midiendo cosas mientras la vida les pasa por al lado, aquí están, y <span class="sub">te vas a reconocer en alguno</span>.</p>
+      </div></li>
+    </ol>
+
+    <aside class="anexo" aria-label="Ficha y veredicto">
+      <article class="ficha cinta" aria-label="Ficha de lectura" style="--giro: -1.8deg; --cinta-giro: 4deg">
+        <div class="fp-cab"><span>Ata Nymy · Ficha Nº 12</span><span>Préstamo</span></div>
+        <div class="fp-titulo">La medición del mundo</div>
+        <div class="fp-autor">Kehlmann · 2005 · Gotinga y medio mundo</div>
+        <div class="fp-fila"><span>Época</span><div class="epocas" aria-label="Pasado reciente"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="fp-fila"><span></span><div class="fp-epoca-txt">1790 – 1828</div></div>
+        <svg class="radar" role="img" aria-label="Personajes 3,5; Historia 3,5; Universo 3,2; Narrativa 2,8; Otros 3,2" data-scores='[["Personajes",3.5],["Historia",3.5],["Universo",3.2],["Narrativa",2.8],["Otros",3.2]]'></svg>
+        <div class="fp-pie"><span class="fp-nota">3,2<small>/ 5</small></span><span class="mono" style="font-size:.62rem;color:rgba(51,36,27,.6)">Leído · 2026</span></div>
+      </article>
+      <span class="sello" data-arriba="ATA NYMY" data-abajo="MEDIDO" data-centro="IX·26"></span>
+      <div class="veredicto">
+        <span class="etiqueta">Veredicto</span>
+        <p>Los personajes brillan; la narrativa se queda corta cuando el chiste ya se entendió. Ideal para leer en dos tardes.</p>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="hoja">
+    <a class="firma" href="index.html"><span class="jaguar" style="color:var(--tinta-2)"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+    <p class="pregunta">¿Tú eres más Gauss o más Humboldt?</p>
+    <span class="aviso">Maqueta · cuaderno de ejemplo</span>
+  </div>
+</footer>
+
+<script src="marcas.js"></script>
+</body>
+</html>

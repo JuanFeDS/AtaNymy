@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css");
+@import url("../tokens.css");
+
+/*
+  Taller · materiales compartidos de Ata Nymy v2
+  Lo constante: el sello (franja nocturna + firma) y la ficha de préstamo.
+  Todo lo demás lo decide cada entrada con sus variables de papel y tinta.
+*/
+
+:root {
+  --papel: var(--an-parchment);
+  --papel-hi: var(--an-parchment-hi);
+  --tinta: var(--an-espresso);
+  --tinta-suave: rgba(51, 36, 27, 0.78);
+  --tinta-2: var(--an-cafe);
+  --resaltador: rgba(255, 204, 126, 0.75);
+  --sello-tinta: #2F4066;
+
+  --m-subrayado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 35 5 62 11 96 7 S 158 4 197 8' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  --m-doble: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 5 C 50 3 120 7 197 4 M8 11 C 60 9 130 12 190 10' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  --m-circulo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' preserveAspectRatio='none'%3E%3Cpath d='M150 9 C 110 1 32 5 12 30 C -3 53 52 77 112 73 C 172 69 201 47 191 25 C 183 9 150 4 118 8' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --m-tachado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 60 4 140 10 198 5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  --m-corchete: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 200' preserveAspectRatio='none'%3E%3Cpath d='M13 3 C 6 4 5 8 5 30 L 4 170 C 4 192 6 196 13 197' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  color: var(--tinta);
+  font-family: var(--an-font-body);
+  font-size: var(--web-size-body);
+  line-height: var(--web-leading-body);
+  background: var(--an-grain-dark), radial-gradient(90rem 50rem at 15% 0%, var(--papel-hi) 0%, transparent 70%), var(--papel);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--tinta-2); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--resaltador); }
+
+.hoja { width: min(100% - 2 * var(--web-gutter), var(--web-max)); margin-inline: auto; }
+
+/* ───────── Sello: franja nocturna, siempre igual y siempre pequeña ───────── */
+.franja { background: var(--an-bg-night); color: var(--an-parchment); }
+.franja .hoja { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-block: 0.7rem; flex-wrap: wrap; }
+.firma { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.firma .jaguar { width: 2.1rem; height: 2.1rem; display: grid; place-items: center; color: var(--an-ochre); font-size: 1.5rem; }
+.firma .jaguar img { width: 100%; height: auto; }
+.firma b { font-family: var(--an-font-sign); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; }
+.franja nav { display: flex; flex-wrap: wrap; gap: 0.2rem 1.4rem; font-family: var(--an-font-mono); font-size: 0.7rem; letter-spacing: var(--an-tracking-label); text-transform: uppercase; }
+.franja nav a { text-decoration: none; opacity: 0.7; padding-block: 0.45rem; }
+.franja nav a:hover, .franja nav a[aria-current] { opacity: 1; text-decoration: underline; text-decoration-color: var(--an-moss); text-decoration-thickness: 2px; }
+
+/* ───────── Tipografía de lectura ───────── */
+.etiqueta { display: inline-flex; align-items: center; gap: 0.7rem; font-family: var(--an-font-mono); font-size: var(--web-size-label); letter-spacing: var(--an-tracking-label); text-transform: uppercase; color: var(--tinta-suave); }
+.etiqueta::before { content: ""; width: 1.8rem; height: 0.28rem; border-radius: 3px; background: var(--tinta-2); }
+h1, h2, h3 { font-family: var(--an-font-title); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: var(--web-size-hero); line-height: var(--web-leading-title); margin: 0.9rem 0 0.6rem; }
+h2 { font-size: var(--web-size-h2); line-height: 1.1; margin: 0 0 0.9rem; }
+.bajada { font: italic 400 var(--web-size-lead)/1.45 var(--an-font-title); color: var(--tinta-suave); margin: 0; max-width: 34ch; }
+.prosa { max-width: var(--web-measure); }
+.prosa p { margin: 0 0 1.15em; text-wrap: pretty; }
+.mono { font-family: var(--an-font-mono); font-size: var(--web-size-label); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ───────── Marcas a mano (máscaras SVG en el color de tinta) ───────── */
+.sub, .doble, .circ, .tach { position: relative; white-space: nowrap; }
+.sub::after, .doble::after, .circ::after, .tach::after {
+  content: ""; position: absolute; pointer-events: none;
+  background: var(--marca, var(--tinta-2));
+  -webkit-mask: var(--m) no-repeat 0 0 / 100% 100%; mask: var(--m) no-repeat 0 0 / 100% 100%;
+}
+.sub { --m: var(--m-subrayado); }
+.sub::after { left: -2%; right: -2%; bottom: -0.32em; height: 0.42em; }
+.sub::after, .doble::after, .tach::after { transition-delay: inherit !important; }
+.doble { --m: var(--m-doble); }
+.doble::after { left: -2%; right: -2%; bottom: -0.42em; height: 0.5em; }
+.circ { --m: var(--m-circulo); }
+.circ { margin-inline: 0.3em; }
+.circ::after { left: -0.42em; right: -0.42em; top: -0.38em; bottom: -0.34em; }
+.tach { --m: var(--m-tachado); }
+.tach::after { left: -3%; right: -3%; top: 46%; height: 0.36em; }
+.resalta { background: linear-gradient(100deg, transparent 0.12em, var(--resaltador) 0.28em, var(--resaltador) calc(100% - 0.3em), transparent calc(100% - 0.08em)) 0 78% / 100% 0.62em no-repeat; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-inline: 0.1em; }
+
+/* Las marcas se dibujan al entrar en pantalla */
+@media (prefers-reduced-motion: no-preference) {
+  .js .sub::after, .js .doble::after, .js .tach::after { -webkit-mask-size: 0% 100%; mask-size: 0% 100%; transition: -webkit-mask-size 0.9s cubic-bezier(.6,.1,.2,1), mask-size 0.9s cubic-bezier(.6,.1,.2,1); }
+  .js .circ::after { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(.6,.1,.2,1); }
+  .js .visto.sub::after, .js .visto.doble::after, .js .visto.tach::after { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+  .js .visto.circ::after { clip-path: inset(0 0 0 0); }
+  .js .resalta { background-size: 0% 0.62em; transition: background-size 1.1s cubic-bezier(.6,.1,.2,1); }
+  .js .resalta.visto { background-size: 100% 0.62em; }
+}
+
+/* Nota al margen: la voz del lector, en cursiva y en tinta de color */
+.nota { font: italic 400 1.05rem/1.35 var(--an-font-title); color: var(--tinta-2); }
+.nota .mono { font-style: normal; display: block; margin-bottom: 0.25rem; color: var(--tinta-suave); }
+
+/* Cinta adhesiva */
+.cinta { position: relative; }
+.cinta::before {
+  content: ""; position: absolute; z-index: 2; top: -0.85rem; left: 50%; width: 6.5rem; height: 1.7rem;
+  transform: translateX(-50%) rotate(var(--cinta-giro, -3deg));
+  background: rgba(250, 244, 232, 0.55); backdrop-filter: blur(0.5px);
+  box-shadow: 0 1px 2px rgba(51, 36, 27, 0.12);
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 4px calc(100% - 4px), transparent 100%);
+}
+
+/* ───────── Ficha de préstamo (el objeto constante) ───────── */
+.ficha {
+  --fp-linea: rgba(62, 91, 120, 0.22);
+  position: relative; width: 100%; max-width: 23rem;
+  background:
+    linear-gradient(var(--fp-linea), var(--fp-linea)) 0 3.35rem / 100% 2px no-repeat,
+    repeating-linear-gradient(to bottom, transparent 0 1.6rem, var(--fp-linea) 1.6rem calc(1.6rem + 1px)) 0 3.4rem / 100% calc(100% - 3.4rem) no-repeat,
+    var(--an-grain-dark), var(--an-cream);
+  color: var(--an-espresso);
+  padding: 1rem 1.25rem 1.3rem;
+  transform: rotate(var(--giro, 1.4deg));
+  box-shadow: 0 1px 0 rgba(51, 36, 27, 0.06), 0 22px 28px -20px rgba(51, 36, 27, 0.55);
+  font-size: 0.9rem; line-height: 1.6rem;
+}
+.ficha::after { content: ""; position: absolute; top: 0.55rem; right: 1.1rem; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--papel); box-shadow: inset 0 1px 2px rgba(51, 36, 27, 0.3); }
+.ficha .fp-cab { display: flex; justify-content: space-between; font-family: var(--an-font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: #C8653F; padding-right: 1.4rem; }
+.ficha .fp-titulo { font: 400 1.45rem/1.05 var(--an-font-title); margin: 0.75rem 0 0.15rem; }
+.ficha .fp-autor { font-family: var(--an-font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(51, 36, 27, 0.7); }
+.ficha .fp-fila { display: grid; grid-template-columns: 5.2rem 1fr; gap: 0.5rem; align-items: center; margin-top: 0.4rem; }
+.ficha .fp-fila > span:first-child { font-family: var(--an-font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(51, 36, 27, 0.6); }
+.epocas { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.epocas i { height: 1.1rem; border: 1.5px solid rgba(51, 36, 27, 0.35); border-radius: 2px; position: relative; }
+.epocas i.on { background: var(--sello-tinta); border-color: var(--sello-tinta); opacity: 0.85; }
+.ficha .fp-epoca-txt { font-family: var(--an-font-mono); font-size: 0.62rem; color: rgba(51, 36, 27, 0.7); margin-top: -0.2rem; }
+.ficha .radar { width: 100%; max-width: 15rem; display: block; margin: 0.4rem auto 0; overflow: visible; color: var(--an-espresso); }
+.radar .ring, .radar .axis { fill: none; stroke: currentColor; stroke-opacity: 0.18; stroke-width: 1.4; }
+.radar .shape { fill: var(--sello-tinta); fill-opacity: 0.12; stroke: var(--sello-tinta); stroke-width: 3; stroke-linejoin: round; filter: url(#lapiz); }
+.radar .dot { fill: var(--sello-tinta); }
+.radar .lbl { font: 500 24px var(--an-font-mono); letter-spacing: 0.04em; text-transform: uppercase; fill: currentColor; fill-opacity: 0.7; }
+.radar .val { font: 400 38px var(--an-font-title); fill: var(--an-espresso); }
+.ficha .fp-pie { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 0.6rem; }
+.ficha .fp-nota { font: 400 2.6rem/1 var(--an-font-title); }
+.ficha .fp-nota small { font-family: var(--an-font-mono); font-size: 0.66rem; letter-spacing: 0.1em; color: rgba(51, 36, 27, 0.6); margin-left: 0.3rem; }
+
+/* Sello de tinta generado por marcas.js */
+.sello { display: inline-block; width: 7.2rem; height: 7.2rem; color: var(--sello-tinta); transform: rotate(var(--sello-giro, -12deg)); mix-blend-mode: multiply; opacity: 0.88; }
+.sello svg { width: 100%; height: 100%; overflow: visible; }
+.sello text { font-family: var(--an-font-mono); font-weight: 700; fill: currentColor; letter-spacing: 0.12em; }
+
+/* ───────── Pie ───────── */
+.pie { padding-block: 3rem 2.5rem; margin-top: var(--web-space-section); border-top: 1px solid rgba(51, 36, 27, 0.18); }
+.pie .hoja { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: baseline; }
+.pie .firma b { font-size: 1.05rem; }
+.pie .pregunta { font: italic 400 1.3rem/1.35 var(--an-font-title); max-width: 34ch; margin: 0; }
+.pie .aviso { font-family: var(--an-font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinta-suave); }
