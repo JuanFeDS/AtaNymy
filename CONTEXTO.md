@@ -50,10 +50,14 @@ Blog o bitácora de lectura, todo en español, con reseñas, ensayos, fraseario,
 
 **Stack previsto:** Astro + MDX estático, publicado en GitHub Pages con subdominio. Supabase solo si aparece algo dinámico.
 
-**Versiones oficiales (noviembre de 2026):** `design/maqueta-v3/`
-- `cien-anos-de-soledad.html`: reseña como experiencia de scroll que dura cien años, con escenas de imanes, hielo, insomnio, nombres, guerras, Remedios, subrayados y lluvia.
-- `la-medicion-del-mundo.html`: pantalla partida entre Gauss y Humboldt, con viaje en el mapa, órbita de Ceres, altímetro del Chimborazo y cierre en Berlín.
-- `design/maqueta-v1` y `maqueta-v2` quedan como historial. La estantería y el fraseario del Quijote siguen en v2 hasta rehacerlos.
+**Sitio oficial:** la carpeta `sitio/` es la fuente y se publica tal cual en la rama `gh-pages`, en https://juanfeds.com/AtaNymy/
+- `index.html`: la estantería, todavía en estilo v2.
+- `cien-anos-de-soledad/`: reseña como experiencia de scroll que dura cien años, con escenas de imanes, hielo, insomnio, nombres, guerras, Remedios, subrayados y lluvia.
+- `la-medicion-del-mundo/`: pantalla partida entre Gauss y Humboldt, con viaje en el mapa, órbita de Ceres, altímetro del Chimborazo y cierre en Berlín.
+- `quijote/`: el fraseario, todavía en estilo v2.
+- `comun/`: tokens, taller, marcas y ficha, compartidos por todas las páginas.
+- `design/maqueta*` queda solo como historial de iteraciones.
+- **Para publicar:** reemplazar el contenido de `gh-pages` por el de `sitio/` y hacer push.
 
 **Reglas de diseño que salieron de las iteraciones:**
 - Cada entrada es una experiencia con una mecánica sacada del propio libro, no una plantilla de artículo.
@@ -62,7 +66,7 @@ Blog o bitácora de lectura, todo en español, con reseñas, ensayos, fraseario,
 - La ficha (`ficha.css`) mantiene la estructura (radar de 5 dimensiones, época y nota) y se viste con el color y la letra de cada libro.
 - La regla de un color fijo por serie es solo para Instagram; en la web hay libertad.
 
-**Para verlas:** el servidor local `maquetas` de `.claude/launch.json` sirve `design/` en http://localhost:4321.
+**Para verlo en local:** en `.claude/launch.json`, `sitio` sirve el sitio en http://localhost:4322 y `maquetas` sirve el historial en http://localhost:4321.
 
 ## Pendiente
 
