@@ -90,13 +90,13 @@ def separar_unidas(region):
     return [parte for mitad in mitades for parte in separar_unidas(mitad)]
 
 
-def armar_figuras(fondo):
+def armar_figuras(fondo, separar=True):
     """Agrupa las regiones en figuras completas: separa las unidas y reasigna los adornos sueltos."""
     regiones = componentes(ndimage.binary_fill_holes(ndimage.binary_opening(~fondo, iterations=2)))
     area_mayor = regiones[0].sum()
     grandes = [region for region in regiones if region.sum() >= area_mayor * PROPORCION_ADORNO]
     adornos = [region for region in regiones if 40 <= region.sum() < area_mayor * PROPORCION_ADORNO]
-    figuras = [parte for region in grandes for parte in separar_unidas(region)]
+    figuras = [parte for region in grandes for parte in (separar_unidas(region) if separar else [region])]
     for adorno in adornos:
         cercania = ndimage.binary_dilation(adorno, iterations=DISTANCIA_ADORNO)
         contactos = [int((cercania & figura).sum()) for figura in figuras]
@@ -132,14 +132,14 @@ def limpiar_zonas(imagen, zonas):
     return imagen
 
 
-def recortar(entrada, salida, nombres=None, zonas=None):
+def recortar(entrada, salida, nombres=None, zonas=None, separar=True):
     """Recorta todas las figuras de la hoja y escribe titeres.json en la carpeta de salida."""
     carpeta = Path(salida)
     carpeta.mkdir(parents=True, exist_ok=True)
     imagen = Image.open(entrada).convert("RGB")
     if zonas:
         imagen = limpiar_zonas(imagen, zonas)
-    figuras = armar_figuras(mascara_fondo(np.asarray(imagen).astype(np.int16)))
+    figuras = armar_figuras(mascara_fondo(np.asarray(imagen).astype(np.int16)), separar)
     alto_fila = max(caja(figura)[1] - caja(figura)[0] for figura in figuras) * 0.6
     figuras.sort(key=lambda figura: (round(caja(figura)[0] / alto_fila), caja(figura)[2]))
     nombres = nombres or [f"titere-{indice:02d}" for indice in range(1, len(figuras) + 1)]
@@ -159,11 +159,12 @@ def main():
     parser.add_argument("entrada", help="Hoja de títeres sobre fondo gris liso")
     parser.add_argument("salida", help="Carpeta donde guardar los PNG y titeres.json")
     parser.add_argument("--nombres", help="Nombres separados por comas, en orden de lectura")
+    parser.add_argument("--sin-separar", action="store_true", help="No partir figuras por estrechamientos (para objetos con astas o mangos finos)")
     parser.add_argument("--limpiar", help="Rectángulos x0,y0,x1,y1 a pintar de fondo, separados por punto y coma")
     argumentos = parser.parse_args()
     nombres = argumentos.nombres.split(",") if argumentos.nombres else None
     zonas = [tuple(int(valor) for valor in zona.split(",")) for zona in argumentos.limpiar.split(";")] if argumentos.limpiar else None
-    for nombre, datos in recortar(argumentos.entrada, argumentos.salida, nombres, zonas).items():
+    for nombre, datos in recortar(argumentos.entrada, argumentos.salida, nombres, zonas, not argumentos.sin_separar).items():
         print(f"{nombre}: {datos['ancho']} x {datos['alto']}")
 
 
