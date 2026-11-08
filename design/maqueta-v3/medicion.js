@@ -77,7 +77,7 @@ const viaje = (() => {
 
   const ESCALA = window.matchMedia('(max-width: 860px)').matches ? 1.25 : 1.45;
 
-  return (avance) => {
+  const mover = (avance) => {
     hecha.style.strokeDashoffset = `${total * (1 - avance)}`;
     const punto = sombra.getPointAtLength(total * avance);
     viajero.setAttribute('transform', `translate(${punto.x.toFixed(1)} ${punto.y.toFixed(1)})`);
@@ -94,6 +94,8 @@ const viaje = (() => {
     textoAnio.textContent = String(PARADAS[actual][1]);
     textoParada.textContent = String(actual + 1);
   };
+  mover.fraccionDe = (lugar) => fracciones[PARADAS.findIndex(([nombre]) => nombre === lugar)];
+  return mover;
 })();
 
 /* ───────── Notas: cada una cae en el lado de su capítulo ───────── */
@@ -106,6 +108,11 @@ const notas = (() => {
     return copia;
   });
   const lineasSuma = [...document.querySelectorAll('.suma li')];
+  const panelGauss = document.querySelector('.panel-gauss');
+  const panelHumboldt = document.querySelector('.panel-humboldt');
+  const ceres = document.querySelector('.ceres');
+  const altura = document.querySelector('[data-altura]');
+  const ALTURA_ALCANZADA = 5878;
   const INICIO = 0.03;
   const TRAMO = 0.94 / tarjetas.length;
 
@@ -116,10 +123,43 @@ const notas = (() => {
     tarjetas.forEach((tarjeta, i) => {
       if (tarjeta.hasAttribute('data-comillas')) tarjeta.classList.toggle('indirecto', i < indice || (i === indice && local > 0.4));
     });
+    const modo = tarjetas[indice] ? tarjetas[indice].dataset.modo : undefined;
+    const avanceModo = acotar(local / 0.75);
+    panelGauss.classList.toggle('modo-ceres', modo === 'ceres');
+    panelHumboldt.classList.toggle('modo-chimborazo', modo === 'chimborazo');
+    panelGauss.style.setProperty('--l', modo === 'ceres' ? avanceModo.toFixed(3) : '0');
+    panelHumboldt.style.setProperty('--l', modo === 'chimborazo' ? avanceModo.toFixed(3) : '0');
+    if (modo === 'ceres') {
+      const angulo = avanceModo * Math.PI * 2;
+      const giro = (-12 * Math.PI) / 180;
+      const ex = 138 * Math.cos(angulo);
+      const ey = 98 * Math.sin(angulo);
+      const x = 168 + ex * Math.cos(giro) - ey * Math.sin(giro);
+      const y = 116 + ex * Math.sin(giro) + ey * Math.cos(giro);
+      ceres.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    }
+    if (modo === 'chimborazo') altura.textContent = `≈ ${Math.round(avanceModo * ALTURA_ALCANZADA).toLocaleString('es')}`;
     const inicioSuma = INICIO + TRAMO;
     lineasSuma.forEach((linea, i) => linea.classList.toggle('escrita', progreso > inicioSuma + i * TRAMO * 0.14));
   };
 })();
+
+/* ───────── El mapa avanza al ritmo de las notas: Humboldt llega al Chimborazo con su nota ───────── */
+const tramosRuta = (() => {
+  const tarjetas = [...document.getElementById('notas-datos').content.querySelectorAll('.nota-tarjeta')];
+  const tramo = 0.94 / tarjetas.length;
+  const indiceChimborazo = tarjetas.findIndex((tarjeta) => tarjeta.dataset.modo === 'chimborazo');
+  return [[0.03, 0], [0.03 + (indiceChimborazo + 0.35) * tramo, viaje.fraccionDe('Chimborazo')], [0.93, 1]];
+})();
+
+function rutaSegunLectura(progreso) {
+  for (let i = 1; i < tramosRuta.length; i += 1) {
+    const [s0, r0] = tramosRuta[i - 1];
+    const [s1, r1] = tramosRuta[i];
+    if (progreso <= s1) return r0 + (r1 - r0) * acotar((progreso - s0) / (s1 - s0));
+  }
+  return 1;
+}
 
 /* ───────── Scroll ───────── */
 const partido = document.querySelector('.partido');
@@ -131,7 +171,7 @@ function actualizar() {
   const recorrido = caja.height - window.innerHeight;
   const progreso = recorrido > 0 ? acotar(-caja.top / recorrido) : 0;
   partido.style.setProperty('--s', progreso.toFixed(3));
-  viaje(acotar((progreso - 0.03) / 0.9));
+  viaje(rutaSegunLectura(progreso));
   notas(progreso);
 }
 

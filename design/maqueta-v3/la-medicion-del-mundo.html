@@ -7,7 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../maqueta-v2/taller.css?v=3">
-<link rel="stylesheet" href="medicion.css?v=3">
+<link rel="stylesheet" href="ficha.css?v=2">
+<link rel="stylesheet" href="medicion.css?v=5">
 </head>
 <body>
 
@@ -41,7 +42,7 @@
         <svg class="cuarto" viewBox="0 0 260 200" role="img" aria-label="Plano de un cuarto con un escritorio y un punto: Gauss no se mueve">
           <g filter="url(#lapiz)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <rect x="40" y="20" width="180" height="150"/>
-            <path d="M40 120 v30" stroke-width="7" style="stroke: var(--papel-g)"/>
+            <path d="M40 120 v30" stroke-width="7" style="stroke: var(--g-fondo)"/>
             <path d="M40 120 q 24 3 27 30" stroke-width="1.2" stroke-dasharray="2 4"/>
             <rect x="140" y="34" width="62" height="34"/>
             <path d="M188 50 h-6 M150 44 h20 M150 52 h28" stroke-width="1.2"/>
@@ -57,6 +58,13 @@
           <li>50 parejas × 101</li>
           <li class="total">= 5050</li>
         </ol>
+        <svg class="orbita" viewBox="0 0 320 240" role="img" aria-label="Órbita de Ceres calculada por Gauss">
+          <ellipse class="orbita-tierra" cx="160" cy="120" rx="70" ry="52"/>
+          <ellipse class="orbita-ceres" pathLength="1" cx="168" cy="116" rx="138" ry="98" transform="rotate(-12 168 116)"/>
+          <circle class="sol" cx="160" cy="120" r="9"/>
+          <g class="ceres"><circle r="5"/><text x="10" y="4">Ceres</text></g>
+          <text class="anota" x="16" y="228">1801 · la encuentra con papel y pluma</text>
+        </svg>
         <div class="notas notas-g"></div>
       </div>
 
@@ -80,6 +88,10 @@
             <g class="viajero"><circle r="9"/><circle r="18" class="halo"/></g>
           </g>
         </svg>
+        <div class="altimetro" aria-hidden="true">
+          <div class="alti-barra"><span class="alti-relleno"></span><span class="alti-cima">cima</span></div>
+          <div class="alti-cifra"><b data-altura>0</b><span class="mono">metros, según sus cálculos</span></div>
+        </div>
         <span class="mono mapa-nota">Mapa a mano · sin escala · con Bonpland, siempre detrás</span>
         <div class="notas notas-h"></div>
       </div>
@@ -106,6 +118,16 @@
           <p class="frase-indirecta">Humboldt dijo que eso había que medirlo.</p>
         </div>
         <p class="pequeno">Los diálogos van en estilo indirecto, como si alguien te contara lo que dijeron. Al principio choca; luego entiendes el chiste: dos genios que nunca terminan de hablarse.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="g" data-modo="ceres">
+        <time class="mono">6 sep</time>
+        <h3>Encuentra un planeta sin mirar el cielo</h3>
+        <p>En 1801 se pierde Ceres, un cuerpo recién descubierto. Gauss calcula dónde tiene que estar con unas pocas observaciones, y ahí aparece. Mira la órbita: <span class="resalta">la dibuja desde su escritorio</span>.</p>
+      </article>
+      <article class="nota-tarjeta" data-lado="h" data-modo="chimborazo">
+        <time class="mono">7 sep</time>
+        <h3>Subir al Chimborazo</h3>
+        <p>En 1802 Humboldt sube el volcán que entonces se creía el más alto del mundo. No llega a la cima, pero sube más alto que nadie antes que él, con los pies destrozados y midiendo todo por el camino.</p>
       </article>
       <article class="nota-tarjeta" data-lado="g">
         <time class="mono">8 sep</time>
@@ -145,16 +167,23 @@
         </div>
       </div>
       <div class="ficha-col">
-        <article class="ficha cinta" aria-label="Ficha de lectura" style="--giro: -1.8deg; --cinta-giro: 4deg">
-          <div class="fp-cab"><span>Ata Nymy · Ficha Nº 12</span><span>Préstamo</span></div>
-          <div class="fp-titulo">La medición del mundo</div>
-          <div class="fp-autor">Kehlmann · 2005 · Gotinga y medio mundo</div>
-          <div class="fp-fila"><span>Época</span><div class="epocas" aria-label="Pasado reciente"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
-          <div class="fp-fila"><span></span><div class="fp-epoca-txt">1790 – 1828</div></div>
-          <svg class="radar" role="img" aria-label="Personajes 3,5; Historia 3,5; Universo 3,2; Narrativa 2,8; Otros 3,2" data-scores='[["Personajes",3.5],["Historia",3.5],["Universo",3.2],["Narrativa",2.8],["Otros",3.2]]'></svg>
-          <div class="fp-pie"><span class="fp-nota">3,2<small>/ 5</small></span><span class="mono" style="font-size:.62rem;color:rgba(51,36,27,.6)">Leído · 2026</span></div>
+        <article class="fv3" aria-label="Ficha de lectura" style="--giro:-1.8deg;--f-banda:#14213D;--f-banda-tinta:#FFB627;--f-trazo:#FF6B4A;--f-relleno:rgba(15,122,90,.28);--f-sello:#0F7A5A">
+          <div class="fv3-hoja">
+            <div class="fv3-banda"><span>Ficha de lectura</span><b>Nº 12</b></div>
+            <div class="fv3-cuerpo">
+              <p class="fv3-titulo">La medición del mundo</p>
+              <div class="fv3-autor">Daniel Kehlmann · 2005 · Gotinga y medio mundo</div>
+              <svg class="radar" role="img" aria-label="Personajes 3,5; Historia 3,5; Universo 3,2; Narrativa 2,8; Otros 3,2" data-scores='[["Personajes",3.5],["Historia",3.5],["Universo",3.2],["Narrativa",2.8],["Otros",3.2]]'></svg>
+              <div class="fv3-epoca">
+                <div class="fv3-epoca-cab"><span>Época</span><span>Pasado reciente · 1790–1828</span></div>
+                <div class="fv3-regla" style="--desde:3;--hasta:3" aria-hidden="true"></div>
+                <div class="fv3-epoca-pie"><span>Pasado remoto</span><b>Presente</b><span>Futuro distante</span></div>
+              </div>
+              <div class="fv3-pie"><span class="fv3-nota">3,2<small>/ 5</small></span><span class="fv3-meta">Leído<br><b>Sep 2026</b></span></div>
+            </div>
+          </div>
+          <span class="sello" data-arriba="ATA NYMY" data-abajo="MEDIDO" data-centro="IX·26"></span>
         </article>
-        <span class="sello" data-arriba="ATA NYMY" data-abajo="MEDIDO" data-centro="IX·26"></span>
       </div>
     </div>
   </section>
@@ -168,6 +197,6 @@
 </footer>
 
 <script src="../maqueta-v2/marcas.js?v=3"></script>
-<script src="medicion.js?v=1"></script>
+<script src="medicion.js?v=4"></script>
 </body>
 </html>

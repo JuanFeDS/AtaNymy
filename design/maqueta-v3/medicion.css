@@ -51,7 +51,7 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
 .berlin::after { content: ""; position: absolute; right: -6rem; bottom: -6rem; width: 26rem; height: 26rem; border-radius: 50%; border: 2px dashed rgba(20,33,61,.25); }
 
 /* 1 · Pantalla partida */
-.partido { position: relative; height: 760svh; }
+.partido { position: relative; height: 1000svh; }
 .escenario { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) 1.1rem minmax(0, 1.15fr); overflow: hidden; }
 .panel { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 4.6rem clamp(1.2rem, 3vw, 2.6rem) 1.6rem; }
 .panel-cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; position: relative; z-index: 2; }
@@ -144,7 +144,6 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
 .voto-botones button[aria-pressed="true"] { outline: 3px solid var(--coral); outline-offset: 3px; }
 .voto-respuesta { font: italic 400 1.3rem/1.4 var(--an-font-title); min-height: 1.8em; margin: 1rem 0 0; color: #7A2E1E; }
 .encuentro .ficha-col { position: relative; justify-self: center; width: 100%; max-width: 23rem; }
-.encuentro .sello { position: absolute; right: -1rem; bottom: -2rem; --sello-giro: 9deg; mix-blend-mode: normal; }
 
 .pie { margin-top: 0; background: var(--g-fondo); color: var(--g-tinta); border-top: 0; padding-block: 2.4rem; }
 .pie .aviso { color: rgba(243,235,221,.7); }
@@ -169,4 +168,31 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
   .nota-tarjeta p { font-size: 0.9rem; }
   .frase-directa, .frase-indirecta { font-size: 1.25rem !important; }
   .grieta { display: none; }
+}
+
+/* Gauss · Ceres: la órbita reemplaza al cuarto mientras dura su nota */
+.cuarto, .suma { transition: opacity .5s; }
+.orbita { position: absolute; left: 50%; top: 9.5rem; width: min(86%, 26rem); transform: translateX(-50%); opacity: 0; transition: opacity .5s; pointer-events: none; overflow: visible; }
+.modo-ceres .cuarto, .modo-ceres .suma { opacity: .08; }
+.modo-ceres .orbita { opacity: 1; }
+.orbita-tierra { fill: none; stroke: var(--g-tinta); stroke-opacity: .25; stroke-width: 1.2; stroke-dasharray: 2 5; }
+.orbita-ceres { fill: none; stroke: var(--g-acento); stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--l, 0)); }
+.sol { fill: var(--g-acento); filter: drop-shadow(0 0 10px var(--g-acento)); }
+.ceres circle { fill: var(--g-tinta); }
+.ceres text { font: 500 12px var(--an-font-mono); fill: var(--g-tinta); }
+.orbita .anota { font: italic 400 15px var(--an-font-title); fill: var(--g-acento); }
+
+/* Humboldt · Chimborazo: altímetro que sube con la nota */
+.altimetro { position: absolute; left: clamp(1.2rem, 3vw, 2.6rem); top: 9rem; bottom: 15rem; display: flex; gap: 1rem; align-items: stretch; opacity: 0; transition: opacity .5s; z-index: 3; pointer-events: none; }
+.modo-chimborazo .altimetro { opacity: 1; }
+.alti-barra { position: relative; width: 0.9rem; border-radius: 999px; background: repeating-linear-gradient(0deg, rgba(255,243,220,.5) 0 1px, transparent 1px 10%), rgba(0,0,0,.18); }
+.alti-relleno { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--l, 0) * 93.8%); border-radius: 999px; background: linear-gradient(var(--h-tinta), var(--coral)); }
+.alti-cima { position: absolute; top: -1.4rem; left: 50%; transform: translateX(-50%); font: 500 0.6rem var(--an-font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--h-tinta); opacity: .7; }
+.alti-cifra { align-self: flex-end; display: flex; flex-direction: column; margin-bottom: calc(var(--l, 0) * 93.8% - 1rem); }
+.alti-cifra b { font: 400 clamp(2.4rem, 4vw, 3.4rem)/1 var(--an-font-title); color: var(--h-tinta); font-variant-numeric: tabular-nums; }
+.alti-cifra .mono { font-size: 0.62rem; color: var(--h-tinta); opacity: .8; }
+.modo-chimborazo .mapa { filter: saturate(.6) brightness(.85); transition: filter .5s; }
+@media (max-width: 860px) {
+  .orbita { top: 6.4rem; width: 70%; }
+  .altimetro { top: 4rem; bottom: 9rem; }
 }
