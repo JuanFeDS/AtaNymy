@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "4321", "--directory", "design"],
       "port": 4321
+    },
+    {
+      "name": "sitio",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4322", "--directory", "sitio"],
+      "port": 4322
     }
   ]
 }
