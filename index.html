@@ -4,9 +4,145 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ata Nymy · Bitácora de lectura</title>
-<meta http-equiv="refresh" content="0; url=maqueta-v2/index.html">
-<link rel="canonical" href="maqueta-v2/index.html">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#1F2B45;color:#F0E4CC;font-family:system-ui,sans-serif}a{color:#A9B64E}</style>
+<link rel="stylesheet" href="comun/taller.css">
+<style>
+/* La única página nocturna: la estantería. */
+:root { --papel: var(--an-night); --papel-hi: var(--an-night-light); --tinta: var(--an-parchment); --tinta-suave: rgba(240,228,204,.72); --tinta-2: var(--an-moss); }
+body { background: var(--an-grain-light), radial-gradient(70rem 40rem at 80% 0%, var(--an-night-light) 0%, transparent 70%), var(--an-night); }
+.franja { background: transparent; }
+
+.intro { display: grid; grid-template-columns: 1fr; gap: 3rem 4rem; padding-block: clamp(2.5rem, 6vw, 4.5rem) 1rem; align-items: end; }
+@media (min-width: 1000px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); } }
+.intro h1 { max-width: 14ch; }
+.intro .bajada { color: var(--tinta-suave); }
+.intro .cifras { margin-top: 2rem; color: var(--tinta-suave); line-height: 2; }
+.intro .cifras b { color: var(--an-ochre); font-weight: 400; }
+
+/* Estantería */
+.estante { position: relative; min-width: 0; }
+.lomos { display: flex; align-items: flex-end; gap: 0.35rem; min-height: 22rem; padding-inline: 1rem; overflow-x: auto; overflow-y: visible; padding-top: 3rem; scrollbar-width: none; }
+.tabla { height: 1.1rem; background: linear-gradient(#5A3F2C, #3B2A1E); box-shadow: 0 14px 24px -10px rgba(0,0,0,.6); border-radius: 2px; }
+.lomo {
+  --alto: 17rem; --ancho: 3.2rem;
+  flex: none; height: var(--alto); width: var(--ancho);
+  background: var(--an-grain-dark), var(--lomo-bg);
+  color: var(--lomo-tx);
+  border-radius: 3px 3px 1px 1px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 0.9rem 0 0.7rem;
+  text-decoration: none; position: relative;
+  box-shadow: inset 3px 0 0 rgba(255,255,255,.08), inset -4px 0 0 rgba(0,0,0,.18);
+  transform-origin: bottom center; transition: transform .35s cubic-bezier(.3,.7,.2,1.2);
+}
+.lomo span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--an-font-title); font-size: 1.05rem; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: calc(var(--alto) - 4rem); }
+.lomo small { font-family: var(--an-font-mono); font-size: 0.55rem; letter-spacing: 0.12em; opacity: .75; }
+.lomo::before { content: ""; position: absolute; left: 0; right: 0; top: 2.4rem; height: 0.3rem; background: currentColor; opacity: .35; }
+a.lomo:hover, a.lomo:focus-visible { transform: translateY(-1.2rem) rotate(-2deg); }
+.lomo.inclinado { transform: rotate(-9deg); margin-inline: 1.7rem 0.3rem; }
+.lomo.por-leer { filter: saturate(.55) brightness(.85); }
+.lomo .marcap { position: absolute; top: -1.6rem; left: 50%; width: 0.55rem; height: 2.4rem; background: var(--an-moss); transform: translateX(-50%); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
+.dormilon { flex: none; align-self: flex-end; width: 7.5rem; display: grid; place-items: end center; color: var(--an-ochre); font-size: 3.4rem; padding-left: 1rem; }
+.dormilon img { width: 100%; height: auto; }
+.estante-pie { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem; color: var(--tinta-suave); }
+
+/* Ahora leyendo */
+.leyendo { display: grid; grid-template-columns: 1fr; gap: 2rem 4rem; margin-top: var(--web-space-block); padding-top: 2rem; border-top: 1px solid rgba(240,228,204,.18); }
+@media (min-width: 900px) { .leyendo { grid-template-columns: 1fr 1.3fr; } }
+.leyendo h2 { margin-top: 0.7rem; }
+.progreso { position: relative; height: 2.6rem; margin-top: 1.2rem; }
+.progreso svg { width: 100%; height: 100%; overflow: visible; color: var(--an-ochre); }
+.progreso .mono { color: var(--tinta-suave); }
+.leyendo p { margin: 0 0 1em; color: rgba(240,228,204,.85); max-width: 54ch; }
+
+/* Últimas entradas: lista, no tarjetas */
+.entradas { margin-top: var(--web-space-block); }
+.entradas ol { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+.entradas a { display: grid; grid-template-columns: 1fr; gap: 0.3rem 2rem; padding: 1.4rem 0.8rem; border-top: 1px solid rgba(240,228,204,.18); text-decoration: none; position: relative; isolation: isolate; transition: color .25s; }
+@media (min-width: 800px) { .entradas a { grid-template-columns: 7rem 8rem 1fr 1.3fr; align-items: baseline; } }
+.entradas a::before { content: ""; position: absolute; inset: 0; background: var(--fila); z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.6,.1,.2,1); }
+.entradas a:hover::before, .entradas a:focus-visible::before { transform: scaleX(1); }
+.entradas a:hover, .entradas a:focus-visible { color: var(--fila-tx); }
+.entradas a:hover .mono, .entradas a:hover .gancho { color: inherit; }
+.entradas .mono { color: var(--tinta-suave); }
+.entradas .titulo { font: 400 1.5rem/1.15 var(--an-font-title); }
+.entradas .gancho { color: rgba(240,228,204,.78); font-size: 1rem; }
+.pie { border-top-color: rgba(240,228,204,.18); }
+</style>
 </head>
-<body><p>Entrando a la estantería… <a href="maqueta-v2/index.html">Ata Nymy</a></p></body>
+<body>
+
+<header class="franja">
+  <div class="hoja">
+    <a class="firma" href="#"><span class="jaguar"><img src="assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+    <nav aria-label="Principal"><a href="#" aria-current="page">Estantería</a><a href="cien-anos-de-soledad/">Reseñas</a><a href="quijote/">Fraseario</a><a href="la-medicion-del-mundo/">Cuadernos</a></nav>
+  </div>
+</header>
+
+<main class="hoja">
+  <section class="intro">
+    <div>
+      <span class="etiqueta">Bitácora de lectura</span>
+      <h1>Una biblioteca de noche</h1>
+      <p class="bajada">Reseñas, frases y cuadernos de lo que voy leyendo. Con lápiz, sin prisa y con un jaguar dormido en la estantería.</p>
+      <div class="mono cifras">2026 · <b>14</b> libros leídos<br>3 entradas nuevas este mes</div>
+    </div>
+
+  <div class="estante" role="group" aria-label="Estantería de libros">
+    <div class="lomos">
+      <a class="lomo" href="cien-anos-de-soledad/" style="--lomo-bg:#EDD9B0;--lomo-tx:#8E3F22;--alto:18.5rem;--ancho:3.6rem"><span>Cien años de soledad</span><small>RESEÑA</small></a>
+      <a class="lomo" href="la-medicion-del-mundo/" style="--lomo-bg:#4E5630;--lomo-tx:#F0E4CC;--alto:15.5rem;--ancho:3rem"><span>La medición del mundo</span><small>CUADERNO</small></a>
+      <div class="lomo por-leer" style="--lomo-bg:#5C3447;--lomo-tx:#F0E4CC;--alto:16.5rem;--ancho:2.6rem"><span>Pedro Páramo</span><small>·</small></div>
+      <a class="lomo" href="quijote/" style="--lomo-bg:#A63A24;--lomo-tx:#F1EBDC;--alto:20.5rem;--ancho:4.4rem"><span>Don Quijote de la Mancha</span><small>FRASES</small></a>
+      <div class="lomo inclinado" style="--lomo-bg:#3E5B78;--lomo-tx:#FFCC7E;--alto:19rem;--ancho:3.4rem"><i class="marcap" aria-hidden="true"></i><span>Por quién doblan las campanas</span><small>EN CURSO</small></div>
+      <div class="lomo por-leer" style="--lomo-bg:#F0E4CC;--lomo-tx:#33241B;--alto:14.5rem;--ancho:2.4rem"><span>La vegetariana</span><small>·</small></div>
+      <div class="lomo por-leer" style="--lomo-bg:#7A5236;--lomo-tx:#FFCC7E;--alto:17.5rem;--ancho:3.1rem"><span>Memorias de Adriano</span><small>·</small></div>
+      <div class="dormilon"><img src="assets/jaguar.png" alt="El jaguar de Ata Nymy, dormido sobre el estante" data-fallback-icon="ti-paw"></div>
+    </div>
+    <div class="tabla" aria-hidden="true"></div>
+    <div class="estante-pie mono"><span>Los lomos opacos aún no tienen entrada</span><span>Pasa el cursor para sacar un libro</span></div>
+  </div>
+  </section>
+
+  <section class="leyendo" aria-labelledby="t-leyendo">
+    <div>
+      <span class="etiqueta">Ahora leyendo</span>
+      <h2 id="t-leyendo">Por quién doblan las campanas</h2>
+      <div class="mono" style="color:var(--tinta-suave)">Ernest Hemingway · 1940</div>
+      <div class="progreso" aria-label="Progreso de lectura: 38 %">
+        <svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+          <g filter="url(#lapiz)" stroke="currentColor" stroke-linecap="round" fill="none">
+            <path d="M2 22 H398" stroke-opacity=".25" stroke-width="2"/>
+            <path d="M2 22 C 60 20 110 24 152 21" stroke-width="5"/>
+            <path d="M152 8 v28" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="mono" style="color:var(--tinta-suave)">38 % · tres días en la sierra, de momento</div>
+    </div>
+    <div>
+      <p>Lo estoy leyendo despacio porque, en paralelo, estoy probando a ilustrar a sus personajes con IA: el estadounidense, la chica, Pablo y la cueva. Cuando termine, la entrada llevará esas láminas y lo que aprendí comparando herramientas.</p>
+      <p class="nota" style="color:var(--an-ochre)">Spoiler de proceso: los modelos insisten en convertir los pinos en abetos.</p>
+    </div>
+  </section>
+
+  <section class="entradas" aria-labelledby="t-entradas">
+    <span class="etiqueta">Últimas entradas</span>
+    <h2 id="t-entradas" style="margin-top:.7rem">En la mesa</h2>
+    <ol>
+      <li><a href="quijote/" style="--fila:#A63A24;--fila-tx:#F1EBDC"><span class="mono">Nov 2026</span><span class="mono">Fraseario</span><span class="titulo">Don Quijote de la Mancha</span><span class="gancho">Ocho frases comprobadas y una que no está en el libro.</span></a></li>
+      <li><a href="cien-anos-de-soledad/" style="--fila:#EDD9B0;--fila-tx:#33241B"><span class="mono">Oct 2026</span><span class="mono">Reseña</span><span class="titulo">Cien años de soledad</span><span class="gancho">Siete generaciones, dos nombres y un árbol para no perderse.</span></a></li>
+      <li><a href="la-medicion-del-mundo/" style="--fila:#4E5630;--fila-tx:#F0E4CC"><span class="mono">Sep 2026</span><span class="mono">Cuaderno</span><span class="titulo">La medición del mundo</span><span class="gancho">Dos genios, un escritorio y medio planeta.</span></a></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="hoja">
+    <a class="firma" href="#"><span class="jaguar" style="color:var(--an-ochre)"><img src="assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+    <p class="pregunta">¿Qué libro debería sacar de la estantería ahora?</p>
+    <span class="aviso">Maqueta · contenido de ejemplo</span>
+  </div>
+</footer>
+
+<script src="comun/marcas.js"></script>
+</body>
 </html>
