@@ -53,16 +53,53 @@
     cuenta.textContent = `${indiceActual(lista) + 1} / ${lista.length}`;
   }
 
+  // El scroll suave del navegador dura lo mismo para cualquier distancia y acelera las animaciones.
+  // Este va a ritmo de lectura: más largo cuanto más lejos, con entrada y salida suaves.
+  const DURACION_MINIMA = 1400;
+  const DURACION_MAXIMA = 3200;
+  const MS_POR_PIXEL = 1.1;
+  let animacion = null;
+
+  const suavizar = (t) => (t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2);
+
+  function detener() {
+    if (animacion) cancelAnimationFrame(animacion.cuadro);
+    animacion = null;
+  }
+
+  function desplazar(destino) {
+    detener();
+    if (reducido) { window.scrollTo(0, destino); return; }
+    const origen = window.scrollY;
+    const distancia = destino - origen;
+    const duracion = Math.min(DURACION_MAXIMA, Math.max(DURACION_MINIMA, Math.abs(distancia) * MS_POR_PIXEL));
+    const inicio = performance.now();
+    animacion = { destino, cuadro: 0 };
+    const paso = (ahora) => {
+      const t = Math.min(1, (ahora - inicio) / duracion);
+      window.scrollTo(0, origen + distancia * suavizar(t));
+      if (t < 1 && animacion) animacion.cuadro = requestAnimationFrame(paso);
+      else animacion = null;
+    };
+    animacion.cuadro = requestAnimationFrame(paso);
+  }
+
   function mover(direccion) {
     const lista = paradas();
-    const y = window.scrollY;
+    const y = animacion ? animacion.destino : window.scrollY;
     const destino = direccion > 0
       ? lista.find((posicion) => posicion > y + TOLERANCIA)
       : [...lista].reverse().find((posicion) => posicion < y - TOLERANCIA);
     if (destino === undefined) return;
-    window.scrollTo({ top: destino, behavior: reducido ? 'auto' : 'smooth' });
+    desplazar(destino);
     indicador.classList.add('usado');
   }
+
+  ['wheel', 'touchstart', 'mousedown'].forEach((tipo) => {
+    window.addEventListener(tipo, (evento) => {
+      if (!evento.target.closest || !evento.target.closest('.recorrido')) detener();
+    }, { passive: true });
+  });
 
   document.addEventListener('keydown', (evento) => {
     if (evento.altKey || evento.ctrlKey || evento.metaKey || evento.shiftKey) return;
