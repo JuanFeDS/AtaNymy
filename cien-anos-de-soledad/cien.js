@@ -277,7 +277,7 @@ const guerras = (() => {
   const banderas = Array.from({ length: TOTAL }, () => {
     const bandera = document.createElement('span');
     bandera.className = 'bandera';
-    bandera.innerHTML = '<svg viewBox="0 0 30 40"><path class="asta" d="M6 38 V4"/><path class="pano" d="M7 5 L27 10 L7 17 Z"/><path class="tacha" d="M2 6 L28 36 M28 8 L3 34"/></svg>';
+    bandera.innerHTML = '<img src="../assets/objetos/cien-anos/bandera.png" alt=""><svg viewBox="0 0 30 30" preserveAspectRatio="none"><path class="tacha" d="M3 4 L27 27 M27 5 L4 26"/></svg>';
     contenedor.append(bandera);
     return bandera;
   });
@@ -288,6 +288,79 @@ const guerras = (() => {
       bandera.classList.toggle('perdida', avance > i + 0.6);
     });
     contador.textContent = String(Math.min(TOTAL, Math.floor(avance)));
+  };
+})();
+
+/* ───────── IX · Teatro de sombras ───────── */
+const sombras = (() => {
+  const escena = document.querySelector('.escena-sombras');
+  const pantalla = escena.querySelector('.escenario');
+  const figuras = [...escena.querySelectorAll('.sombra')];
+  const suave = (t) => t * t * (3 - 2 * t);
+  const mezcla = (a, b, t) => a + (b - a) * t;
+  let luzX = 0.5;
+  let objetivoLuz = 0.5;
+  let centros = figuras.map(() => -1000);
+  let animandoLuz = false;
+
+  function inclinar() {
+    const ancho = window.innerWidth;
+    pantalla.style.setProperty('--luz-x', `${(luzX * 100).toFixed(1)}%`);
+    figuras.forEach((figura, i) => {
+      figura.style.setProperty('--sesgo', `${(((centros[i] - luzX * ancho) / ancho) * 16).toFixed(2)}deg`);
+    });
+  }
+
+  function seguirLuz() {
+    luzX += (objetivoLuz - luzX) * 0.06;
+    inclinar();
+    if (animandoLuz && Math.abs(objetivoLuz - luzX) > 0.001) requestAnimationFrame(seguirLuz);
+    else animandoLuz = false;
+  }
+
+  window.addEventListener('pointermove', (evento) => {
+    objetivoLuz = 0.2 + 0.6 * (evento.clientX / window.innerWidth);
+    if (!animandoLuz && !movimientoReducido) { animandoLuz = true; requestAnimationFrame(seguirLuz); }
+  }, { passive: true });
+
+  return (progreso) => {
+    const ancho = window.innerWidth;
+    const alto = window.innerHeight;
+    const movil = ancho < 860;
+    const desfile = limitar(progreso / 0.5);
+    const separacion = suave(limitar((progreso - 0.5) / 0.28));
+    const lectura = suave(limitar((progreso - 0.8) / 0.14));
+    const altoFigura = mezcla(alto * (movil ? 0.38 : 0.58), alto * (movil ? 0.17 : 0.29), separacion);
+    const anchos = figuras.map((figura) => {
+      const imagen = figura.querySelector('img');
+      const proporcion = imagen.naturalWidth ? imagen.naturalWidth / imagen.naturalHeight : 0.5;
+      return altoFigura * proporcion;
+    });
+    const hueco = ancho * 0.025;
+    const largoFila = anchos.reduce((suma, valor) => suma + valor, 0) + hueco * (figuras.length - 1);
+    const inicioFila = mezcla(ancho, (ancho - largoFila) / 2, 1 - (1 - desfile) ** 2);
+    let cursor = inicioFila;
+    centros = figuras.map((_, i) => {
+      const enFila = cursor + anchos[i] / 2;
+      cursor += anchos[i] + hueco;
+      const enSoledad = movil
+        ? ancho * (0.14 + 0.24 * (i % 4))
+        : ancho * (0.09 + (0.82 * i) / (figuras.length - 1));
+      return mezcla(enFila, enSoledad, separacion);
+    });
+    // En móvil no caben ocho en fila: al separarse, los cuatro primeros suben a una segunda fila.
+    const alzas = figuras.map((_, i) => (movil && i < 4 ? alto * 0.3 * separacion : 0));
+    figuras.forEach((figura, i) => {
+      const cercania = 1 - limitar(Math.abs(centros[i] - ancho / 2) / (ancho * 0.17));
+      figura.style.setProperty('--cx', `${centros[i].toFixed(1)}px`);
+      figura.style.setProperty('--h', `${altoFigura.toFixed(1)}px`);
+      figura.style.setProperty('--alza', `${alzas[i].toFixed(1)}px`);
+      figura.style.setProperty('--nombre', (suave(cercania) * (1 - limitar(separacion * 4))).toFixed(3));
+      figura.style.setProperty('--foco', separacion.toFixed(3));
+    });
+    pantalla.style.setProperty('--luz', (1 - 0.88 * separacion).toFixed(3));
+    pantalla.style.setProperty('--lectura', lectura.toFixed(3));
+    inclinar();
   };
 })();
 
@@ -304,6 +377,7 @@ const epocas = (() => {
     ['.escena-remedios', '#2D6CDF', '#7FB2FF', '#FFFFFF', '#FFD23F'],
     ['.escena-mariposas', '#0D5E57', '#19A38A', '#F2FFF8', '#FFD23F'],
     ['.escena-lluvia', '#16233F', '#2E4D86', '#E6EEF7', '#9BE7F5'],
+    ['.escena-sombras', '#1C0F0A', '#8A4B1E', '#FFEEDD', '#FFB347'],
     ['.cierre', '#7A2216', '#D2532F', '#FFEEDD', '#FFB347'],
   ];
   const aRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
@@ -342,7 +416,7 @@ const epocas = (() => {
 
 const reloj = document.querySelector('[data-anio]');
 const escenas = [...document.querySelectorAll('.escena[data-escena]')];
-const actualizadores = { nombres: espiral, insomnio, lluvia, guerras };
+const actualizadores = { nombres: espiral, insomnio, lluvia, guerras, sombras };
 let pendiente = false;
 
 function actualizar() {

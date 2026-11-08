@@ -1,0 +1,42 @@
+{
+  "jose-arcadio-buendia": {
+    "archivo": "jose-arcadio-buendia.png",
+    "ancho": 933,
+    "alto": 1479
+  },
+  "ursula": {
+    "archivo": "ursula.png",
+    "ancho": 352,
+    "alto": 727
+  },
+  "melquiades": {
+    "archivo": "melquiades.png",
+    "ancho": 494,
+    "alto": 763
+  },
+  "remedios": {
+    "archivo": "remedios.png",
+    "ancho": 437,
+    "alto": 784
+  },
+  "coronel": {
+    "archivo": "coronel.png",
+    "ancho": 318,
+    "alto": 698
+  },
+  "mauricio-babilonia": {
+    "archivo": "mauricio-babilonia.png",
+    "ancho": 320,
+    "alto": 733
+  },
+  "pilar-ternera": {
+    "archivo": "pilar-ternera.png",
+    "ancho": 361,
+    "alto": 765
+  },
+  "fernanda": {
+    "archivo": "fernanda.png",
+    "ancho": 416,
+    "alto": 776
+  }
+}

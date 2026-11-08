@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La medición del mundo · Ata Nymy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../comun/taller.css">
 <link rel="stylesheet" href="../comun/ficha.css">
+<link rel="stylesheet" href="../comun/recorrido.css">
 <link rel="stylesheet" href="medicion.css">
 </head>
 <body>
@@ -25,13 +26,12 @@
       <h1 id="titulo">La medición <em>del mundo</em></h1>
       <div class="mono byline">Daniel Kehlmann · 2005</div>
       <p class="berlin-intro">Berlín, 1828. Humboldt invita a Gauss a un congreso y Gauss, que odia salir de casa, acepta a regañadientes. Desde ese viaje, el libro mira atrás: <span class="sub">dos vidas dedicadas a medir el mundo</span>, una sin moverse y otra sin parar.</p>
-      <p class="mono berlin-pista">Desliza: la pantalla se parte en dos</p>
     </div>
     <div class="grieta" aria-hidden="true"><svg viewBox="0 0 20 400" preserveAspectRatio="none"><path d="M10 0 L8 60 L13 110 L7 170 L12 230 L9 300 L11 400" fill="none" stroke="currentColor" stroke-width="1.6" filter="url(#lapiz)"/></svg></div>
   </section>
 
   <!-- 1 · La pantalla partida -->
-  <section class="partido" aria-label="Las dos vidas, en paralelo">
+  <section class="partido" data-paradas="0.089,0.206,0.324,0.441,0.559,0.676,0.794,0.911" aria-label="Las dos vidas, en paralelo">
     <div class="escenario">
 
       <div class="panel panel-gauss">
@@ -103,12 +103,12 @@
       <article class="nota-tarjeta" data-lado="h">
         <time class="mono">3 sep · pág. de inicio</time>
         <h3>Quiere medirlo todo</h3>
-        <p>La temperatura, la altura de las montañas, hasta el azul del cielo. Humboldt sale de La Coruña en 1799 con Bonpland y un baúl de instrumentos. Mira el mapa: ya va en camino.</p>
+        <p>La temperatura, la altura de las montañas, hasta el azul del cielo. Humboldt sale de La Coruña en 1799 con Bonpland y un baúl de instrumentos, decidido a medir cada cosa que encuentre.</p>
       </article>
       <article class="nota-tarjeta" data-lado="g">
         <time class="mono">4 sep</time>
         <h3>Mientras tanto, Gauss suma</h3>
-        <p>De niño encuentra un atajo para sumar del 1 al 100 y el maestro no sabe qué hacer con él. Mira su cuaderno: <span class="resalta">lo está resolviendo ahora mismo</span>, sin levantarse.</p>
+        <p>De niño encuentra un atajo para sumar del 1 al 100 y el maestro no sabe qué hacer con él. <span class="resalta">Ya entonces piensa sin moverse</span>, y así seguirá toda la vida.</p>
       </article>
       <article class="nota-tarjeta" data-lado="h" data-comillas>
         <time class="mono">5 sep</time>
@@ -122,7 +122,7 @@
       <article class="nota-tarjeta" data-lado="g" data-modo="ceres">
         <time class="mono">6 sep</time>
         <h3>Encuentra un planeta sin mirar el cielo</h3>
-        <p>En 1801 se pierde Ceres, un cuerpo recién descubierto. Gauss calcula dónde tiene que estar con unas pocas observaciones, y ahí aparece. Mira la órbita: <span class="resalta">la dibuja desde su escritorio</span>.</p>
+        <p>En 1801 se pierde Ceres, un cuerpo recién descubierto. Gauss calcula dónde tiene que estar con unas pocas observaciones, y ahí aparece. <span class="resalta">No le hace falta mirar el cielo</span>: le basta con hacer cuentas.</p>
       </article>
       <article class="nota-tarjeta" data-lado="h" data-modo="chimborazo">
         <time class="mono">7 sep</time>
@@ -132,7 +132,7 @@
       <article class="nota-tarjeta" data-lado="g">
         <time class="mono">8 sep</time>
         <h3>Un capítulo cada uno</h3>
-        <p>La novela alterna como esta pantalla: uno calcula sin moverse, el otro se mete en ríos, cuevas y volcanes. Cuando te cansas de uno, llega el otro. Funciona como un péndulo.</p>
+        <p>La novela alterna capítulos: uno calcula sin moverse, el otro se mete en ríos, cuevas y volcanes. Cuando te cansas de uno, llega el otro. Funciona como un péndulo.</p>
       </article>
       <article class="nota-tarjeta" data-lado="h">
         <time class="mono">11 sep</time>
@@ -148,7 +148,7 @@
   </section>
 
   <!-- 2 · Berlín, otra vez: se cierra la pantalla -->
-  <section class="encuentro" aria-labelledby="t-encuentro">
+  <section class="encuentro" data-parada aria-labelledby="t-encuentro">
     <div class="telon" aria-hidden="true"><span class="telon-g"></span><span class="telon-h"></span></div>
     <div class="encuentro-cab">
       <span class="etiqueta">14 sep · Berlín, 1828</span>
@@ -197,6 +197,7 @@
 </footer>
 
 <script src="../comun/marcas.js"></script>
+<script src="../comun/recorrido.js"></script>
 <script src="medicion.js"></script>
 </body>
 </html>

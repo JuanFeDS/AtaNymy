@@ -1,0 +1,16 @@
+/* Indicador del recorrido con flechas: discreto, abajo a la derecha. Solo con ratón y teclado. */
+.recorrido {
+  position: fixed; right: 2.2rem; bottom: 1rem; z-index: 45;
+  display: flex; align-items: center; gap: 0.2rem; padding: 0.25rem;
+  border-radius: 999px; background: rgba(10, 8, 6, 0.42); backdrop-filter: blur(6px);
+  color: #FFF6E6; font: 500 0.7rem/1 var(--an-font-mono, ui-monospace, monospace); letter-spacing: 0.1em;
+  opacity: 0.55; transition: opacity 0.3s;
+}
+.recorrido:hover, .recorrido:focus-within, .recorrido.usado { opacity: 1; }
+.recorrido button {
+  width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: transparent; color: inherit;
+  font: inherit; font-size: 0.95rem; cursor: pointer; transition: background 0.2s;
+}
+.recorrido button:hover { background: rgba(255, 246, 230, 0.16); }
+.recorrido-cuenta { min-width: 4.4rem; text-align: center; font-variant-numeric: tabular-nums; }
+@media (hover: none), (max-width: 860px) { .recorrido { display: none; } }

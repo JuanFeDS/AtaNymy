@@ -15,7 +15,7 @@
   --h-acento: #FFB627;
   --coral: #FF6B4A;
   --papel-nota: #FFF6E6;
-  --an-font-title: 'Instrument Serif', Georgia, serif;
+  --an-font-title: 'Libre Caslon Text', Georgia, serif;
   --an-font-body: 'Instrument Sans', 'Helvetica Neue', sans-serif;
   --an-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --tinta: var(--tinta-oscura);
@@ -45,7 +45,6 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
 .berlin .byline { color: var(--tinta-suave); }
 .berlin-intro { font: 400 clamp(1.25rem, 2vw, 1.55rem)/1.5 var(--an-font-title); margin: 2.2rem 0 0; max-width: 38ch; }
 .berlin-intro .sub { --marca: var(--coral); }
-.berlin-pista { margin-top: 2.4rem; color: var(--coral); font-weight: 500; }
 .grieta { position: absolute; left: 64%; top: 0; bottom: 0; width: 1.4rem; transform: translateX(-50%); color: var(--tinta-oscura); opacity: .55; }
 .grieta svg { width: 100%; height: 100%; }
 .berlin::after { content: ""; position: absolute; right: -6rem; bottom: -6rem; width: 26rem; height: 26rem; border-radius: 50%; border: 2px dashed rgba(20,33,61,.25); }
@@ -196,3 +195,16 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
   .orbita { top: 6.4rem; width: 70%; }
   .altimetro { top: 4rem; bottom: 9rem; }
 }
+
+/* Las notas suben un poco para no tocar el indicador del recorrido */
+@media (min-width: 861px) { .notas { bottom: 4.2rem; } .notas-g { bottom: 4.2rem; } }
+
+/* Títulos en Libre Caslon: más sólidos y de libro clásico. Caslon es ancha, así que bajan un poco de tamaño. */
+h1, h2, h3, .fv3-titulo { font-weight: 700; letter-spacing: -0.015em; }
+.berlin h1 { font-size: clamp(2.6rem, 5.2vw, 4.3rem); line-height: 1.02; }
+.berlin h1 em { font-weight: 400; }
+.panel-cab h2 { font-size: clamp(1.8rem, 2.9vw, 2.6rem); }
+.nota-tarjeta h3 { font-size: 1.4rem; line-height: 1.12; }
+.encuentro-cab h2 { font-size: clamp(2rem, 3.8vw, 3.1rem); }
+.contador b, .alti-cifra b { font-weight: 400; }
+.cuarto { overflow: visible; }
