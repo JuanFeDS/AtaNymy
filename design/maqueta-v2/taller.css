@@ -75,6 +75,7 @@ h2 { font-size: var(--web-size-h2); line-height: 1.1; margin: 0 0 0.9rem; }
 .sub { --m: var(--m-subrayado); }
 .sub::after { left: -2%; right: -2%; bottom: -0.32em; height: 0.42em; }
 .sub::after, .doble::after, .tach::after { transition-delay: inherit !important; }
+.trozo:not(:last-child)::after { right: -0.32em; }
 .doble { --m: var(--m-doble); }
 .doble::after { left: -2%; right: -2%; bottom: -0.42em; height: 0.5em; }
 .circ { --m: var(--m-circulo); }
