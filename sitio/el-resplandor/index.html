@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Resplandor · Ata Nymy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Josefin+Sans:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="../comun/taller.css">
+<link rel="stylesheet" href="../comun/ficha.css">
+<link rel="stylesheet" href="../comun/titeres.css">
+<link rel="stylesheet" href="../comun/recorrido.css">
+<link rel="stylesheet" href="resplandor.css">
+</head>
+<body>
+
+<!-- Piezas compartidas de lo dibujado a mano: margen de papel recortado, texturas y siluetas repetidas -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="margen-papel" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="ancho"/>
+      <feFlood flood-color="#FFFFFF"/>
+      <feComposite in2="ancho" operator="in" result="margen"/>
+      <feMerge><feMergeNode in="margen"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="margen-fino" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="2.5" result="ancho"/>
+      <feFlood flood-color="#FFFFFF"/>
+      <feComposite in2="ancho" operator="in" result="margen"/>
+      <feMerge><feMergeNode in="margen"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="halo-ambar"><stop offset="0" stop-color="#FFC93C" stop-opacity=".55"/><stop offset="1" stop-color="#FFC93C" stop-opacity="0"/></radialGradient>
+    <pattern id="tejas" width="36" height="28" patternUnits="userSpaceOnUse">
+      <rect width="36" height="28" fill="#2E5BAA"/>
+      <path d="M0 0 a9 9 0 0 0 18 0 a9 9 0 0 0 18 0 V14 H0 Z" fill="#3A6CC0"/>
+      <path d="M0 0 a9 9 0 0 0 18 0 a9 9 0 0 0 18 0 M-9 14 a9 9 0 0 0 18 0 a9 9 0 0 0 18 0 a9 9 0 0 0 18 0 M0 28 a9 9 0 0 0 18 0 a9 9 0 0 0 18 0" fill="none" stroke="#132A62" stroke-width="2.4"/>
+    </pattern>
+    <pattern id="ladrillos" width="24" height="14" patternUnits="userSpaceOnUse">
+      <rect width="24" height="14" fill="#C8323F"/>
+      <rect x="7" y="1.5" width="10" height="4.5" fill="#DE5560"/>
+      <path d="M0 0.7 H24 M0 7.7 H24 M6 0 V7 M18 7 V14" stroke="#6E1424" stroke-width="1.6" fill="none"/>
+    </pattern>
+    <symbol id="arana" viewBox="0 0 80 96">
+      <path d="M40 0 V40" stroke="#8A6A2A" stroke-width="2.5"/>
+      <g fill="none" stroke="#2B120C" stroke-width="6" stroke-linecap="round"><path d="M40 54 Q20 58 12 46 M40 54 Q60 58 68 46 M40 56 Q30 66 24 56 M40 56 Q50 66 56 56"/></g>
+      <g fill="none" stroke="#D9B15A" stroke-width="3" stroke-linecap="round"><path d="M40 54 Q20 58 12 46 M40 54 Q60 58 68 46 M40 56 Q30 66 24 56 M40 56 Q50 66 56 56"/></g>
+      <path d="M28 40 H52 L46 60 Q40 66 34 60 Z" fill="#D9B15A" stroke="#2B120C" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M33 44 H47" stroke="#FFF1C9" stroke-width="2" stroke-linecap="round"/>
+      <g fill="#FFF4E0" stroke="#2B120C" stroke-width="2"><rect x="9" y="34" width="6" height="12" rx="1"/><rect x="65" y="34" width="6" height="12" rx="1"/><rect x="21" y="44" width="6" height="12" rx="1"/><rect x="53" y="44" width="6" height="12" rx="1"/></g>
+      <g fill="#FFD166" stroke="#2B120C" stroke-width="1.6"><path d="M12 33 Q8 27 12 22 Q16 27 12 33 Z"/><path d="M68 33 Q64 27 68 22 Q72 27 68 33 Z"/><path d="M24 43 Q20 37 24 32 Q28 37 24 43 Z"/><path d="M56 43 Q52 37 56 32 Q60 37 56 43 Z"/></g>
+      <g fill="#BFE6FF" stroke="#2B120C" stroke-width="1.5"><path d="M34 66 L36 74 L38 66 Z"/><path d="M40 66 L40 80 L43 70 Z"/><path d="M46 66 L44 74 L42 66 Z"/></g>
+    </symbol>
+    <symbol id="olla" viewBox="0 0 80 64">
+      <path d="M8 18 Q2 18 2 24 Q2 28 8 28 M72 18 Q78 18 78 24 Q78 28 72 28" fill="none" stroke="#2B120C" stroke-width="5"/>
+      <path d="M8 18 Q2 18 2 24 Q2 28 8 28 M72 18 Q78 18 78 24 Q78 28 72 28" fill="none" stroke="#E8A15A" stroke-width="2.4"/>
+      <path d="M8 14 H72 V48 Q72 60 58 60 H22 Q8 60 8 48 Z" fill="#D9773B" stroke="#2B120C" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M8 14 H72 V22 H8 Z" fill="#F09A5A" stroke="#2B120C" stroke-width="2.6"/>
+      <path d="M18 28 V50" stroke="#FFC48A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M60 26 V52" stroke="#A44F22" stroke-width="5" stroke-linecap="round"/>
+      <path d="M40 0 L40 14" stroke="#2B120C" stroke-width="3"/>
+    </symbol>
+    <symbol id="sarten" viewBox="0 0 80 96">
+      <path d="M40 0 V12" stroke="#2B120C" stroke-width="3"/>
+      <circle cx="40" cy="14" r="5" fill="none" stroke="#2B120C" stroke-width="3"/>
+      <rect x="35" y="18" width="10" height="34" rx="4" fill="#5A2418" stroke="#2B120C" stroke-width="2.5"/>
+      <circle cx="40" cy="70" r="24" fill="#D9773B" stroke="#2B120C" stroke-width="2.6"/>
+      <circle cx="40" cy="70" r="17" fill="#B85E2A"/>
+      <path d="M29 62 Q33 55 41 54" fill="none" stroke="#FFC48A" stroke-width="3.5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- La cabina: el marco, las puertas y el indicador son fijos. El scroll es el ascensor. -->
+<div class="puertas" aria-hidden="true">
+  <div class="puerta puerta-i"></div>
+  <div class="puerta puerta-d"></div>
+  <div class="placa"><span class="mono">Hacia</span><b data-placa>PB</b></div>
+</div>
+<div class="destello" aria-hidden="true"></div>
+<div class="marco" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="firma" href="../"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
+  <div class="indicador" role="img" aria-label="Indicador de pisos del ascensor">
+    <ol>
+      <li data-lampara="0">R</li><li data-lampara="1">2</li><li data-lampara="2">1</li><li data-lampara="3">PB</li><li data-lampara="4">J</li><li data-lampara="5">S</li>
+    </ol>
+    <span class="luz" aria-hidden="true"></span>
+  </div>
+  <div class="manometro" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" class="m-borde"/>
+      <path class="m-arco" d="M 15.4 77 A 40 40 0 1 1 84.6 77" pathLength="100"/>
+      <path class="m-rojo" d="M 84.6 77 A 40 40 0 0 0 90 50" pathLength="100"/>
+      <g class="m-aguja"><path d="M50 52 L50 16"/><circle cx="50" cy="50" r="5"/></g>
+    </svg>
+    <span class="mono">Caldera</span>
+  </div>
+</header>
+
+<main>
+  <!-- 0 · Vestíbulo -->
+  <section class="vestibulo" aria-labelledby="titulo">
+    <div class="vestibulo-texto">
+      <span class="etiqueta">Reseña · Novela de terror · Ficha Nº 14</span>
+      <h1 id="titulo">El <em>Resplandor</em></h1>
+      <div class="mono byline">Stephen King · 1977</div>
+      <p class="vestibulo-hook">Un hotel, seis paradas, una caldera.</p>
+      <p class="vestibulo-pista mono">Desliza: el ascensor sube y baja solo</p>
+    </div>
+    <figure class="cartel" aria-hidden="true">
+      <svg viewBox="0 0 320 400">
+        <g class="cv-montes">
+          <path class="cv-monte cv-monte-lejos" d="M-10 250 L44 96 L100 170 L150 120 L205 180 L266 72 L330 196 V300 H-10 Z"/>
+          <path class="cv-cumbre" d="M266 72 L244 114 L258 108 L266 120 L276 106 L290 116 Z M44 96 L26 134 L38 128 L46 138 L56 126 L68 130 Z"/>
+          <path class="cv-monte" d="M-10 270 L60 210 L120 250 L190 200 L250 246 L330 210 V320 H-10 Z"/>
+        </g>
+        <g class="cv-hotel">
+          <rect class="cv-muro" x="22" y="196" width="276" height="140"/>
+          <rect class="cv-muro" x="122" y="150" width="76" height="60"/>
+          <path class="cv-techo" d="M10 200 L44 168 H276 L310 200 Z"/>
+          <path class="cv-techo" d="M112 154 L160 108 L208 154 Z"/>
+          <rect class="cv-torre" x="148" y="70" width="24" height="44"/>
+          <path class="cv-techo" d="M142 74 L160 52 L178 74 Z"/>
+          <path class="cv-mastil" d="M160 52 V22"/>
+          <path class="cv-bandera" d="M160 22 L188 30 L160 38 Z"/>
+          <path class="cv-nieve" d="M38 170 L44 164 H276 L282 170 Q272 176 262 172 Q252 182 240 174 Q226 180 214 173 Q200 182 186 174 Q172 180 158 173 Q144 182 130 174 Q116 180 102 173 Q88 182 74 174 Q60 180 48 174 Q42 176 38 170 Z M8 200 Q14 194 22 198 Q30 194 40 199 Q60 194 80 199 Q100 194 120 199 Q140 194 160 199 Q180 194 200 199 Q220 194 240 199 Q260 194 280 199 Q296 194 312 200 L312 206 Q296 204 284 210 L280 204 Q262 202 246 208 L240 202 Q160 200 80 202 L76 210 L70 203 Q40 202 30 208 L26 203 Q14 204 8 206 Z"/>
+          <path class="cv-nieve" d="M136 132 L160 108 L184 132 Q176 136 170 131 Q164 140 156 132 Q148 138 136 132 Z"/>
+          <path class="cv-nieve" d="M140 76 L160 50 L180 76 Q170 72 164 78 Q156 72 148 78 Q144 74 140 76 Z"/>
+          <g class="cv-ventanas">
+            <rect x="36" y="218" width="18" height="22"/><rect x="66" y="218" width="18" height="22" class="apagada"/><rect x="96" y="218" width="18" height="22"/><rect x="206" y="218" width="18" height="22"/><rect x="236" y="218" width="18" height="22" class="apagada"/><rect x="266" y="218" width="18" height="22"/>
+            <rect x="36" y="256" width="18" height="22" class="apagada"/><rect x="66" y="256" width="18" height="22"/><rect x="96" y="256" width="18" height="22"/><rect x="206" y="256" width="18" height="22"/><rect x="236" y="256" width="18" height="22" class="cv-217"/><rect x="266" y="256" width="18" height="22" class="apagada"/>
+            <rect x="136" y="168" width="18" height="22"/><rect x="166" y="168" width="18" height="22"/>
+            <circle cx="160" cy="92" r="7"/>
+          </g>
+          <path class="cv-puerta" d="M140 336 V294 Q140 276 160 276 Q180 276 180 294 V336 Z"/>
+          <path class="cv-marquesina" d="M128 270 H192 L184 258 H136 Z"/>
+          <path class="cv-nieve" d="M-6 330 Q30 316 70 326 Q110 318 140 330 L180 330 Q220 316 262 326 Q296 318 326 330 V350 H-6 Z"/>
+        </g>
+        <g class="cv-rotulo">
+          <rect x="18" y="356" width="284" height="36" rx="4"/>
+          <text x="160" y="380" text-anchor="middle">THE OVERLOOK · COLORADO</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="flecha" aria-hidden="true"><svg viewBox="0 0 24 60"><path d="M12 2 V56 M4 46 L12 57 L20 46" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+  </section>
+
+  <div class="viaje" data-hacia="PB" aria-hidden="true"></div>
+
+  <!-- PB · Cocina -->
+  <section class="piso piso-cocina" id="p-cocina" data-nivel="3" aria-label="Planta baja, la cocina">
+    <div class="escenario">
+      <div class="azulejos" aria-hidden="true"></div>
+      <div class="ollas" aria-hidden="true"><i style="--x:12%;--l:4rem"><svg viewBox="0 0 80 64"><use href="#olla"/></svg></i><i style="--x:26%;--l:6.5rem"><svg class="sarten" viewBox="0 0 80 96"><use href="#sarten"/></svg></i><i style="--x:74%;--l:5rem"><svg class="sarten" viewBox="0 0 80 96"><use href="#sarten"/></svg></i><i style="--x:88%;--l:7.5rem"><svg viewBox="0 0 80 64"><use href="#olla"/></svg></i></div>
+      <div class="helado" aria-hidden="true">
+        <svg viewBox="0 0 120 220"><g class="h-papel">
+          <path class="h-cono" d="M24 104 L60 214 L96 104 Z"/>
+          <path class="h-rejilla" d="M32 128 L88 128 M40 152 L80 152 M48 176 L72 176 M44 106 L68 206 M76 106 L52 206"/>
+          <path class="h-bola h-b1" d="M18 104 Q12 70 40 56 Q60 46 82 56 Q108 70 102 104 Q96 112 90 106 Q86 122 78 108 Q70 112 64 106 Q56 120 50 106 Q40 112 34 106 Q26 116 18 104 Z"/>
+          <path class="h-bola h-b2" d="M30 62 Q26 30 60 22 Q94 30 90 62 Q84 70 78 64 Q72 74 66 64 Q60 70 54 64 Q46 74 40 64 Q34 70 30 62 Z"/>
+          <g class="h-grageas"><rect x="38" y="80" width="8" height="3" rx="1.5" transform="rotate(-30 42 81)" fill="#2E9BE6"/><rect x="64" y="72" width="8" height="3" rx="1.5" transform="rotate(25 68 73)" fill="#F2B632"/><rect x="78" y="88" width="8" height="3" rx="1.5" transform="rotate(-60 82 89)" fill="#1F8E86"/><rect x="52" y="92" width="8" height="3" rx="1.5" transform="rotate(10 56 93)" fill="#FFF4E0"/><rect x="46" y="40" width="7" height="3" rx="1.5" transform="rotate(40 49 41)" fill="#E3263F"/><rect x="68" y="46" width="7" height="3" rx="1.5" transform="rotate(-20 71 47)" fill="#2E9BE6"/></g>
+          <path class="h-tallo" d="M62 8 Q64 -4 76 -8"/>
+          <circle cx="62" cy="14" r="9" class="h-cereza"/>
+          <circle cx="59" cy="11" r="2.5" fill="#FFB0B8"/>
+        </g></svg>
+      </div>
+      <div class="radiacion" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="pensamiento pensamiento-1" aria-hidden="true">¿Quieres un helado?</div>
+      <div class="pensamiento pensamiento-2" aria-hidden="true">Mantente lejos de la 217</div>
+      <figure class="titere" hidden data-src="../assets/titeres/el-resplandor/hallorann.png" style="--x:24%;--alto:64svh" aria-hidden="true"></figure>
+      <figure class="titere titere--espejo" hidden data-src="../assets/titeres/el-resplandor/danny.png" style="--x:76%;--alto:44svh" aria-hidden="true"></figure>
+      <div class="pie-escena mono">PB · Cocina</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>El día que el hotel cierra por el invierno, Hallorann, el cocinero, le sirve un helado a Danny y le habla sin mover los labios. Es el primer adulto que le dice que lo suyo tiene nombre: <span class="resalta">el resplandor</span>.</p></div>
+      <div class="paso"><p>Le explica que los lugares guardan lo que les ha pasado, como el olor a tostada quemada. Y le pide que se mantenga lejos de la 217.</p></div>
+      <div class="paso"><p>Si pasa algo, que lo llame. Después Hallorann se va a Florida. <span class="sub">Está lejos justo cuando hace falta</span>.</p></div>
+    </div>
+  </section>
+
+  <div class="viaje" data-hacia="R" aria-hidden="true"></div>
+
+  <!-- R · Azotea -->
+  <section class="piso piso-azotea" id="p-azotea" data-nivel="0" aria-label="Azotea">
+    <div class="escenario">
+      <div class="luna" aria-hidden="true"></div>
+      <div class="copos" aria-hidden="true"></div>
+      <svg class="tejado" viewBox="0 0 640 420" aria-hidden="true">
+        <g class="t-montes">
+          <path class="t-monte" d="M-20 230 L50 140 L120 205 L170 170 L230 240 L300 300 L380 230 L450 190 L520 130 L590 190 L660 150 V420 H-20 Z"/>
+          <path class="t-cumbre" d="M50 140 L28 168 L40 164 L50 174 L60 162 L76 168 Z M520 130 L496 160 L510 156 L520 166 L532 154 L548 160 Z M170 170 L156 186 L168 182 L178 188 L186 180 Z M660 150 L640 176 L652 172 L660 180 Z"/>
+        </g>
+        <g class="t-casa">
+          <path class="t-agua" d="M-20 420 L-20 250 L300 70 L660 250 L660 420 Z"/>
+          <path class="t-alero" d="M-20 250 L300 70 L660 250"/>
+          <path class="t-nieve t-nieve-sombra" d="M-20 250 L300 70 L660 250 L660 294 Q640 284 620 272 Q605 288 592 268 Q570 254 548 246 Q536 264 526 242 Q505 228 486 210 Q470 202 452 192 Q440 206 432 186 Q400 172 380 158 Q362 166 350 142 Q330 130 312 120 Q300 114 288 120 Q268 132 252 140 Q240 158 230 146 Q205 162 182 178 Q168 198 158 186 Q130 202 104 220 Q92 238 82 224 Q55 240 30 256 Q12 276 0 268 Q-10 276 -20 296 Z"/>
+          <path class="t-nieve" d="M-20 250 L300 70 L660 250 L660 288 Q640 278 620 266 Q605 282 592 262 Q570 248 548 240 Q536 258 526 236 Q505 222 486 204 Q470 196 452 186 Q440 200 432 180 Q400 166 380 152 Q362 160 350 136 Q330 124 312 114 Q300 108 288 114 Q268 126 252 134 Q240 152 230 140 Q205 156 182 172 Q168 192 158 180 Q130 196 104 214 Q92 232 82 218 Q55 234 30 250 Q12 270 0 262 Q-10 270 -20 290 Z"/>
+          <g class="t-ojo" transform="translate(546 284) scale(.9) translate(-300 -214)">
+            <circle class="t-halo" cx="300" cy="214" r="62"/>
+            <circle class="t-ojo-marco" cx="300" cy="214" r="31"/>
+            <circle class="t-ojo-luz" cx="300" cy="214" r="22"/>
+            <path class="t-ojo-cruz" d="M300 192 V236 M278 214 H322"/>
+            <path class="t-nieve" d="M281 186 Q300 172 319 186 Q322 192 316 192 Q300 184 284 192 Q278 192 281 186 Z"/>
+          </g>
+          <g class="t-chimenea" transform="translate(436 150) scale(1.4) translate(-436 -150)">
+            <path class="t-ladrillo" d="M422 64 H476 V164 L422 137 Z"/>
+            <path class="t-ladrillo-sombra" d="M464 64 H476 V164 L464 158 Z"/>
+            <path class="t-contorno" d="M422 64 H476 V164 L422 137 Z"/>
+            <rect class="t-corona" x="413" y="50" width="72" height="16" rx="2"/>
+            <rect class="t-olla-chimenea" x="428" y="30" width="16" height="22"/>
+            <rect class="t-olla-chimenea" x="453" y="36" width="14" height="16"/>
+            <rect class="t-borde-olla" x="425" y="27" width="22" height="6" rx="1.5"/>
+            <rect class="t-borde-olla" x="450" y="33" width="20" height="5" rx="1.5"/>
+            <ellipse class="t-hollin" cx="436" cy="28" rx="8" ry="2.2"/>
+            <ellipse class="t-hollin" cx="460" cy="34" rx="7" ry="1.8"/>
+            <path class="t-nieve" d="M409 59 Q406 48 418 48 Q424 44 428 50 L444 50 Q448 44 453 50 L467 50 Q476 44 484 49 Q492 52 489 60 L486 64 L483 77 L479 66 L471 66 L467 74 L463 66 L431 66 L427 82 L423 66 L413 66 Q407 65 409 59 Z"/>
+            <path class="t-nieve" d="M412 124 Q418 112 430 120 Q440 118 448 138 Q462 140 470 154 Q480 154 486 164 L480 170 L414 136 Z"/>
+          </g>
+        </g>
+        <g class="t-humo" transform="translate(436 -26)">
+          <g class="bocanada" style="--x:-4px;--y:-12px;--e:.75;--o:.95;--d:0s"><circle r="10"/><circle cx="10" cy="-4" r="8"/><circle cx="-8" cy="-2" r="7"/></g>
+          <g class="bocanada" style="--x:-18px;--y:-40px;--e:1.05;--o:.8;--d:-1.6s"><circle r="10"/><circle cx="10" cy="-4" r="8"/><circle cx="-8" cy="-2" r="7"/></g>
+          <g class="bocanada" style="--x:-38px;--y:-74px;--e:1.35;--o:.6;--d:-3.2s"><circle r="10"/><circle cx="10" cy="-4" r="8"/><circle cx="-8" cy="-2" r="7"/></g>
+          <g class="bocanada" style="--x:-60px;--y:-104px;--e:1.6;--o:.35;--d:-4.8s"><circle r="10"/><circle cx="10" cy="-4" r="8"/><circle cx="-8" cy="-2" r="7"/></g>
+        </g>
+      </svg>
+      <div class="avispero" aria-hidden="true">
+        <img class="av-img" src="../assets/objetos/el-resplandor/avispero.png" alt="">
+        <i class="avispa" style="--r:3.6rem;--v:2.6s;--d:0s"></i>
+        <i class="avispa" style="--r:4.4rem;--v:3.1s;--d:-.8s"></i>
+        <i class="avispa" style="--r:3rem;--v:2.2s;--d:-1.5s"></i>
+        <i class="avispa" style="--r:5rem;--v:3.8s;--d:-2.1s"></i>
+        <i class="avispa" style="--r:3.8rem;--v:2.9s;--d:-2.9s"></i>
+      </div>
+      <div class="nivel-nieve" aria-hidden="true"><span class="mono">Nieve en el techo</span><div class="nivel"><i></i></div></div>
+      <div class="pie-escena mono">R · Azotea</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>Octubre. El hotel Overlook, en las montañas de Colorado, ya cerró hasta la primavera. Jack Torrance acepta el trabajo de cuidador de invierno: <span class="resalta">un sueldo, tiempo para escribir y cuatro paredes</span> para su familia.</p></div>
+      <div class="paso"><p>Con las primeras nevadas el camino se cierra. A partir de ahí el hotel y los tres Torrance quedan solos, <span class="sub">muy lejos de cualquiera</span>.</p></div>
+      <div class="paso"><p>En el techo Jack encuentra un avispero. Lo da por muerto y se lo lleva a Danny de regalo. Está menos muerto de lo que parece.</p></div>
+    </div>
+  </section>
+
+  <div class="viaje" data-hacia="J" aria-hidden="true"></div>
+
+  <!-- J · Jardín, desde el ventanal -->
+  <section class="piso piso-jardin" id="p-jardin" data-nivel="4" aria-label="El jardín, desde el ventanal">
+    <div class="escenario">
+      <div class="copos copos-densos" aria-hidden="true"></div>
+      <div class="ventanal" aria-hidden="true">
+        <div class="setos"><div class="suelo-nieve"></div><img class="seto seto-leon" src="../assets/objetos/el-resplandor/seto-leon.png" alt="" style="--paso:0"><img class="seto seto-conejo" src="../assets/objetos/el-resplandor/seto-conejo.png" alt="" style="--paso:0"><img class="seto seto-perro" src="../assets/objetos/el-resplandor/seto-perro.png" alt="" style="--paso:0"></div>
+        <div class="ventanal-marco"></div>
+      </div>
+      <p class="aviso-quieto mono" aria-live="polite">Quédate quieto un momento</p>
+      <div class="pie-escena mono">J · El jardín, desde el ventanal</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>Los setos del jardín tienen forma de animales: un león, un conejo, un perro. En el libro <span class="resalta">solo se mueven cuando nadie los mira</span>.</p></div>
+      <div class="paso"><p>Hagamos la prueba: deja de hacer scroll un par de segundos y mira el ventanal.</p></div>
+      <div class="paso"><p>La nieve sube y cada vez se ve menos de ellos. <span class="sub">Cada vez que parpadeas están más cerca</span>.</p></div>
+    </div>
+  </section>
+
+  <div class="viaje" data-hacia="2" aria-hidden="true"></div>
+
+  <!-- 2 · Habitación 217 -->
+  <section class="piso piso-217" id="p-217" data-nivel="1" aria-label="Segundo piso, habitación 217">
+    <div class="escenario">
+      <img class="puerta-img" src="../assets/objetos/el-resplandor/puerta-217.png" alt="">
+      <img class="llave-img" src="../assets/objetos/el-resplandor/llave-217.png" alt="">
+      <figure class="titere" hidden data-src="../assets/titeres/el-resplandor/senora-217.png" style="--x:53%;--alto:44svh;--hundir:3svh;--entra-en:.45;--alto-movil:30svh;--hundir-movil:2svh" aria-hidden="true"></figure>
+      <figure class="titere" hidden data-src="../assets/titeres/el-resplandor/danny.png" style="--x:19%;--alto:50svh;--hundir:6svh;--entra-en:.2" aria-hidden="true"></figure>
+      <figure class="titere titere--tarde" hidden data-src="../assets/titeres/el-resplandor/wendy.png" style="--x:82%;--alto:56svh;--hundir:8svh;--entra-desde:.62;--entra-en:.8" aria-hidden="true"></figure>
+      <div class="pie-escena mono">2 · Habitación 217</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>Danny sabe cosas que no debería saber. En el segundo piso hay una habitación con la puerta cerrada que nadie debería abrir: <span class="resalta">la 217</span>.</p></div>
+      <div class="paso"><p>Le han dicho que no entre. Entra.</p></div>
+      <div class="paso"><p>Detrás de la cortina de la bañera hay alguien. Danny sale con marcas en el cuello, y su madre sospecha de Jack.</p></div>
+    </div>
+  </section>
+
+  <div class="viaje" data-hacia="1" aria-hidden="true"></div>
+
+  <!-- 1 · Colorado Lounge y salón -->
+  <section class="piso piso-salon" id="p-salon" data-nivel="2" aria-label="Primer piso, el salón">
+    <div class="escenario">
+      <div class="lamparas" aria-hidden="true"><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg><svg viewBox="0 0 80 96"><use href="#arana"/></svg></div>
+      <div class="serpentinas" aria-hidden="true">
+        <i style="--x:6%;--c:#F2B632;--t:7s;--d:-1s"></i><i style="--x:16%;--c:#FFF4E0;--t:9s;--d:-4s"></i><i style="--x:27%;--c:#E3263F;--t:8s;--d:-2s"></i><i style="--x:38%;--c:#F2B632;--t:10s;--d:-6s"></i><i style="--x:49%;--c:#FFF4E0;--t:7.5s;--d:-3s"></i><i style="--x:59%;--c:#E3263F;--t:9.5s;--d:-5s"></i><i style="--x:70%;--c:#F2B632;--t:8.5s;--d:-7s"></i><i style="--x:81%;--c:#FFF4E0;--t:7s;--d:-2.5s"></i><i style="--x:92%;--c:#E3263F;--t:10s;--d:-8s"></i>
+      </div>
+      <svg class="reloj-salon" viewBox="-20 -20 240 240" aria-hidden="true">
+        <g class="rs-marco">
+          <path class="rs-adorno" d="M100 -14 Q84 -2 90 12 Q100 2 110 12 Q116 -2 100 -14 Z M100 214 Q84 202 90 188 Q100 198 110 188 Q116 202 100 214 Z M-14 100 Q-2 84 12 90 Q2 100 12 110 Q-2 116 -14 100 Z M214 100 Q202 84 188 90 Q198 100 188 110 Q202 116 214 100 Z"/>
+          <circle cx="100" cy="100" r="94" class="rs-aro"/>
+          <circle cx="100" cy="100" r="80" class="rs-cara"/>
+        </g>
+        <g class="rs-marcas"><path d="M100 26 V40 M174 100 H160 M100 174 V160 M26 100 H40"/></g>
+        <g class="rs-puntos"><circle cx="137" cy="35.9" r="3"/><circle cx="164.1" cy="63" r="3"/><circle cx="164.1" cy="137" r="3"/><circle cx="137" cy="164.1" r="3"/><circle cx="63" cy="164.1" r="3"/><circle cx="35.9" cy="137" r="3"/><circle cx="35.9" cy="63" r="3"/><circle cx="63" cy="35.9" r="3"/></g>
+        <text class="rs-xii" x="100" y="58" text-anchor="middle">XII</text>
+        <g class="rs-largo"><path d="M100 112 V34"/><path class="rs-punta" d="M100 28 L106 42 L100 48 L94 42 Z"/></g>
+        <g class="rs-corto"><path d="M100 110 V60"/><path class="rs-punta" d="M100 52 L108 64 L100 72 L92 64 Z"/></g>
+        <circle cx="100" cy="100" r="7" class="rs-centro"/>
+      </svg>
+      <div class="mascaras" aria-hidden="true"><img class="mascara" src="../assets/objetos/el-resplandor/antifaz.png" alt="" style="--x:10%;--y:30%;--g:-10deg"><img class="mascara" src="../assets/objetos/el-resplandor/antifaz.png" alt="" style="--x:26%;--y:44%;--g:8deg"><img class="mascara" src="../assets/objetos/el-resplandor/antifaz.png" alt="" style="--x:70%;--y:34%;--g:-6deg"><img class="mascara" src="../assets/objetos/el-resplandor/antifaz.png" alt="" style="--x:84%;--y:48%;--g:12deg"><img class="mascara" src="../assets/objetos/el-resplandor/antifaz.png" alt="" style="--x:50%;--y:22%;--g:3deg"></div>
+      <img class="barra-img" src="../assets/objetos/el-resplandor/barra.png" alt="">
+      <div class="suelo-salon" aria-hidden="true"></div>
+      <figure class="titere" hidden data-src="../assets/titeres/el-resplandor/lloyd.png" style="--x:18%;--alto:56svh" aria-hidden="true"></figure>
+      <figure class="titere" hidden data-src="../assets/titeres/el-resplandor/jack.png" style="--x:41%;--alto:56svh;--hundir:12svh;--entra-en:.18" aria-hidden="true"></figure>
+      <figure class="titere titere--espejo" hidden data-src="../assets/titeres/el-resplandor/invitada.png" style="--x:77%;--alto:58svh;--entra-en:.3" aria-hidden="true"></figure>
+      <div class="pie-escena mono">1 · Colorado Lounge y salón</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>En el Colorado Lounge el bar está vacío, pero Lloyd, el cantinero, sirve igual. Jack lleva meses sin beber. <span class="sub">Se sienta</span>.</p></div>
+      <div class="paso"><p>Arriba suena una fiesta de máscaras de hace décadas. Los invitados bailan y brindan y no se acaban.</p></div>
+      <div class="paso"><p>Mira el reloj: avanza con tu scroll. Cuando marque la medianoche, <span class="resalta">se caen las máscaras</span>.</p></div>
+    </div>
+  </section>
+
+  <div class="viaje" data-hacia="S" aria-hidden="true"></div>
+
+  <!-- S · Sótano -->
+  <section class="piso piso-sotano" id="p-sotano" data-nivel="5" data-final aria-label="Sótano y caldera">
+    <div class="escenario">
+      <div class="brasas" aria-hidden="true"></div>
+      <div class="recortes" aria-hidden="true"><img class="recortes-img" src="../assets/objetos/el-resplandor/recortes.png" alt=""></div>
+      <div class="caldera" aria-hidden="true">
+        <svg class="tuberias" viewBox="0 0 347 409" preserveAspectRatio="none">
+          <defs><path id="tb-trazo" d="M212 18 V-420 M316 214 H372 Q392 214 392 194 V-420 M40 300 H-60 Q-80 300 -80 280 V-420"/></defs>
+          <use href="#tb-trazo" class="tb-margen"/><use href="#tb-trazo" class="tb-borde"/><use href="#tb-trazo" class="tb-cobre"/><use href="#tb-trazo" class="tb-brillo"/>
+          <g class="tb-brida"><rect x="196" y="-34" width="32" height="12" rx="3"/><rect x="380" y="60" width="24" height="12" rx="3"/><rect x="-92" y="140" width="24" height="12" rx="3"/><rect x="346" y="204" width="12" height="22" rx="3"/></g>
+        </svg>
+        <img class="c-img" src="../assets/objetos/el-resplandor/caldera.png" alt="">
+        <svg class="c-valvula" viewBox="0 0 112 112"><circle cx="56" cy="56" r="54" class="v-fondo"/><circle cx="56" cy="56" r="41" class="v-hueco"/><path d="M56 16 V96 M16 56 H96 M27.7 27.7 L84.3 84.3 M84.3 27.7 L27.7 84.3" class="v-radio-borde"/><path d="M56 16 V96 M16 56 H96 M27.7 27.7 L84.3 84.3 M84.3 27.7 L27.7 84.3" class="v-radio"/><circle cx="56" cy="56" r="46" class="v-aro"/><circle cx="56" cy="56" r="46" class="v-aro-luz" pathLength="100"/><circle cx="56" cy="56" r="11" class="v-centro"/><circle cx="56" cy="56" r="4" class="v-perno"/></svg>
+        <svg class="c-reloj" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="92" class="cr-cara"/>
+          <circle cx="100" cy="100" r="97" class="cr-borde"/><circle cx="100" cy="100" r="87" class="cr-borde cr-borde-fino"/>
+          <path class="cr-rojo" d="M158 158 A 82 82 0 0 0 180 112"/>
+          <g class="cr-marcas"></g>
+          <g class="cr-aguja"><path d="M100 108 L100 30"/><circle cx="100" cy="100" r="8"/></g>
+        </svg>
+        <div class="vapor"><i style="--x:61%;--y:-6%;--d:0s"></i><i style="--x:61%;--y:-6%;--d:-.9s"></i><i style="--x:97%;--y:52%;--d:-.4s"></i><i style="--x:2%;--y:73%;--d:-1.3s"></i><i style="--x:61%;--y:-6%;--d:-1.6s"></i><i style="--x:97%;--y:52%;--d:-1.2s"></i></div>
+        <div class="chispas"><i style="--x:36%;--y:52%;--d:0s"></i><i style="--x:30%;--y:40%;--d:-.3s"></i><i style="--x:92%;--y:50%;--d:-.55s"></i><i style="--x:60%;--y:4%;--d:-.15s"></i><i style="--x:8%;--y:70%;--d:-.4s"></i><i style="--x:48%;--y:62%;--d:-.65s"></i><i style="--x:70%;--y:30%;--d:-.25s"></i></div>
+        <div class="estallido">
+          <i class="onda"></i><i class="onda onda-2"></i>
+          <svg viewBox="-100 -100 200 200">
+            <path class="e-rojo" d="M0 -98 L14 -40 L62 -76 L38 -22 L96 -18 L44 8 L84 56 L24 34 L18 92 L-6 40 L-48 84 L-34 26 L-94 34 L-44 -2 L-86 -50 L-26 -32 L-30 -88 L-4 -42 Z"/>
+            <path class="e-naranja" d="M0 -70 L12 -30 L44 -54 L28 -14 L68 -10 L30 8 L58 42 L16 24 L12 64 L-4 28 L-34 58 L-24 18 L-66 22 L-30 -2 L-60 -36 L-18 -22 L-20 -62 L-4 -30 Z"/>
+            <path class="e-amarillo" d="M0 -44 L9 -18 L30 -32 L18 -6 L42 0 L18 8 L34 30 L8 16 L6 40 L-4 16 L-22 34 L-14 8 L-40 10 L-18 -4 L-36 -24 L-10 -14 Z"/>
+            <circle class="e-blanco" r="14"/>
+          </svg>
+        </div>
+        <div class="escombros">
+          <i class="pieza" style="--dx:-34rem;--dy:-26rem;--g:-320deg;--c:#E3263F;--p:polygon(0 0,100% 20%,70% 100%)"></i>
+          <i class="pieza" style="--dx:30rem;--dy:-30rem;--g:280deg;--c:#FF8A1F;--p:polygon(10% 0,100% 40%,60% 100%,0 70%)"></i>
+          <i class="pieza" style="--dx:-14rem;--dy:-38rem;--g:200deg;--c:#4E6A6A;--p:polygon(0 30%,80% 0,100% 100%)"></i>
+          <i class="pieza" style="--dx:42rem;--dy:-8rem;--g:-240deg;--c:#FFD23F;--p:polygon(0 0,100% 0,50% 100%)"></i>
+          <i class="pieza" style="--dx:-44rem;--dy:-6rem;--g:360deg;--c:#7DF0C6;--p:polygon(20% 0,100% 60%,0 100%)"></i>
+          <i class="pieza" style="--dx:12rem;--dy:-40rem;--g:-200deg;--c:#E3263F;--p:polygon(0 20%,100% 0,90% 100%,10% 80%)"></i>
+          <i class="pieza" style="--dx:-24rem;--dy:4rem;--g:150deg;--c:#FF8A1F;--p:polygon(0 0,100% 50%,0 100%)"></i>
+          <i class="pieza" style="--dx:24rem;--dy:2rem;--g:-170deg;--c:#4E6A6A;--p:polygon(30% 0,100% 100%,0 80%)"></i>
+          <i class="pieza tuerca" style="--dx:-6rem;--dy:-44rem;--g:420deg;--c:#D9B15A"></i>
+          <i class="pieza tuerca" style="--dx:36rem;--dy:-20rem;--g:-380deg;--c:#D3301D"></i>
+          <i class="pieza papel" style="--dx:-30rem;--dy:-34rem;--g:-150deg"></i>
+          <i class="pieza papel" style="--dx:22rem;--dy:-42rem;--g:130deg"></i>
+          <i class="pieza papel" style="--dx:46rem;--dy:-24rem;--g:-110deg"></i>
+          <i class="pieza papel" style="--dx:-40rem;--dy:-18rem;--g:170deg"></i>
+        </div>
+      </div>
+      <div class="humo" aria-hidden="true"><i style="--x:52%;--e:1.3;--sube:46svh"></i><i style="--x:34%;--e:1;--sube:58svh"></i><i style="--x:70%;--e:1.1;--sube:52svh"></i><i style="--x:44%;--e:.8;--sube:70svh"></i><i style="--x:62%;--e:.9;--sube:76svh"></i></div>
+      <div class="ceniza" aria-hidden="true"></div>
+      <div class="pie-escena mono">S · Sótano y caldera</div>
+    </div>
+    <div class="relato">
+      <div class="paso"><p>En el sótano hay un álbum de recortes de periódico: la historia del hotel, con sus fiestas, sus dueños y sus muertos.</p></div>
+      <div class="paso"><p>Y hay una caldera. Hay que descargarla todos los días o la presión sube hasta que revienta. Jack lo sabe. <span class="sub">Cada día lo piensa menos</span>.</p></div>
+      <div class="paso"><p>Mira el medidor: lleva toda la historia subiendo. La última vez que Jack se acuerda de la caldera, ya es tarde.</p></div>
+      <div class="paso paso-despues"><p>Silencio.</p></div>
+    </div>
+  </section>
+
+  <!-- Afuera -->
+  <section class="afuera" aria-labelledby="t-afuera">
+    <div class="copos copos-densos" aria-hidden="true"></div>
+    <div class="afuera-cab">
+      <span class="etiqueta">Afuera · Nieve y humo</span>
+      <h2 id="t-afuera">Tres personas salen</h2>
+      <p>Danny, Wendy y Hallorann, que volvió a tiempo, dejan atrás el hotel. En el libro nadie vuelve a necesitar un ascensor.</p>
+      <figure class="titere titere--solo-escritorio" hidden data-src="../assets/titeres/el-resplandor/danny.png" style="--x:calc(100% + 4.5rem);--alto:26svh;--hundir:0px" aria-hidden="true"></figure>
+      <figure class="titere titere--solo-escritorio" hidden data-src="../assets/titeres/el-resplandor/wendy.png" style="--x:calc(100% + 10rem);--alto:30svh;--hundir:0px;--ritmo:3.9s" aria-hidden="true"></figure>
+      <figure class="titere titere--solo-escritorio" hidden data-src="../assets/titeres/el-resplandor/hallorann.png" style="--x:calc(100% + 15.5rem);--alto:31svh;--hundir:0px;--ritmo:3s" aria-hidden="true"></figure>
+    </div>
+    <div class="afuera-grid">
+      <div class="ficha-col">
+        <article class="fv3" aria-label="Ficha de lectura" style="--giro:-1.8deg;--f-banda:#101936;--f-banda-tinta:#F2B632;--f-trazo:#E3263F;--f-relleno:rgba(227,38,63,.25);--f-sello:#E3263F">
+          <div class="fv3-hoja">
+            <div class="fv3-banda"><span>Ficha de lectura</span><b>Nº 14</b></div>
+            <div class="fv3-cuerpo">
+              <p class="fv3-titulo">El Resplandor</p>
+              <div class="fv3-autor">Stephen King · 1977 · El hotel Overlook</div>
+              <p class="fv3-pendiente mono">Radar, época y nota: pendientes</p>
+              <div class="fv3-pie"><span class="fv3-nota">—<small>/ 5</small></span><span class="fv3-meta">Leído<br><b>Nov 2026</b></span></div>
+            </div>
+          </div>
+          <span class="sello" data-arriba="ATA NYMY" data-abajo="CERRADO" data-centro="XI·26"></span>
+        </article>
+      </div>
+      <div class="tablero-col">
+        <p class="tablero-pregunta">¿A qué piso vas?</p>
+        <div class="tablero" role="group" aria-label="Tablero del ascensor: ir a un piso">
+          <button type="button" data-ir="p-azotea" aria-label="Piso R, la azotea">R</button>
+          <button type="button" data-ir="p-217" aria-label="Piso 2, la habitación 217">2</button>
+          <button type="button" data-ir="p-salon" aria-label="Piso 1, el salón">1</button>
+          <button type="button" data-ir="p-cocina" aria-label="Planta baja, la cocina">PB</button>
+          <button type="button" data-ir="p-jardin" aria-label="El jardín, desde el ventanal">J</button>
+          <button type="button" data-ir="p-sotano" aria-label="Sótano y caldera">S</button>
+          <button type="button" class="boton-fantasma" data-ir="p-217" aria-label="217. No es un piso, es una habitación del segundo piso">217</button>
+        </div>
+        <p class="tablero-nota mono">Ese último botón no estaba en el tablero.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie-resplandor">
+  <a class="firma" href="../"><span class="jaguar"><img src="../assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
+  <span class="mono">Reseña en prosa: próximamente</span>
+</footer>
+
+<script src="../comun/marcas.js"></script>
+<script src="../comun/recorrido.js"></script>
+<script src="resplandor.js"></script>
+</body>
+</html>
