@@ -11,6 +11,7 @@
   --noche: #18233d; --oro: #e3b865; --oro-2: #a8782c; --papel: #f3ead8; --tinta: #2b1d15;
   --grano: url("assets/texturas/grano.png"); --veta: url("assets/texturas/veta.png"); --papel-grano: url("assets/texturas/papel.png");
 }
+html { font-size: 75%; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--papel); font: 400 1.05rem/1.6 'Bricolage Grotesque', sans-serif; background: #121b31; }
@@ -22,7 +23,7 @@ a { color: inherit; text-decoration: none; }
 .pared::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; background: repeating-linear-gradient(90deg, transparent 0 3.2rem, rgba(255, 255, 255, .8) 3.2rem calc(3.2rem + 1px)), url("assets/texturas/lino.png") 0 0/256px; }
 
 .barra { position: relative; z-index: 4; background: #0d1527; box-shadow: 0 .6rem 1.4rem rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(227, 184, 101, .22); }
-.cab { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: .6rem 1rem; flex-wrap: wrap; max-width: 1560px; margin: 0 auto; padding: .4rem 1.5rem; }
+.cab { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: .6rem 1rem; flex-wrap: wrap; max-width: 97.5rem; margin: 0 auto; padding: .4rem 1.5rem; }
 .cab .firma { display: inline-flex; align-items: center; gap: .7rem; font: 700 1.5rem "Fredoka", sans-serif; letter-spacing: -.01em; }
 .cab .logo { height: 3.3rem; width: auto; display: block; }
 .cab .firma { line-height: 1; }
@@ -31,7 +32,7 @@ a { color: inherit; text-decoration: none; }
 .cab nav a { padding-bottom: .2rem; border-bottom: 2px solid transparent; }
 .cab nav a:hover, .cab nav a[aria-current] { border-color: var(--oro); }
 
-.portada { position: relative; z-index: 2; max-width: 1560px; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 2.5rem 3rem; align-items: start; }
+.portada { position: relative; z-index: 2; max-width: 97.5rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 2.5rem 3rem; align-items: start; }
 .titular h1 { margin: 0; font: 600 clamp(2.6rem, 5.4vw, 4.4rem)/.98 'Fraunces', serif; font-variation-settings: 'SOFT' 60, 'WONK' 1; letter-spacing: -.025em; }
 .titular h1 em { color: var(--oro); font-style: italic; font-weight: 400; }
 .titular p { margin: 1.1rem 0 0; max-width: 40ch; color: rgba(243, 234, 216, .8); font-size: 1.1rem; }
@@ -103,7 +104,7 @@ a.libro.izq:hover .etiqueta, a.libro.izq:focus-visible .etiqueta, a.libro.der:ho
 .pie b { display: block; margin-bottom: .3rem; font: 700 1.2rem 'Fredoka', sans-serif; color: var(--papel); }
 
 
-@media (max-width: 960px) {
+@media (max-width: 840px) {
   .portada { grid-template-columns: minmax(0, 1fr); padding-bottom: 3rem; }
   .cab nav { gap: 1.1rem; font-size: .95rem; }
   .nicho { overflow-x: auto; padding-inline: 1rem; scrollbar-width: none; }
