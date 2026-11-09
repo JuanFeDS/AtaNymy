@@ -29,3 +29,25 @@ python herramientas/armar_patrones.py design/fondos/cien-anos-iconos.webp sitio/
 
 - `--iconos` (por defecto 14) cambia la densidad; `--semilla` cambia la distribución.
 - La opacidad se ajusta en `cien.css` con `--opacidad-patron` (por defecto 0.075).
+
+## El Resplandor
+
+Hojas originales en `design/titeres/` y `design/fondos/`. Prompts en `prompts/06-resplandor-titeres.md`. Se guardan con estos nombres:
+
+- `design/titeres/resplandor-familia.webp` (hoja 1)
+- `design/titeres/resplandor-hotel.webp` (hoja 2)
+- `design/fondos/resplandor-objetos.webp` (hoja 3)
+- `design/fondos/resplandor-escenografia.webp` (hoja 4)
+
+```bash
+python herramientas/recortar_titeres.py design/titeres/resplandor-familia.webp sitio/assets/titeres/el-resplandor --nombres jack,wendy,danny,hallorann
+python herramientas/recortar_titeres.py design/titeres/resplandor-hotel.webp sitio/assets/titeres/el-resplandor --nombres senora-217,grady,lloyd,invitada
+python herramientas/recortar_titeres.py design/fondos/resplandor-objetos.webp sitio/assets/objetos/el-resplandor --sin-separar --nombres "mazo,llave-217,manometro,manguera,avispero,antifaz,copa,boton-ascensor,copo,recortes,maquina,coche"
+python herramientas/recortar_titeres.py design/fondos/resplandor-escenografia.webp sitio/assets/objetos/el-resplandor --sin-separar --nombres "caldera,banera,barra,puerta-217,seto-leon,seto-conejo,seto-perro,reloj"
+```
+
+- Los nombres de los títeres coinciden con los que ya espera `sitio/el-resplandor/index.html`.
+- Las hojas mixtas (personajes y objetos) se parten en dos imágenes antes de recortar.
+
+- Hoja de objetos: la última fila sale del recortador como libro, máquina de escribir y coche (orden por altura, no de lectura). Por eso los nombres van como `recortes,maquina,coche`.
+- Hoja de escenografía: los márgenes blancos de la bañera, la puerta y el conejo se tocan y el recortador los une. Se separó con un script que asigna cada píxel a la figura más cercana.
