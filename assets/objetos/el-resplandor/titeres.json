@@ -1,0 +1,102 @@
+{
+  "mazo": {
+    "archivo": "mazo.png",
+    "ancho": 269,
+    "alto": 359
+  },
+  "llave-217": {
+    "archivo": "llave-217.png",
+    "ancho": 297,
+    "alto": 343
+  },
+  "manometro": {
+    "archivo": "manometro.png",
+    "ancho": 298,
+    "alto": 349
+  },
+  "manguera": {
+    "archivo": "manguera.png",
+    "ancho": 327,
+    "alto": 326
+  },
+  "avispero": {
+    "archivo": "avispero.png",
+    "ancho": 333,
+    "alto": 370
+  },
+  "antifaz": {
+    "archivo": "antifaz.png",
+    "ancho": 342,
+    "alto": 303
+  },
+  "copa": {
+    "archivo": "copa.png",
+    "ancho": 246,
+    "alto": 348
+  },
+  "boton-ascensor": {
+    "archivo": "boton-ascensor.png",
+    "ancho": 286,
+    "alto": 291
+  },
+  "copo": {
+    "archivo": "copo.png",
+    "ancho": 294,
+    "alto": 341
+  },
+  "coche": {
+    "archivo": "coche.png",
+    "ancho": 326,
+    "alto": 217
+  },
+  "recortes": {
+    "archivo": "recortes.png",
+    "ancho": 371,
+    "alto": 325
+  },
+  "maquina": {
+    "archivo": "maquina.png",
+    "ancho": 324,
+    "alto": 356
+  },
+  "caldera": {
+    "archivo": "caldera.png",
+    "ancho": 347,
+    "alto": 409
+  },
+  "banera": {
+    "archivo": "banera.png",
+    "ancho": 432,
+    "alto": 373
+  },
+  "barra": {
+    "archivo": "barra.png",
+    "ancho": 450,
+    "alto": 361
+  },
+  "puerta-217": {
+    "archivo": "puerta-217.png",
+    "ancho": 286,
+    "alto": 417
+  },
+  "seto-leon": {
+    "archivo": "seto-leon.png",
+    "ancho": 448,
+    "alto": 332
+  },
+  "seto-conejo": {
+    "archivo": "seto-conejo.png",
+    "ancho": 308,
+    "alto": 338
+  },
+  "seto-perro": {
+    "archivo": "seto-perro.png",
+    "ancho": 367,
+    "alto": 376
+  },
+  "reloj": {
+    "archivo": "reloj.png",
+    "ancho": 392,
+    "alto": 396
+  }
+}

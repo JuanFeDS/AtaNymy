@@ -1,0 +1,47 @@
+{
+  "jack": {
+    "archivo": "jack.png",
+    "ancho": 245,
+    "alto": 771
+  },
+  "wendy": {
+    "archivo": "wendy.png",
+    "ancho": 241,
+    "alto": 763
+  },
+  "danny": {
+    "archivo": "danny.png",
+    "ancho": 270,
+    "alto": 672
+  },
+  "hallorann": {
+    "archivo": "hallorann.png",
+    "ancho": 311,
+    "alto": 760
+  },
+  "senora-217-v1": {
+    "archivo": "senora-217-v1.png",
+    "ancho": 325,
+    "alto": 741
+  },
+  "grady": {
+    "archivo": "grady.png",
+    "ancho": 358,
+    "alto": 710
+  },
+  "lloyd": {
+    "archivo": "lloyd.png",
+    "ancho": 342,
+    "alto": 842
+  },
+  "invitada": {
+    "archivo": "invitada.png",
+    "ancho": 472,
+    "alto": 828
+  },
+  "senora-217": {
+    "archivo": "senora-217.png",
+    "ancho": 521,
+    "alto": 652
+  }
+}
