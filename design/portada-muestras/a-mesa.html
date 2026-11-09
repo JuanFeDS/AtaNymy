@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Muestra A · Mesa de objetos</title>
+<link rel="stylesheet" href="base.css">
+<style>
+body { background: radial-gradient(60rem 36rem at 70% 10%, #34487a 0%, transparent 70%), var(--night); min-height: 100vh; }
+.tapete { position:fixed; inset:0; background: url("../../sitio/assets/patrones/cien-anos/mariposas.png") 0 0/520px; opacity:.05; filter: invert(1); pointer-events:none; }
+.mesa { position:relative; max-width:1180px; margin:0 auto; padding: 1rem 1.5rem 6rem; min-height: 64rem; }
+.saludo { max-width: 26rem; margin: 2rem 0 0 .5rem; position:relative; z-index:3; }
+.saludo h1 { font: 600 clamp(2.4rem,5vw,3.6rem)/.95 'Fredoka'; margin:0; letter-spacing:-.02em; }
+.saludo p { font: 500 1.6rem/1.15 'Caveat';  color: var(--ochre); margin:.9rem 0 0 9rem; transform: rotate(-1.5deg); }
+.pieza { position:absolute; transition: transform .45s cubic-bezier(.3,.7,.2,1.25); display:block; }
+.pieza:hover { transform: translateY(-.9rem) rotate(0deg) !important; z-index: 9; }
+.papel { position:relative; padding: 1.6rem 1.4rem 1.4rem; overflow:hidden; }
+.papel h2 { margin:0; }
+.nota-mano { font: 700 1.25rem/1 'Caveat'; }
+.cien { left: 1%; top: 17rem; width: 22rem; transform: rotate(-3deg); }
+.cien .papel { height: 29rem; background: linear-gradient(160deg, var(--cien-1), var(--cien-2)); display:flex; flex-direction:column; justify-content:flex-end; }
+.cien .papel::before { content:""; position:absolute; inset:0; background: var(--cien-ac); opacity:.14; -webkit-mask: url("../../sitio/assets/patrones/cien-anos/insomnio.png") 0 0/420px; mask: url("../../sitio/assets/patrones/cien-anos/insomnio.png") 0 0/420px; }
+.cien h2 { position:relative; font: 800 2.7rem/.92 'Fraunces'; font-variation-settings: 'SOFT' 100, 'WONK' 1; color: var(--cien-ac); letter-spacing:-.02em; }
+.cien .nota-mano { position:relative; margin-top:.8rem; color:#fff4d6; }
+.cien .ursula { position:absolute; left: 4.2rem; top: -8.2rem; height: 20rem; z-index:7; transition: transform .5s cubic-bezier(.3,.7,.2,1.3); transform-origin: 50% 100%; filter: drop-shadow(0 .5rem .4rem rgba(0,0,0,.4)); }
+.cien:hover .ursula { transform: translateY(-1.4rem) rotate(3deg); }
+.cien .iman { position:absolute; right:-1.2rem; top:3.5rem; width:6.2rem; z-index:7; transform: rotate(18deg); filter: drop-shadow(0 .3rem .3rem rgba(0,0,0,.4)); }
+.cien .hielo { position:absolute; left:-1.6rem; bottom:11rem; width:5rem; z-index:7; transform: rotate(-12deg); filter: drop-shadow(0 .3rem .3rem rgba(0,0,0,.4)); }
+.med { left: 36%; top: 9rem; width: 20rem; transform: rotate(2.5deg); }
+.med .papel { height: 24rem; background: linear-gradient(115deg, var(--med-1) 0 54%, var(--med-2) 54% 100%); display:flex; flex-direction:column; justify-content:flex-end; }
+.med h2 { position:relative; font: 400 2.25rem/1 'Libre Caslon Text'; font-style: italic; color: #F3EBDD; }
+.med .nota-mano { position:relative; margin-top:.7rem; color: var(--med-ac); }
+.med svg { position:absolute; top:1.4rem; right:1rem; width:9.5rem; color: var(--med-ac); }
+.med .pegatina { position:absolute; left:-.9rem; top: 1.2rem; z-index:7; background: var(--coral); color: var(--med-1); font: 700 .95rem 'Fredoka'; padding:.35rem .8rem; border-radius: 1rem; transform: rotate(-9deg); box-shadow: 0 .2rem .3rem rgba(0,0,0,.35); }
+.qui { left: 68%; top: 15rem; width: 19rem; transform: rotate(-1.8deg); }
+.qui .papel { height: 26rem; background: var(--quij); display:flex; flex-direction:column; justify-content:flex-end; }
+.qui h2 { position:relative; font: 700 2.15rem/1.02 'Libre Caslon Text'; color: #F8F4EA; }
+.qui .nota-mano { position:relative; margin-top:.8rem; color:#ffd9c7; }
+.qui svg { position:absolute; top:.6rem; left:.8rem; width:15rem; color:#F8F4EA; opacity:.95; }
+.leyendo { left: 34%; top: 37rem; width: 16.5rem; transform: rotate(-4deg); z-index: 4; }
+.leyendo .papel { background:#FFE27A; color:#33241B; padding:1.5rem 1.2rem 1.2rem; }
+.leyendo .papel b { display:block; font: 700 1.55rem/1 'Caveat'; }
+.leyendo .papel small { display:block; font: 500 1.2rem/1.1 'Caveat'; margin-top:.4rem; }
+.leyendo .lapiz { height:.6rem; margin-top:.9rem; background: linear-gradient(90deg,#33241B 0 38%, rgba(51,36,27,.22) 38%); border-radius:.4rem; }
+.leyendo .chincheta { position:absolute; top:-.7rem; left:50%; width:1.5rem; height:1.5rem; border-radius:50%; background: radial-gradient(circle at 35% 30%, #ff9a85, #c8422b 60%); z-index:8; box-shadow: 0 .3rem .3rem rgba(0,0,0,.4); }
+@media (max-width: 900px) { .mesa { min-height: 0; display:flex; flex-direction:column; gap: 7rem; padding-top:0 } .pieza { position:relative; left:auto !important; top:auto !important; margin: 0 auto; } .saludo { margin-bottom: 6rem } }
+</style></head><body>
+<div class="tapete"></div>
+<header class="cab"><b>Ata Nymy</b><nav><a href="#">Mesa</a><a href="#">Reseñas</a><a href="#">Frasearios</a><a href="#">Cuadernos</a></nav></header>
+<main class="mesa">
+  <div class="saludo"><h1>Lo que he leído, sobre la mesa.</h1><p>Toca lo que te llame la atención.</p></div>
+  <a class="pieza cien" href="#"><i class="cinta" style="left:1rem;top:-.5rem"></i><i class="cinta" style="right:1rem;top:-.4rem;--r:5deg"></i>
+    <img class="ursula" src="../../sitio/assets/titeres/cien-anos/ursula.png" alt="">
+    <img class="iman" src="../../sitio/assets/objetos/cien-anos/iman.png" alt=""><img class="hielo" src="../../sitio/assets/objetos/cien-anos/hielo.png" alt="">
+    <div class="sombra-papel"><div class="papel" data-rasgado="3" data-aspereza="1.6"><h2>Cien años de soledad</h2><div class="nota-mano">reseña · oct 2026<br>siete generaciones y dos nombres</div></div></div></a>
+  <a class="pieza med" href="#"><span class="pegatina">cuaderno</span><i class="cinta" style="right:2rem;top:-.5rem;--r:8deg"></i>
+    <div class="sombra-papel"><div class="papel" data-rasgado="11"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="30" stroke-dasharray="2 5"/><path d="M50 8 L58 50 L50 92 L42 50 Z" fill="currentColor" fill-opacity=".25"/><path d="M8 50h84"/></svg><h2>La medición del mundo</h2><div class="nota-mano">cuaderno · sep 2026<br>dos genios y medio planeta</div></div></div></a>
+  <a class="pieza qui" href="#"><i class="cinta" style="left:50%;top:-.5rem;--r:-3deg"></i>
+    <div class="sombra-papel"><div class="papel" data-rasgado="23" data-aspereza="1.3"><svg viewBox="0 0 160 120" fill="currentColor"><path d="M20 118 L34 52 H62 L74 118Z"/><path d="M48 46 L48 8 M48 46 L10 22 M48 46 L86 70 M48 46 L88 20 M48 46 L8 70" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M48 8 L66 6 L62 24Z M88 20 L106 26 L96 38Z M10 22 L4 40 L22 36Z M86 70 L98 80 L82 84Z M8 70 L24 66 L22 84Z"/><circle cx="48" cy="46" r="7"/><path d="M0 118 H160" stroke="currentColor" stroke-width="3"/></svg><h2>Don Quijote de la Mancha</h2><div class="nota-mano">fraseario · nov 2026<br>ocho frases y una falsa</div></div></div></a>
+  <div class="pieza leyendo"><i class="chincheta"></i><div class="sombra-papel"><div class="papel" data-rasgado="5" data-aspereza=".6"><small>ahora leyendo →</small><b>Por quién doblan las campanas</b><div class="lapiz"></div><small>38 %, tres días en la sierra</small></div></div></div>
+</main>
+<div class="muestra">muestra A · mesa de objetos</div>
+<script src="rasgado.js"></script></body></html>

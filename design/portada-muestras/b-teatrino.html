@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Muestra B · Teatrino</title>
+<link rel="stylesheet" href="base.css">
+<style>
+body { min-height: 100vh; background: #151e33; --luz-x: 50%; }
+.cab { position:absolute; left:0; right:0; top:0; }
+.cab b, .cab nav a { text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+.escena { position:relative; min-height: 100vh; display:grid; grid-template-rows: auto 1fr auto; overflow:hidden;
+  background: radial-gradient(38rem 30rem at var(--luz-x) 55%, rgba(255,214,140,.32), transparent 70%), linear-gradient(#25345a, #151e33 70%); }
+.cortina { height: 6.5rem; background:
+  radial-gradient(circle at 50% 100%, var(--plum) 0 2.2rem, transparent 2.3rem) 0 100%/4.4rem 3rem repeat-x,
+  repeating-linear-gradient(90deg, #6d3d54 0 1.1rem, #5C3447 1.1rem 2.2rem); position:relative; z-index:12;
+  box-shadow: 0 1.2rem 1.6rem -.6rem rgba(0,0,0,.55); border-bottom: .35rem solid var(--ochre); }
+.cortina::after { content:"ATA NYMY · FUNCIÓN DE LECTURA"; position:absolute; left:50%; bottom:1.2rem; transform:translateX(-50%); font: 600 .78rem 'Fredoka'; letter-spacing:.28em; color: var(--ochre); white-space:nowrap; }
+.telon-l, .telon-r { position:absolute; top:0; bottom:0; width: 7vw; background: repeating-linear-gradient(90deg, #6d3d54 0 1.1rem, #5C3447 1.1rem 2.2rem); z-index:11; box-shadow: 0 0 2rem rgba(0,0,0,.6); }
+.telon-l { left:0; } .telon-r { right:0; }
+.titulo { position:relative; z-index:5; text-align:center; padding: 1.6rem 1rem 0; }
+.titulo h1 { margin:0; font: 600 clamp(1.8rem,4vw,3rem)/1 'Fredoka'; letter-spacing:-.01em; }
+.titulo p { margin:.4rem 0 0; font: 500 1.5rem 'Caveat'; color: var(--ochre); }
+.tablas { position:relative; z-index:8; display:flex; justify-content:center; align-items:flex-end; gap: clamp(1rem,5vw,5rem); padding: 0 9vw; min-height: 22rem; }
+.titere { position:relative; display:flex; flex-direction:column; align-items:center; width: 15rem; transition: transform .6s cubic-bezier(.3,.7,.2,1.25); transform: translateY(var(--baja,5rem)); }
+.titere:hover, .titere:focus-visible { transform: translateY(-.5rem); }
+.titere .fig { height: 15rem; display:flex; align-items:flex-end; justify-content:center; width:100%; filter: drop-shadow(0 .5rem .5rem rgba(0,0,0,.5)); }
+.titere .fig img { height:100%; width:auto; transform-origin: 50% 100%; animation: mece var(--r,3.6s) ease-in-out infinite alternate; }
+@keyframes mece { from { transform: rotate(-1.8deg) } to { transform: rotate(1.8deg) translateY(-.3rem) } }
+.titere .palo { width:.55rem; height:3.4rem; background: linear-gradient(90deg,#c79a63,#8e6538); }
+.cartel { position:relative; margin-top:-.4rem; z-index: 8; width: 14rem; padding:.8rem 1rem .9rem; text-align:center; transform: rotate(var(--g,-2deg)); }
+.cartel.c1 { background: linear-gradient(160deg, var(--cien-1), var(--cien-2)); color: var(--cien-ac); font-family:'Fraunces'; font-variation-settings:'SOFT' 100,'WONK' 1; font-weight:800; }
+.cartel.c2 { background: linear-gradient(115deg, var(--med-1) 55%, var(--med-2) 55%); color:#F3EBDD; font-family:'Libre Caslon Text'; font-style:italic; }
+.cartel.c3 { background: var(--quij); color:#F8F4EA; font-family:'Libre Caslon Text'; font-weight:700; }
+.cartel b { display:block; font-size:1.25rem; line-height:1.05; font-weight:inherit; }
+.cartel small { display:block; margin-top:.35rem; font: 700 1.1rem/1 'Caveat'; font-style:normal; opacity:.92; }
+.utileria { height: 15rem; width:100%; display:flex; align-items:flex-end; justify-content:center; color:#F8F4EA; filter: drop-shadow(0 .5rem .5rem rgba(0,0,0,.5)); }
+.utileria svg { height: 100%; }
+.tablado { position:relative; z-index:7; height: 6.5rem; background: repeating-linear-gradient(90deg,#7A5236 0 6rem,#6c4630 6rem 6.12rem), #7A5236; border-top: .5rem solid #916443; box-shadow: 0 -1rem 2rem rgba(0,0,0,.5); display:flex; justify-content:flex-end; align-items:center; padding: 0 12vw; }
+.leyendo { z-index: 9; position:absolute; right: 10vw; top: 11rem; font: 700 1.5rem/1.05 'Caveat'; color:#33241B; background:#FFE27A; padding:.8rem 1.1rem; transform: rotate(2deg); box-shadow: 0 .3rem .5rem rgba(0,0,0,.4); max-width: 15rem; }
+.leyendo small { display:block; font-size:1.15rem; font-weight:500; margin-top:.2rem; }
+.leyendo .lapiz { height:.45rem; margin-top:.5rem; background: linear-gradient(90deg,#33241B 0 38%, rgba(51,36,27,.22) 38%); border-radius:.3rem; }
+.tablado .lema { position:absolute; left: 50%; transform:translateX(-50%); text-align:center; display:none; font: 500 1.35rem/1.1 'Caveat'; color:#f3d8b3; max-width: 13rem; }
+@media (max-width: 900px) { .tablas { flex-direction:column; align-items:center; padding-bottom:3rem } .titere { --baja:0rem } .tablado { flex-direction:column; height:auto; padding:2rem 1rem; gap:1rem } .tablado .lema { position:static } .telon-l,.telon-r{width:3vw} }
+</style></head><body>
+<header class="cab"><b>Ata Nymy</b><nav><a href="#">Escenario</a><a href="#">Reseñas</a><a href="#">Frasearios</a><a href="#">Cuadernos</a></nav></header>
+<div class="escena" id="escena">
+  <div class="cortina"></div><div class="telon-l"></div><div class="telon-r"></div>
+  <div class="titulo"><h1>Hoy se leen tres obras</h1><p>Sube el títere para entrar</p></div>
+  <div class="leyendo">en escena ahora:<br>Por quién doblan las campanas<small>38 % · tres días en la sierra</small><div class="lapiz"></div></div>
+  <div class="tablas">
+    <a class="titere" href="#" style="--baja:3rem;--g:-2deg">
+      <div class="fig"><img src="../../sitio/assets/titeres/cien-anos/melquiades.png" alt=""></div><div class="palo"></div>
+      <div class="cartel c1"><b>Cien años de soledad</b><small>reseña · oct 2026</small></div></a>
+    <a class="titere" href="#" style="--baja:6rem;--g:1.8deg;--r:4.2s">
+      <div class="utileria"><svg viewBox="0 0 100 100" fill="none" stroke="#FFB627" stroke-width="2.2" stroke-linecap="round"><circle cx="50" cy="50" r="42" fill="#14213D"/><path d="M8 50a42 42 0 0 1 84 0z" fill="#0F7A5A" stroke="none"/><circle cx="50" cy="50" r="30" stroke-dasharray="2 5"/><path d="M50 8 L58 50 L50 92 L42 50 Z" fill="#FFB627" fill-opacity=".35"/><path d="M8 50h84"/></svg></div><div class="palo"></div>
+      <div class="cartel c2"><b>La medición del mundo</b><small>cuaderno · sep 2026</small></div></a>
+    <a class="titere" href="#" style="--baja:4rem;--g:-1.2deg;--r:3.9s">
+      <div class="utileria"><svg viewBox="0 0 160 160" fill="#F8F4EA"><rect x="2" y="2" width="156" height="156" rx="6" fill="#A63A24"/><path d="M50 150 L62 92 H90 L102 150Z"/><path d="M76 86 L76 36 M76 86 L30 56 M76 86 L124 112 M76 86 L120 50 M76 86 L32 112" stroke="#F8F4EA" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M76 36 L96 34 L90 52Z M120 50 L138 56 L128 68Z M30 56 L24 74 L44 70Z M124 112 L136 122 L120 126Z M32 112 L48 108 L46 126Z"/><circle cx="76" cy="86" r="7"/></svg></div><div class="palo"></div>
+      <div class="cartel c3"><b>Don Quijote de la Mancha</b><small>fraseario · nov 2026</small></div></a>
+  </div>
+  <div class="tablado"><div class="lema">Cada libro sube al escenario con lo suyo.</div></div>
+</div>
+<div class="muestra">muestra B · teatrino</div>
+<script>const e=document.getElementById('escena');e.addEventListener('pointermove',v=>{e.style.setProperty('--luz-x',(v.clientX/e.clientWidth*100)+'%')});</script>
+</body></html>
