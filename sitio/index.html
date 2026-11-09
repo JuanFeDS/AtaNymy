@@ -19,15 +19,19 @@ a { color: inherit; text-decoration: none; }
 
 .pared { position: relative; background: radial-gradient(46rem 30rem at 70% 12%, rgba(255, 196, 110, .2), transparent 70%), linear-gradient(#1b2847, #121b31 90%); }
 .pared::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .12; pointer-events: none; }
-.pared::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .06; background: repeating-linear-gradient(90deg, transparent 0 3.2rem, #fff 3.2rem calc(3.2rem + 1px)); }
+.pared::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; background: repeating-linear-gradient(90deg, transparent 0 3.2rem, rgba(255, 255, 255, .8) 3.2rem calc(3.2rem + 1px)), url("assets/texturas/lino.png") 0 0/256px; }
 
-.cab { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; max-width: 1240px; margin: 0 auto; padding: 1.5rem 1.5rem 0; }
-.cab .firma { font: 700 1.5rem 'Fredoka', sans-serif; letter-spacing: -.01em; }
+.barra { position: relative; z-index: 4; background: #0d1527; box-shadow: 0 .6rem 1.4rem rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(227, 184, 101, .22); }
+.cab { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: .6rem 1rem; flex-wrap: wrap; max-width: 1560px; margin: 0 auto; padding: .4rem 1.5rem; }
+.cab .firma { display: inline-flex; align-items: center; gap: .7rem; font: 700 1.5rem "Fredoka", sans-serif; letter-spacing: -.01em; }
+.cab .logo { height: 3.3rem; width: auto; display: block; }
+.cab .firma { line-height: 1; }
+.cab nav a { line-height: 1.6; }
 .cab nav { display: flex; gap: 1.8rem; font-weight: 500; }
 .cab nav a { padding-bottom: .2rem; border-bottom: 2px solid transparent; }
 .cab nav a:hover, .cab nav a[aria-current] { border-color: var(--oro); }
 
-.portada { position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 2.5rem 3rem; align-items: start; }
+.portada { position: relative; z-index: 2; max-width: 1560px; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 2.5rem 3rem; align-items: start; }
 .titular h1 { margin: 0; font: 600 clamp(2.6rem, 5.4vw, 4.4rem)/.98 'Fraunces', serif; font-variation-settings: 'SOFT' 60, 'WONK' 1; letter-spacing: -.025em; }
 .titular h1 em { color: var(--oro); font-style: italic; font-weight: 400; }
 .titular p { margin: 1.1rem 0 0; max-width: 40ch; color: rgba(243, 234, 216, .8); font-size: 1.1rem; }
@@ -49,9 +53,9 @@ a { color: inherit; text-decoration: none; }
 .libro::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .45; border-radius: inherit; pointer-events: none; }
 .banda { position: absolute; left: 0; right: 0; height: .55rem; background: linear-gradient(90deg, var(--oro-2), var(--oro) 40%, var(--oro-2)); opacity: .9; box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
 .banda.a { top: .9rem; } .banda.b { top: 1.7rem; height: .18rem; } .banda.c { bottom: 2.6rem; height: .18rem; } .banda.d { bottom: 3.2rem; }
-.libro .titulo { position: relative; margin-top: 2.4rem; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 .98rem/1 'Fraunces', serif; letter-spacing: .01em; white-space: nowrap; max-height: calc(var(--alto) - 5.4rem); overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+.libro .titulo { position: relative; margin-top: 2.4rem; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 var(--fs, .98rem)/1 'Fraunces', serif; letter-spacing: .01em; white-space: nowrap; max-height: calc(var(--alto) - 6.8rem); overflow: hidden; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
 .libro.apagado { filter: saturate(.6) brightness(.82); }
-.libro.inclinado { transform: rotate(-11deg); margin-inline: 1.6rem .6rem; }
+.libro.inclinado { transform-origin: bottom left; transform: rotate(-11deg); margin-left: calc(var(--alto) * .19 + .1rem); margin-right: .9rem; }
 a.libro:hover, a.libro:focus-visible { transform: translateY(-1.1rem) rotate(-1.5deg); box-shadow: .6rem .6rem 1rem rgba(0, 0, 0, .55); z-index: 5; }
 a.libro.inclinado:hover, a.libro.inclinado:focus-visible { transform: translateY(-1.1rem) rotate(-8deg); }
 .sujetalibros { flex: none; align-self: flex-end; width: 2.2rem; height: 6.4rem; background: linear-gradient(90deg, #d8a850, #a8782c); border-radius: .2rem .2rem 0 0; box-shadow: .3rem 0 .5rem rgba(0, 0, 0, .5); margin-left: .4rem; }
@@ -98,6 +102,7 @@ a.libro.izq:hover .etiqueta, a.libro.izq:focus-visible .etiqueta, a.libro.der:ho
 .pie { position: relative; padding: 2.4rem 1.5rem 3rem; text-align: center; background: var(--grano), #0b1222; color: rgba(243, 234, 216, .75); font-size: .95rem; }
 .pie b { display: block; margin-bottom: .3rem; font: 700 1.2rem 'Fredoka', sans-serif; color: var(--papel); }
 
+
 @media (max-width: 960px) {
   .portada { grid-template-columns: minmax(0, 1fr); padding-bottom: 3rem; }
   .cab nav { gap: 1.1rem; font-size: .95rem; }
@@ -110,10 +115,10 @@ a.libro.izq:hover .etiqueta, a.libro.izq:focus-visible .etiqueta, a.libro.der:ho
 </head>
 <body>
 <div class="pared">
-  <header class="cab">
-    <a class="firma" href="./">Ata Nymy</a>
+  <header class="barra"><div class="cab">
+    <a class="firma" href="./"><img class="logo" src="assets/jaguar.png" alt="" onerror="this.remove()">Ata Nymy</a>
     <nav aria-label="Principal"><a href="./" aria-current="page">Estantería</a><a href="cien-anos-de-soledad/">Reseñas</a><a href="quijote/">Frasearios</a><a href="la-medicion-del-mundo/">Cuadernos</a></nav>
-  </header>
+  </div></header>
 
   <main class="portada">
     <div class="principal">
@@ -125,10 +130,10 @@ a.libro.izq:hover .etiqueta, a.libro.izq:focus-visible .etiqueta, a.libro.der:ho
       <section class="estanteria" aria-label="Últimas lecturas">
         <div class="nicho">
           <a class="libro izq" href="cien-anos-de-soledad/" style="--c:#1f7a52;--t:#ffd23f;--alto:21rem;--ancho:3.9rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Cien años de soledad</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Reseña · oct 2026</small><b>Cien años de soledad</b><span>Siete generaciones y dos nombres.</span></div></a>
-          <a class="libro" href="la-medicion-del-mundo/" style="--c:#14213d;--t:#ffb627;--alto:18.5rem;--ancho:3.3rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">La medición del mundo</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Cuaderno · sep 2026</small><b>La medición del mundo</b><span>Dos genios y medio planeta.</span></div></a>
+          <a class="libro" href="la-medicion-del-mundo/" style="--c:#14213d;--t:#ffb627;--alto:19.5rem;--ancho:3.3rem;--fs:.86rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">La medición del mundo</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Cuaderno · sep 2026</small><b>La medición del mundo</b><span>Dos genios y medio planeta.</span></div></a>
           <div class="libro apagado" style="--c:#5c3447;--alto:17rem;--ancho:2.7rem"><i class="banda a"></i><span class="titulo">Pedro Páramo</span><i class="banda d"></i></div>
           <a class="libro" href="quijote/" style="--c:#a63a24;--t:#f4e6c8;--alto:22rem;--ancho:4.6rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Don Quijote de la Mancha</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Fraseario · nov 2026</small><b>Don Quijote de la Mancha</b><span>Ocho frases comprobadas y una que no está.</span></div></a>
-          <div class="libro inclinado" style="--c:#3e5b78;--t:#ffcc7e;--alto:21rem;--ancho:3.6rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Por quién doblan las campanas</span><i class="banda d"></i></div>
+          <div class="libro inclinado" style="--c:#3e5b78;--t:#ffcc7e;--alto:21rem;--ancho:3.6rem;--fs:.84rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Por quién doblan las campanas</span><i class="banda d"></i></div>
           <div class="libro apagado" style="--c:#8c9a3a;--t:#2b1d15;--alto:15rem;--ancho:2.5rem"><i class="banda a"></i><span class="titulo">La vegetariana</span><i class="banda d"></i></div>
           <div class="libro apagado" style="--c:#7a5236;--alto:18rem;--ancho:3.2rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Memorias de Adriano</span><i class="banda d"></i></div>
           <span class="vacio"></span><div class="sujetalibros"></div>
