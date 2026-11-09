@@ -4,145 +4,174 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ata Nymy · Bitácora de lectura</title>
-<link rel="stylesheet" href="comun/taller.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fredoka:wght@600;700&display=swap">
 <style>
-/* La única página nocturna: la estantería. */
-:root { --papel: var(--an-night); --papel-hi: var(--an-night-light); --tinta: var(--an-parchment); --tinta-suave: rgba(240,228,204,.72); --tinta-2: var(--an-moss); }
-body { background: var(--an-grain-light), radial-gradient(70rem 40rem at 80% 0%, var(--an-night-light) 0%, transparent 70%), var(--an-night); }
-.franja { background: transparent; }
-
-.intro { display: grid; grid-template-columns: 1fr; gap: 3rem 4rem; padding-block: clamp(2.5rem, 6vw, 4.5rem) 1rem; align-items: end; }
-@media (min-width: 1000px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); } }
-.intro h1 { max-width: 14ch; }
-.intro .bajada { color: var(--tinta-suave); }
-.intro .cifras { margin-top: 2rem; color: var(--tinta-suave); line-height: 2; }
-.intro .cifras b { color: var(--an-ochre); font-weight: 400; }
-
-/* Estantería */
-.estante { position: relative; min-width: 0; }
-.lomos { display: flex; align-items: flex-end; gap: 0.35rem; min-height: 22rem; padding-inline: 1rem; overflow-x: auto; overflow-y: visible; padding-top: 3rem; scrollbar-width: none; }
-.tabla { height: 1.1rem; background: linear-gradient(#5A3F2C, #3B2A1E); box-shadow: 0 14px 24px -10px rgba(0,0,0,.6); border-radius: 2px; }
-.lomo {
-  --alto: 17rem; --ancho: 3.2rem;
-  flex: none; height: var(--alto); width: var(--ancho);
-  background: var(--an-grain-dark), var(--lomo-bg);
-  color: var(--lomo-tx);
-  border-radius: 3px 3px 1px 1px;
-  display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 0.9rem 0 0.7rem;
-  text-decoration: none; position: relative;
-  box-shadow: inset 3px 0 0 rgba(255,255,255,.08), inset -4px 0 0 rgba(0,0,0,.18);
-  transform-origin: bottom center; transition: transform .35s cubic-bezier(.3,.7,.2,1.2);
+:root {
+  --noche: #18233d; --oro: #e3b865; --oro-2: #a8782c; --papel: #f3ead8; --tinta: #2b1d15;
+  --grano: url("assets/texturas/grano.png"); --veta: url("assets/texturas/veta.png"); --papel-grano: url("assets/texturas/papel.png");
 }
-.lomo span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--an-font-title); font-size: 1.05rem; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: calc(var(--alto) - 4rem); }
-.lomo small { font-family: var(--an-font-mono); font-size: 0.55rem; letter-spacing: 0.12em; opacity: .75; }
-.lomo::before { content: ""; position: absolute; left: 0; right: 0; top: 2.4rem; height: 0.3rem; background: currentColor; opacity: .35; }
-a.lomo:hover, a.lomo:focus-visible { transform: translateY(-1.2rem) rotate(-2deg); }
-.lomo.inclinado { transform: rotate(-9deg); margin-inline: 1.7rem 0.3rem; }
-.lomo.por-leer { filter: saturate(.55) brightness(.85); }
-.lomo .marcap { position: absolute; top: -1.6rem; left: 50%; width: 0.55rem; height: 2.4rem; background: var(--an-moss); transform: translateX(-50%); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
-.dormilon { flex: none; align-self: flex-end; width: 7.5rem; display: grid; place-items: end center; color: var(--an-ochre); font-size: 3.4rem; padding-left: 1rem; }
-.dormilon img { width: 100%; height: auto; }
-.estante-pie { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem; color: var(--tinta-suave); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--papel); font: 400 1.05rem/1.6 'Bricolage Grotesque', sans-serif; background: #121b31; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--oro); outline-offset: 3px; }
 
-/* Ahora leyendo */
-.leyendo { display: grid; grid-template-columns: 1fr; gap: 2rem 4rem; margin-top: var(--web-space-block); padding-top: 2rem; border-top: 1px solid rgba(240,228,204,.18); }
-@media (min-width: 900px) { .leyendo { grid-template-columns: 1fr 1.3fr; } }
-.leyendo h2 { margin-top: 0.7rem; }
-.progreso { position: relative; height: 2.6rem; margin-top: 1.2rem; }
-.progreso svg { width: 100%; height: 100%; overflow: visible; color: var(--an-ochre); }
-.progreso .mono { color: var(--tinta-suave); }
-.leyendo p { margin: 0 0 1em; color: rgba(240,228,204,.85); max-width: 54ch; }
+.pared { position: relative; background: radial-gradient(46rem 30rem at 70% 12%, rgba(255, 196, 110, .2), transparent 70%), linear-gradient(#1b2847, #121b31 90%); }
+.pared::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .12; pointer-events: none; }
+.pared::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; background: repeating-linear-gradient(90deg, transparent 0 3.2rem, rgba(255, 255, 255, .8) 3.2rem calc(3.2rem + 1px)), url("assets/texturas/lino.png") 0 0/256px; }
 
-/* Últimas entradas: lista, no tarjetas */
-.entradas { margin-top: var(--web-space-block); }
-.entradas ol { list-style: none; margin: 1.2rem 0 0; padding: 0; }
-.entradas a { display: grid; grid-template-columns: 1fr; gap: 0.3rem 2rem; padding: 1.4rem 0.8rem; border-top: 1px solid rgba(240,228,204,.18); text-decoration: none; position: relative; isolation: isolate; transition: color .25s; }
-@media (min-width: 800px) { .entradas a { grid-template-columns: 7rem 8rem 1fr 1.3fr; align-items: baseline; } }
-.entradas a::before { content: ""; position: absolute; inset: 0; background: var(--fila); z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.6,.1,.2,1); }
-.entradas a:hover::before, .entradas a:focus-visible::before { transform: scaleX(1); }
-.entradas a:hover, .entradas a:focus-visible { color: var(--fila-tx); }
-.entradas a:hover .mono, .entradas a:hover .gancho { color: inherit; }
-.entradas .mono { color: var(--tinta-suave); }
-.entradas .titulo { font: 400 1.5rem/1.15 var(--an-font-title); }
-.entradas .gancho { color: rgba(240,228,204,.78); font-size: 1rem; }
-.pie { border-top-color: rgba(240,228,204,.18); }
+.barra { position: relative; z-index: 4; background: #0d1527; box-shadow: 0 .6rem 1.4rem rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(227, 184, 101, .22); }
+.cab { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: .6rem 1rem; flex-wrap: wrap; max-width: 1560px; margin: 0 auto; padding: .4rem 1.5rem; }
+.cab .firma { display: inline-flex; align-items: center; gap: .7rem; font: 700 1.5rem "Fredoka", sans-serif; letter-spacing: -.01em; }
+.cab .logo { height: 3.3rem; width: auto; display: block; }
+.cab .firma { line-height: 1; }
+.cab nav a { line-height: 1.6; }
+.cab nav { display: flex; gap: 1.8rem; font-weight: 500; }
+.cab nav a { padding-bottom: .2rem; border-bottom: 2px solid transparent; }
+.cab nav a:hover, .cab nav a[aria-current] { border-color: var(--oro); }
+
+.portada { position: relative; z-index: 2; max-width: 1560px; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 2.5rem 3rem; align-items: start; }
+.titular h1 { margin: 0; font: 600 clamp(2.6rem, 5.4vw, 4.4rem)/.98 'Fraunces', serif; font-variation-settings: 'SOFT' 60, 'WONK' 1; letter-spacing: -.025em; }
+.titular h1 em { color: var(--oro); font-style: italic; font-weight: 400; }
+.titular p { margin: 1.1rem 0 0; max-width: 40ch; color: rgba(243, 234, 216, .8); font-size: 1.1rem; }
+
+.estanteria { margin-top: 3.2rem; }
+.nicho { position: relative; border-radius: .5rem .5rem 0 0; padding: 3rem 1.6rem 0; display: flex; align-items: flex-end; gap: .3rem; min-height: 25rem; background: linear-gradient(#0c1220, #131c33 40%, #0f1729); box-shadow: inset 0 1.6rem 2.6rem rgba(0, 0, 0, .65), inset 1.4rem 0 1.8rem -1rem rgba(0, 0, 0, .6), inset -1.4rem 0 1.8rem -1rem rgba(0, 0, 0, .6); }
+.nicho::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .12; border-radius: inherit; pointer-events: none; }
+.tabla { position: relative; height: 1.6rem; background: var(--veta), linear-gradient(#a8703f, #7b4a26 55%, #5a3419); box-shadow: 0 1.8rem 2.2rem -.6rem rgba(0, 0, 0, .6), inset 0 .22rem 0 rgba(255, 214, 160, .38), inset 0 -.25rem 0 rgba(0, 0, 0, .3); border-radius: .15rem; }
+.estanteria .pie-estante { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.4rem; font-size: .92rem; color: rgba(243, 234, 216, .65); }
+.pie-estante a { color: var(--oro); border-bottom: 1px solid rgba(227, 184, 101, .4); }
+.pie-estante a:hover { border-color: var(--oro); }
+
+.libro { --alto: 19rem; --ancho: 3.6rem; --c: #7a2a1a; --t: var(--oro);
+  position: relative; flex: none; width: var(--ancho); height: var(--alto); display: flex; flex-direction: column; align-items: center; padding: 1.1rem 0 1rem; color: var(--t);
+  border-radius: .22rem .22rem .08rem .08rem; transform-origin: bottom center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 14%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .4)), repeating-linear-gradient(0deg, rgba(0, 0, 0, .09) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 3px), var(--c);
+  box-shadow: .35rem 0 .6rem rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(0, 0, 0, .25);
+  transition: transform .45s cubic-bezier(.3, .7, .2, 1.2), box-shadow .45s; }
+.libro::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .45; border-radius: inherit; pointer-events: none; }
+.banda { position: absolute; left: 0; right: 0; height: .55rem; background: linear-gradient(90deg, var(--oro-2), var(--oro) 40%, var(--oro-2)); opacity: .9; box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+.banda.a { top: .9rem; } .banda.b { top: 1.7rem; height: .18rem; } .banda.c { bottom: 2.6rem; height: .18rem; } .banda.d { bottom: 3.2rem; }
+.libro .titulo { position: relative; margin-top: 2.4rem; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 var(--fs, .98rem)/1 'Fraunces', serif; letter-spacing: .01em; white-space: nowrap; max-height: calc(var(--alto) - 6.8rem); overflow: hidden; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+.libro.apagado { filter: saturate(.6) brightness(.82); }
+.libro.inclinado { transform-origin: bottom left; transform: rotate(-11deg); margin-left: calc(var(--alto) * .19 + .1rem); margin-right: .9rem; }
+a.libro:hover, a.libro:focus-visible { transform: translateY(-1.1rem) rotate(-1.5deg); box-shadow: .6rem .6rem 1rem rgba(0, 0, 0, .55); z-index: 5; }
+a.libro.inclinado:hover, a.libro.inclinado:focus-visible { transform: translateY(-1.1rem) rotate(-8deg); }
+.sujetalibros { flex: none; align-self: flex-end; width: 2.2rem; height: 6.4rem; background: linear-gradient(90deg, #d8a850, #a8782c); border-radius: .2rem .2rem 0 0; box-shadow: .3rem 0 .5rem rgba(0, 0, 0, .5); margin-left: .4rem; }
+.vacio { flex: 1; }
+
+.etiqueta { position: absolute; left: 50%; bottom: 4.4rem; transform: translate(-50%, .6rem); opacity: 0; pointer-events: none; z-index: 8; width: 13.5rem; padding: .6rem .8rem .7rem; background: var(--papel); color: var(--tinta); font: 500 .9rem/1.25 'Bricolage Grotesque', sans-serif; box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .5); transition: .3s; border-radius: .15rem; text-shadow: none; }
+.etiqueta::before { content: ""; position: absolute; inset: 0; background: var(--papel-grano); opacity: .6; pointer-events: none; }
+.etiqueta b { display: block; position: relative; font: 700 1rem/1.1 'Fraunces', serif; }
+.etiqueta small { position: relative; opacity: .7; letter-spacing: .06em; text-transform: uppercase; font-size: .68rem; font-weight: 700; }
+.etiqueta span { position: relative; }
+.libro.izq .etiqueta { left: 0; transform: translate(0, .6rem); }
+.libro.der .etiqueta { left: auto; right: 0; transform: translate(0, .6rem); }
+a.libro:hover .etiqueta, a.libro:focus-visible .etiqueta { opacity: 1; transform: translate(-50%, 0); }
+a.libro.izq:hover .etiqueta, a.libro.izq:focus-visible .etiqueta, a.libro.der:hover .etiqueta, a.libro.der:focus-visible .etiqueta { transform: translate(0, 0); }
+
+.panel { display: grid; gap: 2rem; align-content: start; }
+.panel h2 { margin: 0 0 1rem; font: 600 1.5rem/1.1 'Fraunces', serif; letter-spacing: -.01em; }
+.panel h2 small { display: block; margin-top: .2rem; font: italic 400 .98rem 'Fraunces', serif; color: var(--oro); letter-spacing: 0; }
+.tapa { --c: #3e5b78; position: relative; flex: none; width: 100%; aspect-ratio: 2 / 3; border-radius: .2rem .45rem .45rem .2rem; padding: .8rem .6rem; display: flex; flex-direction: column; justify-content: space-between; color: var(--oro); font: 700 .8rem/1.1 'Fraunces', serif;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .35) 0 .35rem, rgba(255, 255, 255, .18) .35rem .48rem, transparent .75rem), repeating-linear-gradient(0deg, rgba(0, 0, 0, .1) 0 1px, transparent 1px 3px), var(--c); box-shadow: .35rem .45rem .8rem rgba(0, 0, 0, .5); }
+.tapa::before { content: ""; position: absolute; inset: 0; background: var(--grano); opacity: .45; border-radius: inherit; pointer-events: none; }
+.tapa::after { content: ""; position: absolute; left: .7rem; right: .45rem; top: .5rem; bottom: .5rem; border: 1px solid rgba(227, 184, 101, .5); border-radius: .1rem; pointer-events: none; }
+.tapa span, .tapa small { position: relative; z-index: 1; } .tapa small { font: 700 .5rem 'Bricolage Grotesque', sans-serif; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.tapa .marca { position: absolute; right: .8rem; top: -.1rem; width: .6rem; height: 2.1rem; background: linear-gradient(90deg, #8b1f2c, #c8374a, #8b1f2c); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); z-index: 2; }
+
+.ahora { display: grid; grid-template-columns: 5.4rem 1fr; gap: 1.2rem; align-items: center; padding: 1.2rem; border-radius: .35rem; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(227, 184, 101, .22); }
+.ahora h3 { margin: 0; font: 600 1.25rem/1.1 'Fraunces', serif; }
+.ahora .autor { font: italic 400 .95rem 'Fraunces', serif; color: var(--oro); }
+.ahora p { margin: .6rem 0 0; font-size: .92rem; line-height: 1.45; color: rgba(243, 234, 216, .8); }
+.avance { margin-top: .7rem; display: flex; align-items: center; gap: .7rem; font-weight: 600; font-size: .85rem; }
+.avance i { flex: 1; height: .45rem; border-radius: 1rem; background: rgba(255, 255, 255, .14); overflow: hidden; } .avance i::after { content: ""; display: block; width: 38%; height: 100%; background: linear-gradient(90deg, var(--oro-2), var(--oro)); }
+
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
+.entrada { display: grid; grid-template-columns: 3.6rem 1fr; gap: 1.1rem; align-items: center; padding: .8rem .8rem .8rem .7rem; border-radius: .3rem; transition: background .3s, transform .3s; }
+.entrada:hover, .entrada:focus-visible { background: linear-gradient(90deg, rgba(227, 184, 101, .16), rgba(255, 255, 255, .02)); transform: translateX(.25rem); }
+.entrada .tapa { padding: .45rem .3rem; font-size: .5rem; }
+.entrada .tapa small, .entrada .tapa span { display: none; }
+.entrada .tapa::after { left: .45rem; right: .28rem; top: .3rem; bottom: .3rem; }
+.entrada .tipo { font: 700 .68rem 'Bricolage Grotesque', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--oro); }
+.entrada h3 { margin: .1rem 0 0; font: 600 1.18rem/1.15 'Fraunces', serif; }
+.entrada p { margin: .25rem 0 0; font-size: .9rem; line-height: 1.4; color: rgba(243, 234, 216, .78); }
+.entrada .fecha { display: block; margin-top: .3rem; font: italic 400 .88rem 'Fraunces', serif; color: rgba(243, 234, 216, .55); }
+
+.pie { position: relative; padding: 2.4rem 1.5rem 3rem; text-align: center; background: var(--grano), #0b1222; color: rgba(243, 234, 216, .75); font-size: .95rem; }
+.pie b { display: block; margin-bottom: .3rem; font: 700 1.2rem 'Fredoka', sans-serif; color: var(--papel); }
+
+
+@media (max-width: 960px) {
+  .portada { grid-template-columns: minmax(0, 1fr); padding-bottom: 3rem; }
+  .cab nav { gap: 1.1rem; font-size: .95rem; }
+  .nicho { overflow-x: auto; padding-inline: 1rem; scrollbar-width: none; }
+  .nicho .libro.izq .etiqueta, .nicho .libro.der .etiqueta { display: none; }
+  .etiqueta { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .libro, .entrada { transition: none; } }
 </style>
 </head>
 <body>
+<div class="pared">
+  <header class="barra"><div class="cab">
+    <a class="firma" href="./"><img class="logo" src="assets/jaguar.png" alt="" onerror="this.remove()">Ata Nymy</a>
+    <nav aria-label="Principal"><a href="./" aria-current="page">Estantería</a><a href="cien-anos-de-soledad/">Reseñas</a><a href="quijote/">Frasearios</a><a href="la-medicion-del-mundo/">Cuadernos</a></nav>
+  </div></header>
 
-<header class="franja">
-  <div class="hoja">
-    <a class="firma" href="#"><span class="jaguar"><img src="assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>Ata Nymy</b></a>
-    <nav aria-label="Principal"><a href="#" aria-current="page">Estantería</a><a href="cien-anos-de-soledad/">Reseñas</a><a href="quijote/">Fraseario</a><a href="la-medicion-del-mundo/">Cuadernos</a></nav>
-  </div>
-</header>
-
-<main class="hoja">
-  <section class="intro">
-    <div>
-      <span class="etiqueta">Bitácora de lectura</span>
-      <h1>Una biblioteca de noche</h1>
-      <p class="bajada">Reseñas, frases y cuadernos de lo que voy leyendo. Con lápiz, sin prisa y con un jaguar dormido en la estantería.</p>
-      <div class="mono cifras">2026 · <b>14</b> libros leídos<br>3 entradas nuevas este mes</div>
-    </div>
-
-  <div class="estante" role="group" aria-label="Estantería de libros">
-    <div class="lomos">
-      <a class="lomo" href="cien-anos-de-soledad/" style="--lomo-bg:#EDD9B0;--lomo-tx:#8E3F22;--alto:18.5rem;--ancho:3.6rem"><span>Cien años de soledad</span><small>RESEÑA</small></a>
-      <a class="lomo" href="la-medicion-del-mundo/" style="--lomo-bg:#4E5630;--lomo-tx:#F0E4CC;--alto:15.5rem;--ancho:3rem"><span>La medición del mundo</span><small>CUADERNO</small></a>
-      <div class="lomo por-leer" style="--lomo-bg:#5C3447;--lomo-tx:#F0E4CC;--alto:16.5rem;--ancho:2.6rem"><span>Pedro Páramo</span><small>·</small></div>
-      <a class="lomo" href="quijote/" style="--lomo-bg:#A63A24;--lomo-tx:#F1EBDC;--alto:20.5rem;--ancho:4.4rem"><span>Don Quijote de la Mancha</span><small>FRASES</small></a>
-      <div class="lomo inclinado" style="--lomo-bg:#3E5B78;--lomo-tx:#FFCC7E;--alto:19rem;--ancho:3.4rem"><i class="marcap" aria-hidden="true"></i><span>Por quién doblan las campanas</span><small>EN CURSO</small></div>
-      <div class="lomo por-leer" style="--lomo-bg:#F0E4CC;--lomo-tx:#33241B;--alto:14.5rem;--ancho:2.4rem"><span>La vegetariana</span><small>·</small></div>
-      <div class="lomo por-leer" style="--lomo-bg:#7A5236;--lomo-tx:#FFCC7E;--alto:17.5rem;--ancho:3.1rem"><span>Memorias de Adriano</span><small>·</small></div>
-      <div class="dormilon"><img src="assets/jaguar.png" alt="El jaguar de Ata Nymy, dormido sobre el estante" data-fallback-icon="ti-paw"></div>
-    </div>
-    <div class="tabla" aria-hidden="true"></div>
-    <div class="estante-pie mono"><span>Los lomos opacos aún no tienen entrada</span></div>
-  </div>
-  </section>
-
-  <section class="leyendo" aria-labelledby="t-leyendo">
-    <div>
-      <span class="etiqueta">Ahora leyendo</span>
-      <h2 id="t-leyendo">Por quién doblan las campanas</h2>
-      <div class="mono" style="color:var(--tinta-suave)">Ernest Hemingway · 1940</div>
-      <div class="progreso" aria-label="Progreso de lectura: 38 %">
-        <svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
-          <g filter="url(#lapiz)" stroke="currentColor" stroke-linecap="round" fill="none">
-            <path d="M2 22 H398" stroke-opacity=".25" stroke-width="2"/>
-            <path d="M2 22 C 60 20 110 24 152 21" stroke-width="5"/>
-            <path d="M152 8 v28" stroke-width="2"/>
-          </g>
-        </svg>
+  <main class="portada">
+    <div class="principal">
+      <div class="titular">
+        <h1>Una biblioteca <em>de noche</em></h1>
+        <p>Reseñas, frases y cuadernos de lo que voy leyendo. Los libros con color ya tienen entrada.</p>
       </div>
-      <div class="mono" style="color:var(--tinta-suave)">38 % · tres días en la sierra, de momento</div>
-    </div>
-    <div>
-      <p>Lo estoy leyendo despacio porque, en paralelo, estoy probando a ilustrar a sus personajes con IA: el estadounidense, la chica, Pablo y la cueva. Cuando termine, la entrada llevará esas láminas y lo que aprendí comparando herramientas.</p>
-      <p class="nota" style="color:var(--an-ochre)">Spoiler de proceso: los modelos insisten en convertir los pinos en abetos.</p>
-    </div>
-  </section>
 
-  <section class="entradas" aria-labelledby="t-entradas">
-    <span class="etiqueta">Últimas entradas</span>
-    <h2 id="t-entradas" style="margin-top:.7rem">En la mesa</h2>
-    <ol>
-      <li><a href="quijote/" style="--fila:#A63A24;--fila-tx:#F1EBDC"><span class="mono">Nov 2026</span><span class="mono">Fraseario</span><span class="titulo">Don Quijote de la Mancha</span><span class="gancho">Ocho frases comprobadas y una que no está en el libro.</span></a></li>
-      <li><a href="cien-anos-de-soledad/" style="--fila:#EDD9B0;--fila-tx:#33241B"><span class="mono">Oct 2026</span><span class="mono">Reseña</span><span class="titulo">Cien años de soledad</span><span class="gancho">Siete generaciones, dos nombres y un árbol para no perderse.</span></a></li>
-      <li><a href="la-medicion-del-mundo/" style="--fila:#4E5630;--fila-tx:#F0E4CC"><span class="mono">Sep 2026</span><span class="mono">Cuaderno</span><span class="titulo">La medición del mundo</span><span class="gancho">Dos genios, un escritorio y medio planeta.</span></a></li>
-    </ol>
-  </section>
-</main>
+      <section class="estanteria" aria-label="Últimas lecturas">
+        <div class="nicho">
+          <a class="libro izq" href="cien-anos-de-soledad/" style="--c:#1f7a52;--t:#ffd23f;--alto:21rem;--ancho:3.9rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Cien años de soledad</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Reseña · oct 2026</small><b>Cien años de soledad</b><span>Siete generaciones y dos nombres.</span></div></a>
+          <a class="libro" href="la-medicion-del-mundo/" style="--c:#14213d;--t:#ffb627;--alto:19.5rem;--ancho:3.3rem;--fs:.86rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">La medición del mundo</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Cuaderno · sep 2026</small><b>La medición del mundo</b><span>Dos genios y medio planeta.</span></div></a>
+          <div class="libro apagado" style="--c:#5c3447;--alto:17rem;--ancho:2.7rem"><i class="banda a"></i><span class="titulo">Pedro Páramo</span><i class="banda d"></i></div>
+          <a class="libro" href="quijote/" style="--c:#a63a24;--t:#f4e6c8;--alto:22rem;--ancho:4.6rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Don Quijote de la Mancha</span><i class="banda c"></i><i class="banda d"></i><div class="etiqueta"><small>Fraseario · nov 2026</small><b>Don Quijote de la Mancha</b><span>Ocho frases comprobadas y una que no está.</span></div></a>
+          <div class="libro inclinado" style="--c:#3e5b78;--t:#ffcc7e;--alto:21rem;--ancho:3.6rem;--fs:.84rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Por quién doblan las campanas</span><i class="banda d"></i></div>
+          <div class="libro apagado" style="--c:#8c9a3a;--t:#2b1d15;--alto:15rem;--ancho:2.5rem"><i class="banda a"></i><span class="titulo">La vegetariana</span><i class="banda d"></i></div>
+          <div class="libro apagado" style="--c:#7a5236;--alto:18rem;--ancho:3.2rem"><i class="banda a"></i><i class="banda b"></i><span class="titulo">Memorias de Adriano</span><i class="banda d"></i></div>
+          <span class="vacio"></span><div class="sujetalibros"></div>
+        </div>
+        <div class="tabla" aria-hidden="true"></div>
+        <div class="pie-estante"><span>Los lomos opacos aún no tienen entrada.</span></div>
+      </section>
+    </div>
+
+    <aside class="panel" aria-label="Novedades">
+      <section aria-labelledby="t-ahora">
+        <h2 id="t-ahora">Ahora leyendo</h2>
+        <div class="ahora">
+          <div class="tapa"><i class="marca"></i><small>Novela</small></div>
+          <div>
+            <h3>Por quién doblan las campanas</h3>
+            <div class="autor">Ernest Hemingway · 1940</div>
+            <p>Lo leo despacio mientras pruebo a ilustrar a sus personajes con IA. La entrada llevará esas láminas.</p>
+            <div class="avance"><i></i>38 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="t-entradas">
+        <h2 id="t-entradas">Últimas entradas<small>recién sacadas del estante</small></h2>
+        <ol class="lista">
+          <li><a class="entrada" href="quijote/"><div class="tapa" style="--c:#a63a24"><small>Frases</small><span>Quijote</span></div><div><div class="tipo">Fraseario</div><h3>Don Quijote de la Mancha</h3><p>Ocho frases comprobadas y una que no está en el libro.</p><span class="fecha">noviembre 2026</span></div></a></li>
+          <li><a class="entrada" href="cien-anos-de-soledad/"><div class="tapa" style="--c:#1f7a52"><small>Reseña</small><span>Cien años</span></div><div><div class="tipo">Reseña</div><h3>Cien años de soledad</h3><p>Siete generaciones, dos nombres y un árbol para no perderse.</p><span class="fecha">octubre 2026</span></div></a></li>
+          <li><a class="entrada" href="la-medicion-del-mundo/"><div class="tapa" style="--c:#14213d"><small>Cuaderno</small><span>Medición</span></div><div><div class="tipo">Cuaderno</div><h3>La medición del mundo</h3><p>Dos genios, un escritorio y medio planeta.</p><span class="fecha">septiembre 2026</span></div></a></li>
+        </ol>
+      </section>
+    </aside>
+  </main>
+</div>
 
 <footer class="pie">
-  <div class="hoja">
-    <a class="firma" href="#"><span class="jaguar" style="color:var(--an-ochre)"><img src="assets/jaguar.png" alt="" data-fallback-icon="ti-paw"></span><b>@ata_nymy</b></a>
-    <p class="pregunta">¿Qué libro debería sacar de la estantería ahora?</p>
-    <span class="aviso">Maqueta · contenido de ejemplo</span>
-  </div>
+  <b>Ata Nymy</b>
+  ¿Qué libro debería sacar de la estantería ahora?
 </footer>
-
-<script src="comun/marcas.js"></script>
 </body>
 </html>
